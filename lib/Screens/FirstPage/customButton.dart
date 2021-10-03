@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ugaoo/Screens/Login/login.dart';
 import 'package:ugaoo/Screens/MainPage/mainPage.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -12,18 +13,14 @@ class CustomButton extends StatelessWidget {
       {Key? key, this.name, this.pageValue, this.pageContext, this.formKey})
       : super(key: key);
 
-  Page0() =>
-      Navigator.push(pageContext, MaterialPageRoute(builder: (_) => Login()));
+  Page0() => Get.toNamed('/Login');
 
   Page1() {
-    if (formKey.currentState?.validate() == true)
-      Navigator.push(
-          pageContext, MaterialPageRoute(builder: (_) => MainPage()));
+    if (formKey.currentState?.validate() == true) Get.toNamed('/Login/Main');
   }
 
   Page2() {
-    if (formKey.currentState?.validate() == true)
-      Navigator.push(pageContext, MaterialPageRoute(builder: (_) => Login()));
+    if (formKey.currentState?.validate() == true) Get.toNamed('/Signup');
   }
 
   @override

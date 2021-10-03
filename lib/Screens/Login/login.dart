@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ugaoo/Screens/Login/customDivider.dart';
 import 'package:ugaoo/Screens/Login/googleLogin.dart';
 import 'package:ugaoo/Screens/Login/userpass.dart';
-import 'package:ugaoo/Screens/Signup/signup.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 import 'heading.dart';
@@ -49,8 +49,7 @@ class Login extends StatelessWidget {
                           fontSize: width * 0.05,
                           fontWeight: FontWeight.w500),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () => Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => SignupPage())),
+                        ..onTap = () => Get.toNamed('/Signup'),
                     ),
                   ],
                 ))

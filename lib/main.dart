@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ugaoo/Screens/FirstPage/FirstPage.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:ugaoo/misc/Routes.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 void main() {
@@ -9,13 +10,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         scaffoldBackgroundColor: ksecondaryBackgroundColor,
       ),
-      home: FirstPage(),
+      initialRoute: '/',
+      getPages: Routes.routes,
     );
   }
 }
