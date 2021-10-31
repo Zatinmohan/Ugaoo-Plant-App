@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ugaoo/Screens/MainPage/content.dart';
 import 'package:ugaoo/misc/categoryList.dart';
 import 'package:ugaoo/misc/colors.dart';
 
@@ -26,6 +27,22 @@ class _MainPageState extends State<MainPage> {
       default:
         return [];
     }
+  }
+
+  List<MainContent> _content() {
+    List<MainContent> temp = [];
+    if (categoryIndex == 0) {
+      for (int i = 0; i < sub_seeds.length; i++) temp.add(MainContent());
+    } else if (categoryIndex == 1) {
+      for (int i = 0; i < sub_plants.length; i++) temp.add(MainContent());
+    } else if (categoryIndex == 2) {
+      for (int i = 0; i < sub_pots.length; i++) temp.add(MainContent());
+    } else if (categoryIndex == 3) {
+      for (int i = 0; i < sub_tools.length; i++) temp.add(MainContent());
+    } else
+      temp.clear();
+
+    return temp;
   }
 
   @override
@@ -128,7 +145,9 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             )),
-        // body: TabBarView(children: []),
+        body: TabBarView(children: [
+          for (int i = 0; i < _content().length; i++) _content()[i]
+        ]),
       ),
     );
   }
