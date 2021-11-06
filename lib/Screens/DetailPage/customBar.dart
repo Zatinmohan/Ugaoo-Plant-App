@@ -28,12 +28,22 @@ class CustomBar extends StatelessWidget {
                   )),
             ],
           ),
-          IconButton(
-              onPressed: () => print("Liked"),
-              icon: Icon(
-                Icons.favorite_border,
-                size: width * 0.065,
-              )),
+          Row(
+            children: [
+              IconButton(
+                  onPressed: () => print("Liked"),
+                  icon: Icon(
+                    Icons.favorite_border,
+                    size: width * 0.065,
+                  )),
+              IconButton(
+                  onPressed: () => print("Cart"),
+                  icon: Icon(
+                    Icons.shopping_bag_outlined,
+                    size: width * 0.065,
+                  )),
+            ],
+          ),
         ],
       ),
     );
