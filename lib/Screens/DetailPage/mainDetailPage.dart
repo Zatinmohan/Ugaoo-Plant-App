@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ugaoo/Screens/DetailPage/upperDetail.dart';
 import 'package:ugaoo/misc/colors.dart';
 
@@ -14,13 +13,13 @@ class DetailPage extends StatelessWidget {
     PageController _controller = PageController();
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: ksecondaryBackgroundColor,
         body: Column(
           children: [
             UpperDetail(),
             SizedBox(height: 10.0),
-            Expanded(
-                child: BottomDetails(pageController: _controller)),
+            Expanded(child: BottomDetails(pageController: _controller)),
           ],
         ),
         bottomNavigationBar: BottomAppBar(

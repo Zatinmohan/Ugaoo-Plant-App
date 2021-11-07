@@ -13,8 +13,9 @@ class UpperDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MiscController _controller = Get.put(MiscController());
     return Container(
-      height: height * 0.6,
+      height: height * 0.62,
       width: double.infinity,
       child: Card(
         elevation: 2.0,
@@ -27,7 +28,6 @@ class UpperDetail extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            PageIndicatorWidget(),
             Padding(
               padding: EdgeInsets.only(left: 20.0, right: 20.0),
               child: Row(
@@ -81,51 +81,65 @@ class UpperDetail extends StatelessWidget {
                 ],
               ),
             ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: 20.0, right: 20.0, top: 10.0, bottom: 20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Flexible(
+                              flex: 2,
+                              child: Container(
+                                  height: width * 0.12,
+                                  child: TextField(
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                        focusedBorder: focusedBorder.copyWith(
+                                            borderSide: BorderSide(
+                                                color: kPrimaryTextColor)),
+                                        border: textFieldBorder,
+                                        labelText: "Pincode",
+                                        labelStyle: TextStyle(
+                                          color: kHeadingTextColor,
+                                        )),
+                                  ))),
+                          SizedBox(width: 10.0),
+                          Flexible(
+                            flex: 1,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: kPrimaryTextColor,
+                                ),
+                                onPressed: () {
+                                  _controller.page.value =
+                                      !_controller.page.value;
+                                },
+                                child: Text("Check")),
+                          ),
+                        ],
+                      ),
+                      Obx(() {
+                        return _controller.page.value
+                            ? Text("Available in 3-5 Days",
+                                style: TextStyle(
+                                  color: kHeadingTextColor,
+                                  fontSize: width * 0.04,
+                                ))
+                            : SizedBox.shrink();
+                      })
+                    ],
+                  ),
+                )),
             CustomBar(),
           ],
         ),
       ),
-    );
-  }
-}
-
-class PageIndicatorWidget extends StatelessWidget {
-  const PageIndicatorWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final MiscController _controller = Get.put(MiscController());
-    print("Indicator");
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Container(
-              // color: Colors.black,
-              height: 10.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return Obx(() {
-                    return AnimatedContainer(
-                      duration: Duration(milliseconds: 150),
-                      decoration: BoxDecoration(
-                        color: _controller.index.value == index
-                            ? ksecondaryBackgroundColor
-                            : kDeailHeadingColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: SizedBox(
-                        width: 20.0,
-                      ),
-                    );
-                  });
-                },
-              ))),
     );
   }
 }
