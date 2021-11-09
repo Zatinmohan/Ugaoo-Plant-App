@@ -100,13 +100,26 @@ class UpperDetail extends StatelessWidget {
                                   child: TextField(
                                     keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: ksecondaryBackgroundColor,
                                         focusedBorder: focusedBorder.copyWith(
                                             borderSide: BorderSide(
-                                                color: kPrimaryTextColor)),
-                                        border: textFieldBorder,
-                                        labelText: "Pincode",
-                                        labelStyle: TextStyle(
+                                          color: ksecondaryBackgroundColor,
+                                          width: 0.0,
+                                        )),
+                                        // border: textFieldBorder.copyWith(
+                                        //     borderSide: BorderSide(
+                                        //   color: ksecondaryBackgroundColor,
+                                        //   width: 0.0,
+                                        // )),
+                                        enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius:
+                                                BorderRadius.circular(30.0)),
+                                        hintText: "Pincode",
+                                        hintStyle: TextStyle(
                                           color: kHeadingTextColor,
+                                          fontSize: width * 0.04,
                                         )),
                                   ))),
                           SizedBox(width: 10.0),
@@ -120,7 +133,9 @@ class UpperDetail extends StatelessWidget {
                                   _controller.page.value =
                                       !_controller.page.value;
                                 },
-                                child: Text("Check")),
+                                child: Text(
+                                  "Check",
+                                )),
                           ),
                         ],
                       ),

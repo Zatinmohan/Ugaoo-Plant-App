@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:ugaoo/Screens/DetailPage/upperDetail.dart';
 import 'package:ugaoo/misc/colors.dart';
 
@@ -29,23 +30,20 @@ class DetailPage extends StatelessWidget {
             children: [
               Flexible(
                 flex: 1,
-                child: GestureDetector(
-                  onTap: () => print("Add to Cart"),
-                  child: Container(
-                    width: width,
-                    height: height * 0.08,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    child: Center(
-                      child: Text(
-                        "ADD TO CART",
-                        style: TextStyle(
-                          fontSize: width * 0.058,
-                          fontWeight: FontWeight.w500,
-                          color: kDeailHeadingColor,
-                        ),
-                        textAlign: TextAlign.center,
+                child: Container(
+                  width: width,
+                  height: height * 0.08,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                  child: Center(
+                    child: Text(
+                      "Rs. 250",
+                      style: TextStyle(
+                        fontSize: width * 0.07,
+                        fontWeight: FontWeight.w700,
+                        color: kBackgroundColor,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
@@ -53,7 +51,7 @@ class DetailPage extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: GestureDetector(
-                  onTap: () => print("Buy Now"),
+                  onTap: () => print("Add to Cart"),
                   child: Container(
                     width: width,
                     height: height * 0.08,
@@ -62,9 +60,9 @@ class DetailPage extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                     child: Center(
                       child: Text(
-                        "BUY NOW",
+                        "Add To Cart",
                         style: TextStyle(
-                          fontSize: width * 0.06,
+                          fontSize: width * 0.058,
                           fontWeight: FontWeight.w500,
                           color: Colors.white,
                         ),

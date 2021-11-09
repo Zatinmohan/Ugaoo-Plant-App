@@ -37,7 +37,7 @@ class CustomBar extends StatelessWidget {
                     size: width * 0.065,
                   )),
               IconButton(
-                  onPressed: () => print("Cart"),
+                  onPressed: () => Get.toNamed('/Login/Cart'),
                   icon: Icon(
                     Icons.shopping_bag_outlined,
                     size: width * 0.065,

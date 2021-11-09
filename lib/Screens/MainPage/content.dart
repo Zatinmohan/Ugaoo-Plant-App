@@ -35,7 +35,7 @@ class MainContent extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30.0)),
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: 15.0, right: 10.0, bottom: 25),
+                              left: 15.0, right: 10.0, bottom: 20),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +57,7 @@ class MainContent extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                SizedBox(height: 2.5),
+                                SizedBox(height: 5.0),
                                 Text(
                                   "Rs. 250",
                                   style: TextStyle(
@@ -73,8 +73,6 @@ class MainContent extends StatelessWidget {
                 Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    // color: Colors.black,
-
                     child: Hero(
                       tag: seed_images[index],
                       child: Image.network(
