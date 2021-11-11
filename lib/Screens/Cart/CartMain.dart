@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/CartItemController.dart';
 import 'package:ugaoo/Screens/Cart/CartPrice.dart';
 import 'package:ugaoo/Screens/Cart/Items.dart';
 import 'package:ugaoo/misc/PageIndication.dart';
@@ -9,6 +11,7 @@ class MainCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartItemController _controller = Get.put(CartItemController());
     return Scaffold(
       appBar: AppBar(
           backgroundColor: ksecondaryBackgroundColor,
@@ -25,14 +28,16 @@ class MainCart extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 1.0),
-              Text(
-                "1 Item",
-                style: TextStyle(
-                  color: kHeadingTextColor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: width * 0.045,
-                ),
-              ),
+              Obx(() {
+                return Text(
+                  "${_controller.getLength()} Item",
+                  style: TextStyle(
+                    color: kHeadingTextColor,
+                    fontWeight: FontWeight.w400,
+                    fontSize: width * 0.045,
+                  ),
+                );
+              })
             ],
           ),
           leading: IconButton(
