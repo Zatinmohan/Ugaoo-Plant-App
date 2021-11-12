@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ugaoo/Controller/CartItemController.dart';
 import 'package:ugaoo/Screens/Cart/CartPrice.dart';
 import 'package:ugaoo/Screens/Cart/Items.dart';
+import 'package:ugaoo/Screens/Cart/emptyCart.dart';
 import 'package:ugaoo/misc/PageIndication.dart';
 import 'package:ugaoo/misc/colors.dart';
 
@@ -29,89 +30,100 @@ class MainCart extends StatelessWidget {
               ),
               SizedBox(height: 1.0),
               Obx(() {
-                return Text(
-                  "${_controller.getLength()} Item",
-                  style: TextStyle(
-                    color: kHeadingTextColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: width * 0.045,
-                  ),
-                );
+                return _controller.cartItems.isNotEmpty
+                    ? Text(
+                        "${_controller.getLength()} Item",
+                        style: TextStyle(
+                          color: kHeadingTextColor,
+                          fontWeight: FontWeight.w400,
+                          fontSize: width * 0.045,
+                        ),
+                      )
+                    : SizedBox.shrink();
               })
             ],
           ),
           leading: IconButton(
-              onPressed: () => print("Back"),
+              onPressed: () => Get.back(),
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: kHeadingTextColor,
               ))),
-      body: SingleChildScrollView(
-        child: Container(
-          height: height,
-          child: Column(
-            children: [
-              SizedBox(height: 10.0),
-              PageIndicator(pageNo: 1),
-              SizedBox(height: 10.0),
-              Flexible(flex: 2, child: ItemCart()),
-              Flexible(
-                flex: 1,
-                child: CartPrice(),
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Flexible(
-              flex: 1,
-              child: Container(
-                width: width,
-                height: height * 0.08,
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                child: Center(
-                  child: Text(
-                    "Rs. 1500",
-                    style: TextStyle(
-                      fontSize: width * 0.07,
-                      fontWeight: FontWeight.w700,
-                      color: kBackgroundColor,
-                    ),
-                    textAlign: TextAlign.center,
+      body: Obx(
+        () => _controller.cartItems.isEmpty
+            ? EmptyCart()
+            : SingleChildScrollView(
+                child: Container(
+                  height: height,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 10.0),
+                      PageIndicator(pageNo: 1),
+                      SizedBox(height: 10.0),
+                      Flexible(flex: 2, child: ItemCart()),
+                      Flexible(
+                        flex: 1,
+                        child: CartPrice(),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ),
-            Flexible(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () => print("Select Address"),
+      ),
+      bottomNavigationBar: Obx(
+        () => _controller.cartItems.isNotEmpty
+            ? BottomAppBar(
                 child: Container(
-                  width: width,
-                  height: height * 0.08,
-                  color: kBackgroundColor,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                  child: Center(
-                    child: Text(
-                      "Select Address",
-                      style: TextStyle(
-                        fontSize: width * 0.055,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        width: width,
+                        height: height * 0.08,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        child: Center(
+                          child: Text(
+                            "Rs. 1500",
+                            style: TextStyle(
+                              fontSize: width * 0.07,
+                              fontWeight: FontWeight.w700,
+                              color: kBackgroundColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        )),
+                    Flexible(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () => Get.toNamed('/Cart/Address'),
+                        child: Container(
+                          width: width,
+                          height: height * 0.08,
+                          color: kBackgroundColor,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          child: Center(
+                            child: Text(
+                              "Select Address",
+                              style: TextStyle(
+                                fontSize: width * 0.055,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+              )
+            : SizedBox.shrink(),
       ),
     );
   }

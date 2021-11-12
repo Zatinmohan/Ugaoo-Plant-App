@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ugaoo/Screens/Address/AddressMain.dart';
 import 'package:ugaoo/Screens/Cart/CartMain.dart';
 import 'package:ugaoo/Screens/DetailPage/mainDetailPage.dart';
 import 'package:ugaoo/Screens/FirstPage/FirstPage.dart';
@@ -14,5 +15,6 @@ class Routes {
     GetPage(name: '/Login/Main', page: () => MainPage()),
     GetPage(name: '/Login/Main/Detail', page: () => DetailPage()),
     GetPage(name: '/Login/Cart', page: () => MainCart()),
+    GetPage(name: '/Cart/Address', page: () => AddressMain()),
   ];
 }
