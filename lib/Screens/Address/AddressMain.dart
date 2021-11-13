@@ -52,15 +52,18 @@ class AddressMain extends StatelessWidget {
                   height: height * 0.08,
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                  child: Center(
-                    child: Text(
-                      "Add New Address",
-                      style: TextStyle(
-                        fontSize: width * 0.045,
-                        fontWeight: FontWeight.w700,
-                        color: kBackgroundColor,
+                  child: GestureDetector(
+                    onTap: () => Get.toNamed('/Address/NewAddress'),
+                    child: Center(
+                      child: Text(
+                        "Add New Address",
+                        style: TextStyle(
+                          fontSize: width * 0.045,
+                          fontWeight: FontWeight.w700,
+                          color: kBackgroundColor,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
