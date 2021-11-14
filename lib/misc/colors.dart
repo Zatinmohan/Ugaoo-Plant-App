@@ -19,3 +19,18 @@ var focusedBorder = OutlineInputBorder(
 var textFieldBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(30.0),
     borderSide: BorderSide(color: Colors.green));
+
+var customInputDecoration = InputDecoration(
+  labelStyle: TextStyle(color: Colors.grey),
+  focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10.0),
+      borderSide: BorderSide(
+        color: kBackgroundColor,
+        width: 1.5,
+      )),
+  border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10.0),
+      borderSide: BorderSide(
+        color: kHeadingTextColor,
+      )),
+);
