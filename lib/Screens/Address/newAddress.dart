@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ugaoo/Controller/pincodeAPI.dart';
 import 'package:ugaoo/Screens/Address/UseLocation.dart';
 import 'package:ugaoo/Screens/Address/customRadio.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -10,6 +11,10 @@ class NewAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PincodeAPI _controller = Get.put(PincodeAPI());
+    late TextEditingController? _city = TextEditingController();
+    late TextEditingController? _state = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: ksecondaryBackgroundColor,
@@ -59,14 +64,20 @@ class NewAddress extends StatelessWidget {
                           ))),
                   SizedBox(height: 25.0),
                   TextFormField(
-                      textInputAction: TextInputAction.done,
-                      textCapitalization: TextCapitalization.words,
-                      keyboardType: TextInputType.number,
-                      maxLength: 6,
-                      decoration: customInputDecoration.copyWith(
-                          counterText: '',
-                          counterStyle: TextStyle(fontSize: 0),
-                          labelText: "Pincode *")),
+                    textInputAction: TextInputAction.done,
+                    textCapitalization: TextCapitalization.words,
+                    keyboardType: TextInputType.number,
+                    maxLength: 6,
+                    decoration: customInputDecoration.copyWith(
+                        counterText: '',
+                        counterStyle: TextStyle(fontSize: 0),
+                        labelText: "Pincode *"),
+                    onFieldSubmitted: (val) {
+                      if (val.isNotEmpty && val.length == 6) {
+                        _controller.fetchData(val);
+                      }
+                    },
+                  ),
                   SizedBox(height: 25.0),
                   UseLocation(),
                   SizedBox(height: 25.0),
@@ -88,17 +99,33 @@ class NewAddress extends StatelessWidget {
                       decoration: customInputDecoration.copyWith(
                           labelText: "Landmark")),
                   SizedBox(height: 25.0),
-                  TextFormField(
-                      textInputAction: TextInputAction.next,
-                      textCapitalization: TextCapitalization.words,
-                      decoration: customInputDecoration.copyWith(
-                          labelText: "City/District *")),
+                  Obx(() {
+                    if (_controller.pincodeData.value.postOffice != null)
+                      _city.text = _controller.getCity()!;
+                    else
+                      _city.clear();
+                    return TextFormField(
+                        enabled: false,
+                        textInputAction: TextInputAction.next,
+                        controller: _city,
+                        textCapitalization: TextCapitalization.words,
+                        decoration: customInputDecoration.copyWith(
+                            labelText: "City/District *"));
+                  }),
                   SizedBox(height: 25.0),
-                  TextFormField(
-                      textInputAction: TextInputAction.next,
-                      textCapitalization: TextCapitalization.words,
-                      decoration:
-                          customInputDecoration.copyWith(labelText: "State *")),
+                  Obx(() {
+                    if (_controller.pincodeData.value.postOffice != null)
+                      _state.text = _controller.getState()!;
+                    else
+                      _state.clear();
+                    return TextFormField(
+                        controller: _state,
+                        enabled: false,
+                        textInputAction: TextInputAction.next,
+                        textCapitalization: TextCapitalization.words,
+                        decoration: customInputDecoration.copyWith(
+                            labelText: "State *"));
+                  }),
                   SizedBox(height: 25.0),
                   Container(
                     width: width,
