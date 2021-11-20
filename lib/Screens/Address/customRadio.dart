@@ -1,32 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/pincodeAPI.dart';
 import 'package:ugaoo/misc/colors.dart';
 
-class CustomRadioWidget extends StatefulWidget {
+class CustomRadioWidget extends StatelessWidget {
   final value;
 
   const CustomRadioWidget({Key? key, this.value}) : super(key: key);
-
-  @override
-  State<CustomRadioWidget> createState() => _CustomRadioWidgetState();
-}
-
-class _CustomRadioWidgetState extends State<CustomRadioWidget> {
-  String _groupValue = "None";
   @override
   Widget build(BuildContext context) {
+    final _controller = Get.put(PincodeAPI());
     return Row(
       children: [
-        Radio(
-            value: "${widget.value}",
-            groupValue: _groupValue,
+        Obx(() => Radio(
+            value: "$value",
+            groupValue: _controller.addressType.value,
             onChanged: (String? val) {
-              setState(() {
-                _groupValue = "";
-                _groupValue = val!;
-              });
-            }),
+              _controller.addressType.value = value;
+            })),
         Text(
-          "${widget.value}",
+          "$value",
           style: TextStyle(
             color: kHeadingTextColor,
             fontSize: width * 0.04,

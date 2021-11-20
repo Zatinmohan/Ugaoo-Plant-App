@@ -7,8 +7,13 @@ import 'package:ugaoo/misc/colors.dart';
 class AddressList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var data = Get.arguments;
     final CartItemController _controller = Get.put(CartItemController());
-    List<AddressDummy> dummyList = _controller.addressList;
+    List<AddressDummy> dummyList;
+    if (data == null)
+      dummyList = _controller.addressList;
+    else
+      dummyList = data;
 
     return Container(
       child: ListView.builder(

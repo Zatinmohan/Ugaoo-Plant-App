@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ugaoo/Controller/CartItemController.dart';
 import 'package:ugaoo/Controller/pincodeAPI.dart';
+import 'package:ugaoo/Model/AddressDummy.dart';
 import 'package:ugaoo/Screens/Address/UseLocation.dart';
 import 'package:ugaoo/Screens/Address/customRadio.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -12,8 +14,16 @@ class NewAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PincodeAPI _controller = Get.put(PincodeAPI());
+    CartItemController _addressController = Get.find();
+
     late TextEditingController? _city = TextEditingController();
     late TextEditingController? _state = TextEditingController();
+    TextEditingController _name = TextEditingController();
+    TextEditingController _phone = TextEditingController();
+    TextEditingController _pincode = TextEditingController();
+    TextEditingController _house = TextEditingController();
+    TextEditingController _street = TextEditingController();
+    TextEditingController? _landmark = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -43,12 +53,14 @@ class NewAddress extends StatelessWidget {
                   child: Column(
                 children: [
                   TextFormField(
+                      controller: _name,
                       textInputAction: TextInputAction.next,
                       textCapitalization: TextCapitalization.words,
                       decoration: customInputDecoration.copyWith(
                           labelText: "Full Name *")),
                   SizedBox(height: 25.0),
                   TextFormField(
+                      controller: _phone,
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       maxLength: 10,
@@ -64,6 +76,7 @@ class NewAddress extends StatelessWidget {
                           ))),
                   SizedBox(height: 25.0),
                   TextFormField(
+                    controller: _pincode,
                     textInputAction: TextInputAction.done,
                     textCapitalization: TextCapitalization.words,
                     keyboardType: TextInputType.number,
@@ -82,6 +95,7 @@ class NewAddress extends StatelessWidget {
                   UseLocation(),
                   SizedBox(height: 25.0),
                   TextFormField(
+                      controller: _house,
                       textInputAction: TextInputAction.next,
                       textCapitalization: TextCapitalization.words,
                       decoration: customInputDecoration.copyWith(
@@ -94,6 +108,7 @@ class NewAddress extends StatelessWidget {
                           labelText: "Street Name, Area *")),
                   SizedBox(height: 25.0),
                   TextFormField(
+                      controller: _landmark,
                       textInputAction: TextInputAction.next,
                       textCapitalization: TextCapitalization.words,
                       decoration: customInputDecoration.copyWith(
@@ -162,7 +177,17 @@ class NewAddress extends StatelessWidget {
                             primary: kBackgroundColor,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0))),
-                        onPressed: () => print("Submit"),
+                        onPressed: () {
+                          _addressController.addressList.add(AddressDummy(
+                              _controller.addressType.value,
+                              _house.text,
+                              _street.text,
+                              int.parse(_pincode.text),
+                              _name.text,
+                              int.parse(_phone.text)));
+
+                          Get.back(result: _addressController.addressList);
+                        },
                         child: Text("Save Address")),
                   )
                 ],

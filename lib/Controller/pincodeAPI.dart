@@ -8,6 +8,8 @@ class PincodeAPI extends GetxController {
   var pincodeData = PincodeModel().obs;
   String? _city, _state;
 
+  var addressType = "None".obs;
+
   void fetchData(var pincode) async {
     print("Inside Pincode");
     var baseUrl = "http://www.postalpincode.in/api/pincode/";
