@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Screens/Login/login.dart';
-import 'package:ugaoo/Screens/MainPage/mainPage.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class CustomButton extends StatelessWidget {

@@ -53,7 +53,8 @@ class AddressMain extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: GestureDetector(
-                    onTap: () => Get.toNamed('/Address/NewAddress'),
+                    onTap: () =>
+                        Get.toNamed('/Address/NewAddress', arguments: null),
                     child: Center(
                       child: Text(
                         "Add New Address",
