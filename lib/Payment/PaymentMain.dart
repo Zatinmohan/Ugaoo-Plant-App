@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ugaoo/Screens/Address/UserAddressList.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Payment/DeliveryTo.dart';
+import 'package:ugaoo/Payment/PaymentList.dart';
 import 'package:ugaoo/misc/PageIndication.dart';
 import 'package:ugaoo/misc/colors.dart';
-import 'package:get/get.dart';
 
-class AddressMain extends StatelessWidget {
-  const AddressMain({Key? key}) : super(key: key);
+class PaymentMainPage extends StatelessWidget {
+  const PaymentMainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class AddressMain extends StatelessWidget {
           centerTitle: true,
           elevation: 0.0,
           title: Text(
-            "Address",
+            "Payment",
             style: TextStyle(
               color: kHeadingTextColor,
               fontWeight: FontWeight.w600,
@@ -28,16 +29,20 @@ class AddressMain extends StatelessWidget {
                 Icons.arrow_back_ios,
                 color: kHeadingTextColor,
               ))),
-      body: Container(
-          height: height,
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Flexible(flex: 1, child: PageIndicator(pageNo: 2)),
-            SizedBox(height: 10.0),
-            Flexible(
-              flex: 5,
-              child: AddressList(),
-            )
-          ])),
+      body: SingleChildScrollView(
+        child: Container(
+            padding: EdgeInsets.symmetric(vertical: 20.0),
+            height: height,
+            child: Column(
+              children: [
+                PageIndicator(pageNo: 3),
+                SizedBox(height: 20.0),
+                PaymentList(),
+                SizedBox(height: 5.0),
+                DeliveryTo(),
+              ],
+            )),
+      ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
             child: Row(
@@ -45,27 +50,19 @@ class AddressMain extends StatelessWidget {
           children: [
             Flexible(
               flex: 1,
-              child: GestureDetector(
-                onTap: () => print("Add new address"),
-                child: Container(
-                  width: width,
-                  height: height * 0.08,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                  child: GestureDetector(
-                    onTap: () =>
-                        Get.toNamed('/Address/NewAddress', arguments: null),
-                    child: Center(
-                      child: Text(
-                        "Add New Address",
-                        style: TextStyle(
-                          fontSize: width * 0.045,
-                          fontWeight: FontWeight.w700,
-                          color: kBackgroundColor,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+              child: Container(
+                width: width,
+                height: height * 0.08,
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                child: Center(
+                  child: Text(
+                    "Rs. 420",
+                    style: TextStyle(
+                      fontSize: width * 0.045,
+                      fontWeight: FontWeight.w700,
+                      color: kBackgroundColor,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
@@ -73,7 +70,7 @@ class AddressMain extends StatelessWidget {
             Flexible(
               flex: 1,
               child: GestureDetector(
-                onTap: () => Get.toNamed('/Address/Payment'),
+                onTap: () => print("Pay"),
                 child: Container(
                   width: width,
                   height: height * 0.08,
@@ -82,7 +79,7 @@ class AddressMain extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: Center(
                     child: Text(
-                      "Continue",
+                      "Pay Now",
                       style: TextStyle(
                         fontSize: width * 0.055,
                         fontWeight: FontWeight.w500,
