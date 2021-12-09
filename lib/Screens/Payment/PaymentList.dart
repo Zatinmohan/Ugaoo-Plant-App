@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ugaoo/Screens/Payment/card.dart';
+import 'package:ugaoo/misc/bankList.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class PaymentList extends StatelessWidget {
-  const PaymentList({Key? key}) : super(key: key);
-
+  final cardKey;
+  const PaymentList({Key? key, this.cardKey}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     int? _groupValue = 1;
@@ -15,23 +17,37 @@ class PaymentList extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 5.0),
         children: ListTile.divideTiles(context: context, tiles: [
           AppPointsWidget(points: points),
-          ListTile(
+          ExpansionTile(
             title: Text("Debit/Credit Card"),
-            trailing: IconButton(
-                onPressed: () => print("Press Down"),
-                icon: Icon(Icons.keyboard_arrow_down)),
+            children: [
+              CreditDebitCard(cardKey: cardKey),
+            ],
           ),
-          ListTile(
+          ExpansionTile(
             title: Text("Net Banking"),
-            trailing: IconButton(
-                onPressed: () => print("Press Down"),
-                icon: Icon(Icons.keyboard_arrow_down)),
+            children: [
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Container(
+                  height: 50.0,
+                  child: DropdownButtonFormField(
+                    isExpanded: false,
+                    hint: Text("Select a Bank"),
+                    items:
+                        bankName.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (value) {},
+                  ),
+                ),
+              )
+            ],
           ),
           ListTile(
             title: Text("UPI"),
-            trailing: IconButton(
-                onPressed: () => print("Press Down"),
-                icon: Icon(Icons.keyboard_arrow_down)),
           ),
           ListTile(
             title: Text("COD"),

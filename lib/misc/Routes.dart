@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ugaoo/Payment/PaymentMain.dart';
+
 import 'package:ugaoo/Screens/Address/AddressMain.dart';
 import 'package:ugaoo/Screens/Address/newAddress.dart';
 import 'package:ugaoo/Screens/Cart/CartMain.dart';
@@ -7,6 +7,7 @@ import 'package:ugaoo/Screens/DetailPage/mainDetailPage.dart';
 import 'package:ugaoo/Screens/FirstPage/FirstPage.dart';
 import 'package:ugaoo/Screens/Login/login.dart';
 import 'package:ugaoo/Screens/MainPage/mainPage.dart';
+import 'package:ugaoo/Screens/Payment/PaymentMain.dart';
 import 'package:ugaoo/Screens/Signup/signup.dart';
 
 class Routes {

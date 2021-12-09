@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Payment/DeliveryTo.dart';
-import 'package:ugaoo/Payment/PaymentList.dart';
 import 'package:ugaoo/misc/PageIndication.dart';
 import 'package:ugaoo/misc/colors.dart';
+
+import 'DeliveryTo.dart';
+import 'PaymentList.dart';
 
 class PaymentMainPage extends StatelessWidget {
   const PaymentMainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _cardKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
           backgroundColor: ksecondaryBackgroundColor,
@@ -37,7 +39,7 @@ class PaymentMainPage extends StatelessWidget {
               children: [
                 PageIndicator(pageNo: 3),
                 SizedBox(height: 20.0),
-                PaymentList(),
+                PaymentList(cardKey: _cardKey),
                 SizedBox(height: 5.0),
                 DeliveryTo(),
               ],
@@ -70,7 +72,12 @@ class PaymentMainPage extends StatelessWidget {
             Flexible(
               flex: 1,
               child: GestureDetector(
-                onTap: () => print("Pay"),
+                onTap: () {
+                  if (_cardKey.currentState?.validate() == true)
+                    print("Pay now");
+                  else
+                    print("No");
+                },
                 child: Container(
                   width: width,
                   height: height * 0.08,
