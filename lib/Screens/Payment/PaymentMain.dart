@@ -12,6 +12,7 @@ class PaymentMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _cardKey = GlobalKey<FormState>();
+    final _upi = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
           backgroundColor: ksecondaryBackgroundColor,
@@ -39,7 +40,7 @@ class PaymentMainPage extends StatelessWidget {
               children: [
                 PageIndicator(pageNo: 3),
                 SizedBox(height: 20.0),
-                PaymentList(cardKey: _cardKey),
+                PaymentList(cardKey: _cardKey, upi: _upi),
                 SizedBox(height: 5.0),
                 DeliveryTo(),
               ],
@@ -73,7 +74,8 @@ class PaymentMainPage extends StatelessWidget {
               flex: 1,
               child: GestureDetector(
                 onTap: () {
-                  if (_cardKey.currentState?.validate() == true)
+                  if (_cardKey.currentState?.validate() == true ||
+                      _upi.currentState?.validate() == true)
                     print("Pay now");
                   else
                     print("No");

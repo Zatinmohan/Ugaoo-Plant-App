@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ugaoo/Screens/Payment/UPI.dart';
 import 'package:ugaoo/Screens/Payment/card.dart';
-import 'package:ugaoo/misc/bankList.dart';
+import 'package:ugaoo/Screens/Payment/netBanking.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class PaymentList extends StatelessWidget {
-  final cardKey;
-  const PaymentList({Key? key, this.cardKey}) : super(key: key);
+  final cardKey, upi;
+  const PaymentList({Key? key, this.cardKey, this.upi}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     int? _groupValue = 1;
@@ -23,32 +24,8 @@ class PaymentList extends StatelessWidget {
               CreditDebitCard(cardKey: cardKey),
             ],
           ),
-          ExpansionTile(
-            title: Text("Net Banking"),
-            children: [
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Container(
-                  height: 50.0,
-                  child: DropdownButtonFormField(
-                    isExpanded: false,
-                    hint: Text("Select a Bank"),
-                    items:
-                        bankName.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (value) {},
-                  ),
-                ),
-              )
-            ],
-          ),
-          ListTile(
-            title: Text("UPI"),
-          ),
+          NetBanking(),
+          UPI(upi: upi),
           ListTile(
             title: Text("COD"),
             trailing: Radio(
