@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ugaoo/Controller/CartItemController.dart';
 import 'package:ugaoo/Screens/Address/UserAddressList.dart';
 import 'package:ugaoo/misc/PageIndication.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -9,6 +10,7 @@ class AddressMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartItemController _controller = Get.put(CartItemController());
     return Scaffold(
       appBar: AppBar(
           backgroundColor: ksecondaryBackgroundColor,

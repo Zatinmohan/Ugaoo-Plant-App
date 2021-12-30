@@ -6,6 +6,7 @@ class CartItemController extends GetxController {
   List<Dummy> cartItems = dummyList.obs;
   List<AddressDummy> addressList = dummyAddressList.obs;
   RxInt? addressIndex = 0.obs;
+  RxInt appPoints = 50.obs;
 
   int getLength() {
     return cartItems.length;

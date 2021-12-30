@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ugaoo/Controller/CartItemController.dart';
+import 'package:ugaoo/Controller/miscController.dart';
 import 'package:ugaoo/misc/PageIndication.dart';
 import 'package:ugaoo/misc/colors.dart';
 
@@ -13,6 +15,11 @@ class PaymentMainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _cardKey = GlobalKey<FormState>();
     final _upi = GlobalKey<FormState>();
+    final _netbanking = GlobalKey<FormState>();
+
+    final MiscController _controller = Get.put(MiscController());
+    final CartItemController _price = Get.put(CartItemController());
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: ksecondaryBackgroundColor,
@@ -40,7 +47,8 @@ class PaymentMainPage extends StatelessWidget {
               children: [
                 PageIndicator(pageNo: 3),
                 SizedBox(height: 20.0),
-                PaymentList(cardKey: _cardKey, upi: _upi),
+                PaymentList(
+                    cardKey: _cardKey, upi: _upi, netbanking: _netbanking),
                 SizedBox(height: 5.0),
                 DeliveryTo(),
               ],
@@ -58,15 +66,15 @@ class PaymentMainPage extends StatelessWidget {
                 height: height * 0.08,
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: Center(
-                  child: Text(
-                    "Rs. 420",
-                    style: TextStyle(
-                      fontSize: width * 0.045,
-                      fontWeight: FontWeight.w700,
-                      color: kBackgroundColor,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                  child: Obx(() => Text(
+                        "Rs. ${_price.getPrice()}",
+                        style: TextStyle(
+                          fontSize: width * 0.045,
+                          fontWeight: FontWeight.w700,
+                          color: kBackgroundColor,
+                        ),
+                        textAlign: TextAlign.center,
+                      )),
                 ),
               ),
             ),
@@ -75,10 +83,22 @@ class PaymentMainPage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   if (_cardKey.currentState?.validate() == true ||
-                      _upi.currentState?.validate() == true)
+                      _upi.currentState?.validate() == true ||
+                      _netbanking.currentState?.validate() == true ||
+                      _controller.cod.value == true ||
+                      (_controller.points.value == true &&
+                          _price.appPoints.value > _price.getPrice()))
                     print("Pay now");
-                  else
+                  else if (_controller.points.value == true &&
+                      _price.appPoints.value < _price.getPrice()) {
+                    final _snackBar = SnackBar(
+                        content: Text(
+                            'Balance is Low! Please select a payment method'));
+
+                    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+                  } else {
                     print("No");
+                  }
                 },
                 child: Container(
                   width: width,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/CartItemController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class DeliveryTo extends StatelessWidget {
@@ -6,6 +8,9 @@ class DeliveryTo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartItemController _controller = Get.put(CartItemController());
+    int _addressIndex = _controller.addressIndex!.value;
+
     return Container(
       padding: EdgeInsets.all(10.0),
       // color: Colors.blue,
@@ -32,7 +37,7 @@ class DeliveryTo extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Name",
+                    "${_controller.addressList[_addressIndex].name}",
                     style: TextStyle(
                       color: kHeadingTextColor,
                       fontWeight: FontWeight.w600,
@@ -46,7 +51,7 @@ class DeliveryTo extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5.0)),
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      "Home",
+                      "${_controller.addressList[_addressIndex].addressType}",
                       style: TextStyle(
                         color: kHeadingTextColor,
                         fontWeight: FontWeight.w700,
@@ -58,7 +63,7 @@ class DeliveryTo extends StatelessWidget {
               ),
               SizedBox(height: 5.0),
               Text(
-                "Flat ABC, Street No. 1234, Locality 45, landmark ABC",
+                "${_controller.addressList[_addressIndex].houseno}, ${_controller.addressList[_addressIndex].streetName}, ${_controller.addressList[_addressIndex].nearby}",
                 style: TextStyle(
                   color: kDeailHeadingColor,
                   fontWeight: FontWeight.w600,
@@ -76,7 +81,7 @@ class DeliveryTo extends StatelessWidget {
                       fontSize: width * 0.045,
                     )),
                 TextSpan(
-                    text: "12346",
+                    text: "${_controller.addressList[_addressIndex].pincode}",
                     style: TextStyle(
                       color: kDeailHeadingColor,
                       fontWeight: FontWeight.w500,
@@ -94,7 +99,8 @@ class DeliveryTo extends StatelessWidget {
                       fontSize: width * 0.045,
                     )),
                 TextSpan(
-                    text: "+91 1234567890",
+                    text:
+                        "+91 ${_controller.addressList[_addressIndex].mobile}",
                     style: TextStyle(
                       color: kDeailHeadingColor,
                       fontWeight: FontWeight.w500,
