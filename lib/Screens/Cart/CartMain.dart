@@ -86,7 +86,7 @@ class MainCart extends StatelessWidget {
                             horizontal: 20.0, vertical: 10.0),
                         child: Center(
                           child: Text(
-                            "Rs. 1500",
+                            "Rs. ${_controller.getPrice()}",
                             style: TextStyle(
                               fontSize: width * 0.07,
                               fontWeight: FontWeight.w700,

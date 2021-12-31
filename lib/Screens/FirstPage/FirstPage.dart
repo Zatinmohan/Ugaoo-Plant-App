@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ugaoo/Screens/FirstPage/customButton.dart';
-import 'package:ugaoo/Screens/Login/login.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class FirstPage extends StatefulWidget {

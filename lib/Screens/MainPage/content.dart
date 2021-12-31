@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ugaoo/Model/dummy.dart';
 import 'package:ugaoo/misc/colors.dart';
 import 'package:ugaoo/misc/imagesEg.dart';
 
@@ -18,10 +19,14 @@ class MainContent extends StatelessWidget {
           childAspectRatio: (0.48 * height) / height,
         ),
         itemBuilder: (context, index) {
+          String name = dummyList[index].name;
+          var image = dummyList[index].image;
+          String family = dummyList[index].family;
+          int price = dummyList[index].price;
+
           return GestureDetector(
-              onTap: () => Get.toNamed('/Login/Main/Detail', arguments: {
-                    'image': seed_images[index],
-                  }),
+              onTap: () => Get.toNamed('/Login/Main/Detail',
+                  arguments: dummyList[index]),
               child: Stack(children: [
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -41,7 +46,7 @@ class MainContent extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Product",
+                                  "$name",
                                   style: TextStyle(
                                     color: kHeadingTextColor,
                                     fontSize: width * 0.06,
@@ -50,7 +55,7 @@ class MainContent extends StatelessWidget {
                                 ),
                                 SizedBox(height: 2.5),
                                 Text(
-                                  "Family",
+                                  "$family",
                                   style: TextStyle(
                                     color: kDeailHeadingColor,
                                     fontSize: width * 0.04,
@@ -59,7 +64,7 @@ class MainContent extends StatelessWidget {
                                 ),
                                 SizedBox(height: 5.0),
                                 Text(
-                                  "Rs. 250",
+                                  "Rs. $price",
                                   style: TextStyle(
                                     color: kBackgroundColor,
                                     fontSize: width * 0.065,
@@ -76,7 +81,7 @@ class MainContent extends StatelessWidget {
                     child: Hero(
                       tag: seed_images[index],
                       child: Image.network(
-                        seed_images[index],
+                        image,
                         alignment: Alignment.center,
                       ),
                     ),

@@ -90,14 +90,21 @@ class PaymentMainPage extends StatelessWidget {
                           _price.appPoints.value > _price.getPrice()))
                     print("Pay now");
                   else if (_controller.points.value == true &&
-                      _price.appPoints.value < _price.getPrice()) {
+                      _price.appPoints.value < _price.getPrice() &&
+                      (_cardKey.currentState?.validate() == false ||
+                          _upi.currentState?.validate() == false ||
+                          _netbanking.currentState?.validate() == false ||
+                          _controller.cod.value == false)) {
                     final _snackBar = SnackBar(
                         content: Text(
                             'Balance is Low! Please select a payment method'));
 
                     ScaffoldMessenger.of(context).showSnackBar(_snackBar);
                   } else {
-                    print("No");
+                    final _snackBar = SnackBar(
+                        content: Text('Please select a payment method'));
+
+                    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
                   }
                 },
                 child: Container(

@@ -256,16 +256,18 @@ class NewAddress extends StatelessWidget {
                                   _addressController.addressList[data[1]]
                                       .nearby = _landmark.text;
                                 } else {
-                                  _addressController.addressList
-                                      .add(AddressDummy(
-                                    _controller.addressType.value,
-                                    _house.text,
-                                    _street.text,
-                                    int.parse(_pincode.text),
-                                    _name.text,
-                                    int.parse(_phone.text),
-                                    _landmark.text,
-                                  ));
+                                  _addressController.addressList.add(
+                                      AddressDummy(
+                                          _controller.addressType.value,
+                                          _house.text,
+                                          _street.text,
+                                          int.parse(_pincode.text),
+                                          _name.text,
+                                          int.parse(_phone.text),
+                                          _state.text,
+                                          _city.text,
+                                          _landmark.text,
+                                          ));
                                 }
 
                                 Get.back();

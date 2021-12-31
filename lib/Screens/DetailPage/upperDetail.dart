@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/miscController.dart';
+
 import 'package:ugaoo/Screens/DetailPage/customBar.dart';
 import 'package:ugaoo/Screens/DetailPage/plantNeeds.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class UpperDetail extends StatelessWidget {
-  const UpperDetail({Key? key}) : super(key: key);
+  final image, water, light, temp, name;
+  const UpperDetail(
+      {Key? key, this.image, this.water, this.light, this.temp, this.name})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,21 +46,21 @@ class UpperDetail extends StatelessWidget {
                       children: [
                         PlantNeeds(icon: FontAwesomeIcons.tint, name: "Water"),
                         SizedBox(height: 10.0),
-                        Text("1/Week",
+                        Text("$water",
                             style: TextStyle(
                                 color: kDeailHeadingColor,
                                 fontSize: width * 0.055)),
                         SizedBox(height: 15.0),
                         PlantNeeds(icon: Icons.wb_sunny, name: "Light"),
                         SizedBox(height: 10.0),
-                        Text("Medium",
+                        Text("$light",
                             style: TextStyle(
                                 color: kDeailHeadingColor,
                                 fontSize: width * 0.055)),
                         SizedBox(height: 15.0),
                         PlantNeeds(icon: Icons.thermostat, name: "Temperature"),
                         SizedBox(height: 10.0),
-                        Text("28.5 C",
+                        Text("$temp C",
                             style: TextStyle(
                                 color: kDeailHeadingColor,
                                 fontSize: width * 0.055)),
@@ -67,11 +71,11 @@ class UpperDetail extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Hero(
-                      tag: Get.arguments['image'],
+                      tag: image,
                       child: Center(
                         child: Container(
                           child: Image.network(
-                            Get.arguments['image'],
+                            image,
                             height: height * 0.6,
                           ),
                         ),
@@ -151,7 +155,7 @@ class UpperDetail extends StatelessWidget {
                     ],
                   ),
                 )),
-            CustomBar(),
+            CustomBar(product: name),
           ],
         ),
       ),

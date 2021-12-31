@@ -114,7 +114,7 @@ class ItemCart extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50.0)),
                             child: IconButton(
                                 onPressed: () {
-                                  _controller.cartItems.removeAt(index);
+                                  _controller.removeFromCart(index);
                                 },
                                 icon: Icon(
                                   Icons.delete_rounded,

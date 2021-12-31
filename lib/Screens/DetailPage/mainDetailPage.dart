@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/CartItemController.dart';
+import 'package:ugaoo/Model/dummy.dart';
 
 import 'package:ugaoo/Screens/DetailPage/upperDetail.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -10,15 +13,22 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Detail Page");
+    final Dummy _info = Get.arguments;
     PageController _controller = PageController();
+    final CartItemController _items = Get.put(CartItemController());
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: ksecondaryBackgroundColor,
         body: Column(
           children: [
-            UpperDetail(),
+            UpperDetail(
+                name: _info.name,
+                image: _info.image,
+                temp: _info.temp,
+                water: _info.water,
+                light: _info.light),
             SizedBox(height: 10.0),
             Expanded(child: BottomDetails(pageController: _controller)),
           ],
@@ -37,7 +47,7 @@ class DetailPage extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: Center(
                     child: Text(
-                      "Rs. 250",
+                      "Rs. ${_info.price}",
                       style: TextStyle(
                         fontSize: width * 0.07,
                         fontWeight: FontWeight.w700,
@@ -51,7 +61,9 @@ class DetailPage extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: GestureDetector(
-                  onTap: () => print("Add to Cart"),
+                  onTap: () {
+                    _items.addToCart(_info);
+                  },
                   child: Container(
                     width: width,
                     height: height * 0.08,

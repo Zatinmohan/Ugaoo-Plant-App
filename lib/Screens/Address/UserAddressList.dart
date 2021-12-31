@@ -21,6 +21,9 @@ class AddressList extends StatelessWidget {
           var phone = dummyList[index].mobile;
           var name = dummyList[index].name;
           var houseno = dummyList[index].houseno;
+          var city = dummyList[index].city;
+          var state = dummyList[index].state;
+
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             height: height * 0.3,
@@ -95,16 +98,25 @@ class AddressList extends StatelessWidget {
                           ),
                           SizedBox(height: 5.0),
                           Text(
-                            "city - $pincode",
+                            "$city - $pincode",
                             style: TextStyle(
                               color: kDeailHeadingColor,
                               fontWeight: FontWeight.w500,
                               fontSize: width * 0.045,
                             ),
                           ),
+                          SizedBox(height: 5.0),
+                          Text(
+                            "$state",
+                            style: TextStyle(
+                              color: kDeailHeadingColor,
+                              fontWeight: FontWeight.w500,
+                              fontSize: width * 0.048,
+                            ),
+                          ),
                           SizedBox(height: 7.0),
                           Text(
-                            "$phone",
+                            "+91 $phone",
                             style: TextStyle(
                               color: kDeailHeadingColor,
                               fontWeight: FontWeight.w500,
@@ -122,8 +134,10 @@ class AddressList extends StatelessWidget {
                       width: width,
                       child: IconButton(
                           onPressed: () {
-                            Get.toNamed('/Address/NewAddress',
-                                arguments: [_controller.addressList[index],index]);
+                            Get.toNamed('/Address/NewAddress', arguments: [
+                              _controller.addressList[index],
+                              index
+                            ]);
                           },
                           icon: Icon(Icons.edit)),
                     ),

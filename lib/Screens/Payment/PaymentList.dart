@@ -21,7 +21,7 @@ class PaymentList extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.symmetric(horizontal: 5.0),
         children: ListTile.divideTiles(context: context, tiles: [
-          AppPointsWidget(),
+          AppPointsWidget(cardkey: cardKey, upi: upi, netbanking: netbanking),
           ExpansionTile(
             title: Text("Debit/Credit Card"),
             children: [
@@ -46,8 +46,12 @@ class PaymentList extends StatelessWidget {
 }
 
 class AppPointsWidget extends StatelessWidget {
+  final cardkey, netbanking, upi;
   const AppPointsWidget({
     Key? key,
+    this.cardkey,
+    this.netbanking,
+    this.upi,
   }) : super(key: key);
 
   @override
@@ -75,14 +79,15 @@ class AppPointsWidget extends StatelessWidget {
               : (bool? val) {
                   _controller.points.value = val!;
 
-                  if (_controller.points.value == true &&
-                      _price.appPoints.value < _price.getPrice()) {
-                    final _snackBar = SnackBar(
-                        content: Text(
-                            'Balance is Low! Please select a payment method'));
+                  // if (_controller.points.value == true &&
+                  //     _price.appPoints.value < _price.getPrice() &&
+                  //     _controller.cod.value == false) {
+                  //   final _snackBar = SnackBar(
+                  //       content: Text(
+                  //           'Balance is Low! Please select a payment method'));
 
-                    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
-                  }
+                  //   ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+                  // }
                 },
         ));
   }

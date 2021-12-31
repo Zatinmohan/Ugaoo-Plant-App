@@ -3,7 +3,7 @@ import 'package:ugaoo/Model/AddressDummy.dart';
 import 'package:ugaoo/Model/dummy.dart';
 
 class CartItemController extends GetxController {
-  List<Dummy> cartItems = dummyList.obs;
+  List<Dummy> cartItems = cartList.obs;
   List<AddressDummy> addressList = dummyAddressList.obs;
   RxInt? addressIndex = 0.obs;
   RxInt appPoints = 50.obs;
@@ -19,5 +19,15 @@ class CartItemController extends GetxController {
     }
 
     return v;
+  }
+
+  addToCart(data) {
+    cartList.add(data);
+    cartItems.add(data);
+  }
+
+  removeFromCart(data) {
+    cartList.removeAt(data);
+    cartItems.removeAt(data);
   }
 }

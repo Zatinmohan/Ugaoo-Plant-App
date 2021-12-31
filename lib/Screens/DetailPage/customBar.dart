@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class CustomBar extends StatelessWidget {
-  final product = "Product";
-  const CustomBar({Key? key}) : super(key: key);
+  final product;
+  const CustomBar({Key? key, this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
