@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/CartItemController.dart';
 import 'package:ugaoo/Model/dummy.dart';
-
 import 'package:ugaoo/Screens/DetailPage/upperDetail.dart';
 import 'package:ugaoo/misc/colors.dart';
-
 import 'bottomDetails.dart';
 
 class DetailPage extends StatelessWidget {

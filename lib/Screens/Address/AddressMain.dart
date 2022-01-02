@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ugaoo/Controller/CartItemController.dart';
+import 'package:ugaoo/Model/AddressDummy.dart';
 import 'package:ugaoo/Screens/Address/UserAddressList.dart';
 import 'package:ugaoo/misc/PageIndication.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -75,7 +76,16 @@ class AddressMain extends StatelessWidget {
             Flexible(
               flex: 1,
               child: GestureDetector(
-                onTap: () => Get.toNamed('/Address/Payment'),
+                onTap: () {
+                  if (dummyAddressList.isNotEmpty)
+                    Get.toNamed('/Address/Payment');
+                  else {
+                    final _snackbar = SnackBar(
+                        content:
+                            Text("Please add or select a address to continue"));
+                    ScaffoldMessenger.of(context).showSnackBar(_snackbar);
+                  }
+                },
                 child: Container(
                   width: width,
                   height: height * 0.08,

@@ -30,4 +30,13 @@ class CartItemController extends GetxController {
     cartList.removeAt(data);
     cartItems.removeAt(data);
   }
+
+  addAddress(data) {
+    dummyAddressList.add(data);
+    addressList.add(data);
+  }
+
+  // removeAddress(data){
+
+  // }
 }
