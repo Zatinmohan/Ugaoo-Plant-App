@@ -9,6 +9,7 @@ import 'package:ugaoo/Screens/Login/login.dart';
 import 'package:ugaoo/Screens/MainPage/mainPage.dart';
 import 'package:ugaoo/Screens/Payment/PaymentMain.dart';
 import 'package:ugaoo/Screens/Signup/signup.dart';
+import 'package:ugaoo/Screens/onBoardingPage/onBoarding.dart';
 
 class Routes {
   static final routes = [
@@ -21,5 +22,6 @@ class Routes {
     GetPage(name: '/Cart/Address', page: () => AddressMain()),
     GetPage(name: '/Address/NewAddress', page: () => NewAddress()),
     GetPage(name: '/Address/Payment', page: () => PaymentMainPage()),
+    GetPage(name: '/Onboarding', page: () => OnBoarding()),
   ];
 }

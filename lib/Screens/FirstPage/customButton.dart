@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
       {Key? key, this.name, this.pageValue, this.pageContext, this.formKey})
       : super(key: key);
 
-  Page0() => Get.toNamed('/Login');
+  Page0() => Get.toNamed('/Onboarding');
 
   Page1() {
     if (formKey.currentState?.validate() == true) Get.toNamed('/Login/Main');
