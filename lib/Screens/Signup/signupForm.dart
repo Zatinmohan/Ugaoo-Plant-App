@@ -72,7 +72,7 @@ class _SignUpFormState extends State<SignUpForm> {
               if (val.length < 6)
                 return "Atleast 6 characters";
               else
-                null;
+                return null;
             },
             obscureText: true,
             decoration: InputDecoration(

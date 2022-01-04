@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:ugaoo/Screens/Login/customDivider.dart';
 import 'package:ugaoo/Screens/Login/googleLogin.dart';
 import 'package:ugaoo/Screens/Login/heading.dart';
-import 'package:ugaoo/Screens/Login/login.dart';
 import 'package:ugaoo/Screens/Signup/signupForm.dart';
 import 'package:ugaoo/misc/colors.dart';
 

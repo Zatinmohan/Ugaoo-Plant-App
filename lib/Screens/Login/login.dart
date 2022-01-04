@@ -8,8 +8,20 @@ import 'package:ugaoo/misc/colors.dart';
 
 import 'heading.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  @override
+  void didChangeDependencies() {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
