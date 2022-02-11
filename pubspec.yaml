@@ -32,6 +32,8 @@ dependencies:
   get_storage:
   font_awesome_flutter:
   http:
+  firebase_core: ^1.10.6
+  firebase_auth: ^3.3.4
   
 
 dev_dependencies:
@@ -53,6 +55,7 @@ flutter:
   assets:
     - assets/misc/
     - assets/onboarding/
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -21,7 +21,7 @@ class DetailPage extends StatelessWidget {
         backgroundColor: ksecondaryBackgroundColor,
         body: Column(
           children: [
-            UpperDetail( 
+            UpperDetail(
                 name: _info.name,
                 image: _info.image,
                 temp: _info.temp,

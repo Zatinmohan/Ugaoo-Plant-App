@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ugaoo/Controller/loginFormController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class CustomButton extends StatelessWidget {
@@ -14,7 +15,8 @@ class CustomButton extends StatelessWidget {
   Page0() => Get.toNamed('/Onboarding');
 
   Page1() {
-    if (formKey.currentState?.validate() == true) Get.toNamed('/Login/Main');
+    Get.find<LoginController>().checkLogin();
+    // if (formKey.currentState?.validate() == true) Get.toNamed('/Login/Main');
   }
 
   Page2() {

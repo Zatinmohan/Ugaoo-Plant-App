@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/loginFormController.dart';
 import 'package:ugaoo/Screens/FirstPage/customButton.dart';
 import 'package:ugaoo/misc/colors.dart';
 
@@ -10,26 +12,19 @@ class UsernamePassword extends StatefulWidget {
 }
 
 class _UsernamePasswordState extends State<UsernamePassword> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: _formKey,
+        key: Get.find<LoginController>().loginKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             TextFormField(
-              validator: (value) {
-                String pattern =
-                    r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-                    r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-                    r"{0,253}[a-zA-Z0-9])?)*$";
-                RegExp regex = new RegExp(pattern);
-                if (value == null || value.isEmpty) return '* Required';
-                if (!regex.hasMatch(value)) return "Enter a valid email";
-
-                return null;
+              controller: Get.find<LoginController>().emailController,
+              validator: (value) =>
+                  Get.find<LoginController>().validateEmail(value!),
+              onSaved: (value) {
+                Get.find<LoginController>().email = value!;
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               decoration: InputDecoration(
@@ -41,9 +36,10 @@ class _UsernamePasswordState extends State<UsernamePassword> {
             SizedBox(height: 20.0),
             TextFormField(
               obscureText: true,
-              validator: (val) {
-                if (val == null || val.isEmpty) return "* Required";
-                return null;
+              validator: (value) =>
+                  Get.find<LoginController>().validatePassword(value!),
+              onSaved: (value) {
+                Get.find<LoginController>().pass = value!;
               },
               decoration: InputDecoration(
                 hintText: "Password",
@@ -65,33 +61,10 @@ class _UsernamePasswordState extends State<UsernamePassword> {
               ),
             ),
             SizedBox(height: width * 0.08),
-            // SizedBox(
-            //   width: width * 0.8,
-            //   height: height * 0.065,
-            //   child: ElevatedButton(
-            //       onPressed: () {
-            //         _formKey.currentState?.validate();
-            //       },
-            //       style: ElevatedButton.styleFrom(
-            //           primary: kBackgroundColor,
-            //           elevation: 4,
-            //           padding: EdgeInsets.all(5.0),
-            //           shape: RoundedRectangleBorder(
-            //             borderRadius: BorderRadius.circular(30.0),
-            //           )),
-            //       child: Text(
-            //         "SIGN IN",
-            //         style: TextStyle(
-            //           color: kHeadingTextColor,
-            //           fontWeight: FontWeight.w500,
-            //           fontSize: width * 0.065,
-            //         ),
-            //       )),
-            // ),
             CustomButton(
                 pageContext: context,
                 pageValue: 1,
-                formKey: _formKey,
+                formKey: Get.find<LoginController>().loginKey,
                 name: "SIGN IN"),
           ],
         ));
