@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ugaoo/misc/colors.dart';
 
+// Login behind Payment Page method.
+// UI Login only
+
 class PageIndicator extends StatelessWidget {
   final pageNo;
   const PageIndicator({Key? key, this.pageNo}) : super(key: key);

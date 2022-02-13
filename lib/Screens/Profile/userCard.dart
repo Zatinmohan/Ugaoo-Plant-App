@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/UserController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class UserCard extends StatelessWidget {
@@ -35,7 +37,7 @@ class UserCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Jatin Mohan",
+                        "${Get.find<UserController>().userData.name}",
                         style: TextStyle(
                           color: kHeadingTextColor,
                           fontSize: width * 0.08,
@@ -44,7 +46,7 @@ class UserCard extends StatelessWidget {
                       ),
                       SizedBox(height: 8.0),
                       Text(
-                        "jatinmohan06@gmail.com",
+                        "${Get.find<UserController>().userData.email}",
                         style: TextStyle(
                           color: Colors.blueGrey,
                           fontSize: width * 0.04,

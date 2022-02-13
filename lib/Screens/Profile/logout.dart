@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/authController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class Logout extends StatelessWidget {
@@ -15,7 +17,7 @@ class Logout extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               )),
-          onPressed: () => print("Logout"),
+          onPressed: () => Get.find<AuthController>().logout(),
           child: Text("Logout")),
     );
   }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//Contains a dummy Category List.
+// Shown on Main Screen
+
 List<String> mainCategories = [
   "Seeds",
   "Plants",

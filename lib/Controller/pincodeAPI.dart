@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:ugaoo/Model/pincodeParser.dart';
 import 'package:http/http.dart' as https;
 
+//Used an API to fetch data on the basis of Pincodes in India.
+
 class PincodeAPI extends GetxController {
   var pincodeData = PincodeModel().obs;
   String? _city, _state;

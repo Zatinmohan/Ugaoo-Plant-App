@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+// Contains Color and other formattting stuffs
+// such as width and height of device
+
 const kBackgroundColor = Color(0xffAEC48A);
 const ksecondaryBackgroundColor = Color(0xffEEF3EA);
 const kSecondaryTextColor = Color(0xffE9E9E9);

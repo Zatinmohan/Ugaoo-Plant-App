@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/Bindings/BottmNavBindings.dart';
 import 'package:ugaoo/Controller/Bindings/LoginBindings.dart';
+import 'package:ugaoo/Controller/Bindings/SignupBindings.dart';
 import 'package:ugaoo/Screens/Address/AddressMain.dart';
 import 'package:ugaoo/Screens/Address/newAddress.dart';
 import 'package:ugaoo/Screens/Cart/CartMain.dart';
@@ -13,6 +14,8 @@ import 'package:ugaoo/Screens/Profile/profileMain.dart';
 import 'package:ugaoo/Screens/Signup/signup.dart';
 import 'package:ugaoo/Screens/onBoardingPage/onBoarding.dart';
 
+//Contains all the App pages here.
+
 class Routes {
   static final routes = [
     GetPage(name: '/', page: () => FirstPage()),
@@ -20,7 +23,8 @@ class Routes {
         name: '/Login',
         page: () => Login(),
         binding: LoginControllerBindings()),
-    GetPage(name: '/Signup', page: () => SignupPage()),
+    GetPage(
+        name: '/Signup', page: () => SignupPage(), binding: SignUpBinding()),
     GetPage(
         name: '/Login/Main',
         page: () => MainPage(),
@@ -31,6 +35,9 @@ class Routes {
     GetPage(name: '/Address/NewAddress', page: () => NewAddress()),
     GetPage(name: '/Address/Payment', page: () => PaymentMainPage()),
     GetPage(name: '/Onboarding', page: () => OnBoarding()),
-    GetPage(name: '/Profile', page: () => ProfilePage()),
+    GetPage(
+        name: '/Profile',
+        page: () => ProfilePage(),
+        binding: LoginControllerBindings()),
   ];
 }

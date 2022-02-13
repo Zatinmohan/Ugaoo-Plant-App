@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+//Controls the Bottom Bar Nav
+// Need Getx to get the index number
 
 class BottomNavController extends GetxController {
   var index = 0.obs;

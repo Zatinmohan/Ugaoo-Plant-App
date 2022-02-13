@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/signupController.dart';
 import 'package:ugaoo/Screens/FirstPage/customButton.dart';
 import 'package:ugaoo/misc/colors.dart';
 
@@ -10,18 +12,15 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: Get.find<SignupController>().signupForm,
       child: Column(
         children: [
           TextFormField(
-            validator: (val) {
-              if (val == null || val.isEmpty) return "* Required";
-              return null;
-            },
+            controller: Get.find<SignupController>().fullName,
+            validator: (val) => Get.find<SignupController>().checkName(val!),
             decoration: InputDecoration(
               border: textFieldBorder,
               focusedBorder: focusedBorder,
@@ -30,18 +29,10 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           SizedBox(height: 15.0),
           TextFormField(
+            controller: Get.find<SignupController>().email,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (value) {
-              String pattern =
-                  r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-                  r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-                  r"{0,253}[a-zA-Z0-9])?)*$";
-              RegExp regex = new RegExp(pattern);
-              if (value == null || value.isEmpty) return '* Required';
-              if (!regex.hasMatch(value)) return "Enter a valid email";
-
-              return null;
-            },
+            validator: (value) =>
+                Get.find<SignupController>().verifyEmail(value!),
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               border: textFieldBorder,
@@ -51,12 +42,9 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           SizedBox(height: 15.0),
           TextFormField(
+            controller: Get.find<SignupController>().phone,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) {
-              if (val == null || val.isEmpty) return "*Required";
-              if (val.length < 10) return "Invalid Phone Number";
-              return null;
-            },
+            validator: (val) => Get.find<SignupController>().verifyPhone(val!),
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
               border: textFieldBorder,
@@ -66,14 +54,10 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           SizedBox(height: 15.0),
           TextFormField(
+            controller: Get.find<SignupController>().password,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) {
-              if (val == null || val.isEmpty) return "* Required";
-              if (val.length < 6)
-                return "Atleast 6 characters";
-              else
-                return null;
-            },
+            validator: (val) =>
+                Get.find<SignupController>().checkPassword(val!),
             obscureText: true,
             decoration: InputDecoration(
               border: textFieldBorder,
@@ -86,31 +70,8 @@ class _SignUpFormState extends State<SignUpForm> {
             name: "SIGN UP",
             pageContext: context,
             pageValue: 2,
-            formKey: _formKey,
+            formKey: Get.find<SignupController>().signupForm,
           ),
-          // SizedBox(
-          //   width: width * 0.8,
-          //   height: height * 0.065,
-          //   child: ElevatedButton(
-          //       onPressed: () {
-          //         _formKey.currentState?.validate();
-          //       },
-          //       style: ElevatedButton.styleFrom(
-          //           primary: kBackgroundColor,
-          //           elevation: 4,
-          //           padding: EdgeInsets.all(5.0),
-          //           shape: RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.circular(30.0),
-          //           )),
-          //       child: Text(
-          //         "SIGN UP",
-          //         style: TextStyle(
-          //           color: kHeadingTextColor,
-          //           fontWeight: FontWeight.w500,
-          //           fontSize: width * 0.065,
-          //         ),
-          //       )),
-          // ),
           SizedBox(height: 20.0),
         ],
       ),

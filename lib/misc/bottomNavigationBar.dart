@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:ugaoo/Controller/bottomNavController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
+//Contains the BottomNavBar used in Main Screen
+
 class customBottomNavigationBar extends StatelessWidget {
   const customBottomNavigationBar({Key? key}) : super(key: key);
 

@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ugaoo/Model/onBoarding_info.dart';
 
+//Class for On-Boarding Page, Same page but text and images are different.
+
 class OnBoardingController extends GetxController {
-  var selectedPageIndex = 0.obs;
+  var selectedPageIndex = 0.obs; //Page numbers for the onboarding screen.
   var pageController = PageController();
 
   bool get isLastPage => selectedPageIndex.value == onBoardingPages.length - 1;
@@ -14,6 +16,8 @@ class OnBoardingController extends GetxController {
     else
       pageController.nextPage(duration: 300.milliseconds, curve: Curves.easeIn);
   }
+
+  //Data for On-Boarding Page
 
   final List<OnboardingInfo> onBoardingPages = [
     OnboardingInfo("assets/onboarding/first.png", "Welcome",

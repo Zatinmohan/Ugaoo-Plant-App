@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:ugaoo/Model/AddressDummy.dart';
 import 'package:ugaoo/Model/dummy.dart';
 
+//Controls Cart Item and the functionality behind it
+
 class CartItemController extends GetxController {
   List<Dummy> cartItems = cartList.obs;
   List<AddressDummy> addressList = dummyAddressList.obs;

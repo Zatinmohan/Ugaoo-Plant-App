@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/authController.dart';
 
+//Controls Login Form and contains Validator.
+
 class LoginController extends GetxController {
   final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   late TextEditingController emailController, passController;

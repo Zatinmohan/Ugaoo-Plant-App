@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/loginFormController.dart';
+import 'package:ugaoo/Controller/signupController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class CustomButton extends StatelessWidget {
@@ -16,11 +17,10 @@ class CustomButton extends StatelessWidget {
 
   Page1() {
     Get.find<LoginController>().checkLogin();
-    // if (formKey.currentState?.validate() == true) Get.toNamed('/Login/Main');
   }
 
   Page2() {
-    if (formKey.currentState?.validate() == true) Get.toNamed('/Signup');
+    Get.find<SignupController>().checkSignup();
   }
 
   @override
