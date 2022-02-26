@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/CartItemController.dart';
+import 'package:ugaoo/Controller/Cart/CartController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class CartPrice extends StatelessWidget {
@@ -8,7 +8,6 @@ class CartPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CartItemController _controller = Get.put(CartItemController());
     return Card(
       elevation: 4.0,
       shape: RoundedRectangleBorder(
@@ -19,11 +18,13 @@ class CartPrice extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: Obx(() {
-            var price = _controller.getPrice();
             return Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                PriceWidget(title: "Cart Total", price: price, isTotal: false),
+                PriceWidget(
+                    title: "Cart Total",
+                    price: Get.find<CartController>().getPrice,
+                    isTotal: false),
                 SizedBox(height: 10.0),
                 PriceWidget(title: "GST", price: "Rs. 74.0", isTotal: false),
                 SizedBox(height: 10.0),
@@ -33,7 +34,9 @@ class CartPrice extends StatelessWidget {
                 Divider(height: 2.0, color: Colors.grey),
                 SizedBox(height: 12.0),
                 PriceWidget(
-                    title: "Total", price: "${price + 50}", isTotal: true)
+                    title: "Total",
+                    price: "${Get.find<CartController>().getPrice + 50}",
+                    isTotal: true)
               ],
             );
           }),

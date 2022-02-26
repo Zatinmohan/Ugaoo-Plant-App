@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/onBoarding_controller.dart';
+import 'package:ugaoo/Controller/OnBoarding/onBoarding_controller.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class OnBoarding extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/CartItemController.dart';
+import 'package:ugaoo/Controller/Cart/CartController.dart';
 import 'package:ugaoo/Controller/miscController.dart';
 import 'package:ugaoo/Screens/Payment/UPI.dart';
 import 'package:ugaoo/Screens/Payment/card.dart';
@@ -57,7 +57,7 @@ class AppPointsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MiscController _controller = Get.put(MiscController());
-    final CartItemController _price = Get.put(CartItemController());
+    final CartController _price = Get.put(CartController());
     int points = 50;
     _price.appPoints.value = points;
     return Obx(() => CheckboxListTile(

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:ugaoo/Controller/PreferenceController.dart';
-import 'package:ugaoo/Controller/authController.dart';
+import 'package:ugaoo/Controller/Shared%20Pref/PreferenceController.dart';
+import 'package:ugaoo/Controller/Auth/authController.dart';
 import 'package:ugaoo/misc/Routes.dart';
 import 'package:ugaoo/misc/colors.dart';
 

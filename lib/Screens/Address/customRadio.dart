@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/pincodeAPI.dart';
+import 'package:ugaoo/Controller/Address/AddressFormController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class CustomRadioWidget extends StatelessWidget {
@@ -9,14 +9,13 @@ class CustomRadioWidget extends StatelessWidget {
   const CustomRadioWidget({Key? key, this.value}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final _controller = Get.put(PincodeAPI());
     return Row(
       children: [
         Obx(() => Radio(
             value: "$value",
-            groupValue: _controller.addressType.value,
+            groupValue: Get.find<AddressFormController>().addressType.value,
             onChanged: (String? val) {
-              _controller.addressType.value = value;
+              Get.find<AddressFormController>().addressType.value = value;
             })),
         Text(
           "$value",

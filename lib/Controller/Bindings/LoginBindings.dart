@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/loginFormController.dart';
+import 'package:ugaoo/Controller/Auth/loginFormController.dart';
 
 class LoginControllerBindings implements Bindings {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/loginFormController.dart';
+import 'package:ugaoo/Controller/Auth/loginFormController.dart';
 import 'package:ugaoo/Screens/FirstPage/customButton.dart';
 import 'package:ugaoo/misc/colors.dart';
 

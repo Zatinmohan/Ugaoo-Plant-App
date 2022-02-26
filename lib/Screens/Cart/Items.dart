@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/CartItemController.dart';
-import 'package:ugaoo/Model/dummy.dart';
+import 'package:ugaoo/Controller/Cart/CartController.dart';
+import 'package:ugaoo/Model/ProductModel.dart';
+import 'package:ugaoo/Model/userModel.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class ItemCart extends StatelessWidget {
@@ -9,18 +10,18 @@ class ItemCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CartItemController _controller = Get.put(CartItemController());
     return Container(
       // color: Colors.black,
       child: Obx(() {
         return ListView.builder(
-          itemCount: _controller.cartItems.length,
+          itemCount: Get.find<CartController>().cartLength,
           itemBuilder: (context, index) {
-            Dummy obj = _controller.cartItems[index];
-            var name = obj.name;
-            var price = obj.price;
-            var image = obj.image;
-            var qty = obj.qty;
+            ProductList product = Get.find<CartController>().cartData![index];
+            var name = product.productName;
+            var price = product.productPrice;
+            var image = product.productImage;
+            var qty = 1;
+            // var qty = product.productQuantity;
             return Container(
               height: height * 0.30,
               // color: Colors.black,
@@ -100,7 +101,7 @@ class ItemCart extends StatelessWidget {
                         alignment: Alignment.topLeft,
                         child: Container(
                             margin: EdgeInsets.only(bottom: 10.0),
-                            child: Image.network(image)),
+                            child: Image.network(image!)),
                       ),
                       Align(
                         alignment: Alignment.topRight,
@@ -114,7 +115,12 @@ class ItemCart extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50.0)),
                             child: IconButton(
                                 onPressed: () {
-                                  _controller.removeFromCart(index);
+                                  Get.find<CartController>().removeDataFromCart(
+                                      CartModel(
+                                          orderID: Get.find<CartController>()
+                                              .getOrderID(index),
+                                          qty: 1));
+                                  Get.find<CartController>().update();
                                 },
                                 icon: Icon(
                                   Icons.delete_rounded,

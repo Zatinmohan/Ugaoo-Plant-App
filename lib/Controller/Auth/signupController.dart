@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/authController.dart';
+import 'package:ugaoo/Controller/Auth/authController.dart';
 
 // Contains the Logic for Signup
 

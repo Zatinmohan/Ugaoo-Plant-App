@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/Product/ProductController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class OtherDetails extends StatelessWidget {
@@ -7,6 +9,9 @@ class OtherDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _productData = heading == "Plant Essential"
+        ? Get.find<ProductController>().productEssential
+        : Get.find<ProductController>().productProblems;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -20,19 +25,16 @@ class OtherDetails extends StatelessWidget {
         ),
         SizedBox(height: 8.0),
         pointsWidget(
-            title: "Fertilizer/ feed for the plant: ",
-            content:
-                "Feed your plant a generic liquid fertiliser diluted to half strength every 2 week"),
+            title: "${_productData?.keys.elementAt(0)}: ",
+            content: "${_productData?.values.elementAt(0)}"),
         SizedBox(height: 8.0),
         pointsWidget(
-            title: "Repotting: ",
-            content:
-                "Repot your plant when it begins to outgrow the current pot. Choose a pot one size larger than the current pot. The start of spring is the best time to repot your Spider plant"),
+            title: "${_productData?.keys.elementAt(1)}: ",
+            content: "${_productData?.values.elementAt(1)}"),
         SizedBox(height: 8.0),
         pointsWidget(
-            title: "Propagation : ",
-            content:
-                "Chlorophytum Spider can be propagated by dividing the main plant or by detaching and replanting the plantlet during monsoon."),
+            title: "${_productData?.keys.elementAt(2)}: ",
+            content: "${_productData?.values.elementAt(2)}"),
       ],
     );
   }

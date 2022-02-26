@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/loginFormController.dart';
-import 'package:ugaoo/Controller/signupController.dart';
+import 'package:ugaoo/Controller/Auth/loginFormController.dart';
+import 'package:ugaoo/Controller/Auth/signupController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class CustomButton extends StatelessWidget {

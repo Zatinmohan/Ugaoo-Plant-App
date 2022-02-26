@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
+import 'package:ugaoo/Controller/Bindings/AddressBindings.dart';
+import 'package:ugaoo/Controller/Bindings/AddressFormBindings.dart';
 import 'package:ugaoo/Controller/Bindings/BottmNavBindings.dart';
+import 'package:ugaoo/Controller/Bindings/CartItemBindings.dart';
 import 'package:ugaoo/Controller/Bindings/LoginBindings.dart';
 import 'package:ugaoo/Controller/Bindings/SignupBindings.dart';
 import 'package:ugaoo/Screens/Address/AddressMain.dart';
@@ -29,11 +32,23 @@ class Routes {
         name: '/Login/Main',
         page: () => MainPage(),
         binding: BottomNavBinding()),
-    GetPage(name: '/Login/Main/Detail', page: () => DetailPage()),
-    GetPage(name: '/Login/Cart', page: () => MainCart()),
-    GetPage(name: '/Cart/Address', page: () => AddressMain()),
-    GetPage(name: '/Address/NewAddress', page: () => NewAddress()),
-    GetPage(name: '/Address/Payment', page: () => PaymentMainPage()),
+    GetPage(
+      name: '/Login/Main/Detail',
+      page: () => DetailPage(),
+    ),
+    GetPage(
+        name: '/Login/Cart',
+        page: () => MainCart(),
+        binding: CartItemBindings()),
+    GetPage(
+        name: '/Cart/Address',
+        page: () => AddressMain(),
+        binding: AddressBingings()),
+    GetPage(
+        name: '/Address/NewAddress',
+        page: () => NewAddress(),
+        binding: AddressFormBindings()),
+    // GetPage(name: '/Address/Payment', page: () => PaymentMainPage()),
     GetPage(name: '/Onboarding', page: () => OnBoarding()),
     GetPage(
         name: '/Profile',

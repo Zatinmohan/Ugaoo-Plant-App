@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/bottomNavController.dart';
+import 'package:ugaoo/Controller/BottomNav/bottomNavController.dart';
 
 class BottomNavBinding implements Bindings {
   @override

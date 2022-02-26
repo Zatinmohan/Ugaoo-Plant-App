@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/signupController.dart';
+import 'package:ugaoo/Controller/Auth/signupController.dart';
 import 'package:ugaoo/Screens/FirstPage/customButton.dart';
 import 'package:ugaoo/misc/colors.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/authController.dart';
+import 'package:ugaoo/Controller/Auth/authController.dart';
 
 //Controls Login Form and contains Validator.
 

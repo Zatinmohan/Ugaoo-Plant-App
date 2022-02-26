@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ugaoo/Model/AddressDummy.dart';
+import 'package:ugaoo/Controller/Address/AddressController.dart';
 import 'package:ugaoo/Screens/Address/UserAddressList.dart';
 import 'package:ugaoo/misc/PageIndication.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -54,8 +54,9 @@ class AddressMain extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: GestureDetector(
-                    onTap: () =>
-                        Get.toNamed('/Address/NewAddress', arguments: null),
+                    onTap: () {
+                      Get.find<AddressController>().setData(0, false);
+                    },
                     child: Center(
                       child: Text(
                         "Add New Address",
@@ -75,14 +76,14 @@ class AddressMain extends StatelessWidget {
               flex: 1,
               child: GestureDetector(
                 onTap: () {
-                  if (dummyAddressList.isNotEmpty)
-                    Get.toNamed('/Address/Payment');
-                  else {
-                    final _snackbar = SnackBar(
-                        content:
-                            Text("Please add or select a address to continue"));
-                    ScaffoldMessenger.of(context).showSnackBar(_snackbar);
-                  }
+                  // if (dummyAddressList.isNotEmpty)
+                  //   Get.toNamed('/Address/Payment');
+                  // else {
+                  //   final _snackbar = SnackBar(
+                  //       content:
+                  //           Text("Please add or select a address to continue"));
+                  //   ScaffoldMessenger.of(context).showSnackBar(_snackbar);
+                  // }
                 },
                 child: Container(
                   width: width,

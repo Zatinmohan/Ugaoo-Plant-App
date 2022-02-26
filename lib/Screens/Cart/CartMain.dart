@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/CartItemController.dart';
+import 'package:ugaoo/Controller/Cart/CartController.dart';
 import 'package:ugaoo/Screens/Cart/CartPrice.dart';
 import 'package:ugaoo/Screens/Cart/Items.dart';
 import 'package:ugaoo/Screens/Cart/emptyCart.dart';
@@ -12,7 +12,6 @@ class MainCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CartItemController _controller = Get.put(CartItemController());
     return Scaffold(
       appBar: AppBar(
           backgroundColor: ksecondaryBackgroundColor,
@@ -30,16 +29,16 @@ class MainCart extends StatelessWidget {
               ),
               SizedBox(height: 1.0),
               Obx(() {
-                return _controller.cartItems.isNotEmpty
-                    ? Text(
-                        "${_controller.getLength()} Item",
+                return Get.find<CartController>().isEmpty
+                    ? SizedBox.shrink()
+                    : Text(
+                        "${Get.find<CartController>().cartLength} Items",
                         style: TextStyle(
                           color: kHeadingTextColor,
                           fontWeight: FontWeight.w400,
                           fontSize: width * 0.045,
                         ),
-                      )
-                    : SizedBox.shrink();
+                      );
               })
             ],
           ),
@@ -50,7 +49,7 @@ class MainCart extends StatelessWidget {
                 color: kHeadingTextColor,
               ))),
       body: Obx(
-        () => _controller.cartItems.isEmpty
+        () => Get.find<CartController>().isEmpty
             ? EmptyCart()
             : SingleChildScrollView(
                 child: Container(
@@ -70,61 +69,59 @@ class MainCart extends StatelessWidget {
                 ),
               ),
       ),
-      bottomNavigationBar: Obx(
-        () => _controller.cartItems.isNotEmpty
-            ? BottomAppBar(
-                child: Container(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      flex: 1,
+      bottomNavigationBar: Obx(() => Get.find<CartController>().isEmpty
+          ? SizedBox.shrink()
+          : BottomAppBar(
+              child: Container(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      width: width,
+                      height: height * 0.08,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
+                      child: Center(
+                        child: Text(
+                          "Rs. ${Get.find<CartController>().getPrice}",
+                          style: TextStyle(
+                            fontSize: width * 0.07,
+                            fontWeight: FontWeight.w700,
+                            color: kBackgroundColor,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () => Get.toNamed('/Cart/Address'),
                       child: Container(
                         width: width,
                         height: height * 0.08,
+                        color: kBackgroundColor,
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         child: Center(
                           child: Text(
-                            "Rs. ${_controller.getPrice()}",
+                            "Select Address",
                             style: TextStyle(
-                              fontSize: width * 0.07,
-                              fontWeight: FontWeight.w700,
-                              color: kBackgroundColor,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: GestureDetector(
-                        onTap: () => Get.toNamed('/Cart/Address'),
-                        child: Container(
-                          width: width,
-                          height: height * 0.08,
-                          color: kBackgroundColor,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 10.0),
-                          child: Center(
-                            child: Text(
-                              "Select Address",
-                              style: TextStyle(
-                                fontSize: width * 0.055,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
+                              fontSize: width * 0.055,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ],
-                )),
-              )
-            : SizedBox.shrink(),
-      ),
+                  ),
+                ],
+              )),
+            )),
     );
   }
 }

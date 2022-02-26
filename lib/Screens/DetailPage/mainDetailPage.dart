@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/CartItemController.dart';
-import 'package:ugaoo/Model/dummy.dart';
+import 'package:ugaoo/Controller/Product/ProductController.dart';
+import 'package:ugaoo/Controller/User/UserController.dart';
+import 'package:ugaoo/Model/userModel.dart';
 import 'package:ugaoo/Screens/DetailPage/upperDetail.dart';
 import 'package:ugaoo/misc/colors.dart';
 import 'bottomDetails.dart';
@@ -11,9 +12,7 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Dummy _info = Get.arguments;
-    PageController _controller = PageController();
-    final CartItemController _items = Get.put(CartItemController());
+    final ProductController _data = Get.find<ProductController>();
 
     return SafeArea(
       child: Scaffold(
@@ -21,14 +20,9 @@ class DetailPage extends StatelessWidget {
         backgroundColor: ksecondaryBackgroundColor,
         body: Column(
           children: [
-            UpperDetail(
-                name: _info.name,
-                image: _info.image,
-                temp: _info.temp,
-                water: _info.water,
-                light: _info.light),
+            UpperDetail(),
             SizedBox(height: 10.0),
-            Expanded(child: BottomDetails(pageController: _controller)),
+            Expanded(child: BottomDetails()),
           ],
         ),
         bottomNavigationBar: BottomAppBar(
@@ -45,7 +39,7 @@ class DetailPage extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: Center(
                     child: Text(
-                      "Rs. ${_info.price}",
+                      "Rs. ${_data.productPrice}",
                       style: TextStyle(
                         fontSize: width * 0.07,
                         fontWeight: FontWeight.w700,
@@ -60,7 +54,12 @@ class DetailPage extends StatelessWidget {
                 flex: 1,
                 child: GestureDetector(
                   onTap: () {
-                    _items.addToCart(_info);
+                    CartModel items = CartModel(
+                      orderID: _data.productID,
+                      qty: 1,
+                    );
+
+                    Get.find<UserController>().addData(items);
                   },
                   child: Container(
                     width: width,
