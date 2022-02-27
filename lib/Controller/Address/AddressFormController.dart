@@ -20,9 +20,6 @@ class AddressFormController extends GetxController {
 
   @override
   void onInit() {
-    address.value = Get.find<AddressController>()
-        .savedAddress![Get.find<AddressController>().editAddressIndex.value];
-
     addressFormKey = GlobalKey<FormState>();
     city = TextEditingController();
     state = TextEditingController();
@@ -39,7 +36,11 @@ class AddressFormController extends GetxController {
   }
 
   void checkPageStatus() {
-    if (Get.find<AddressController>().isAddressEdit.isTrue) setValues();
+    if (Get.find<AddressController>().isAddressEdit.isTrue) {
+      address.value = Get.find<AddressController>()
+          .savedAddress![Get.find<AddressController>().editAddressIndex.value];
+      setValues();
+    }
   }
 
   String? validator1(String? value) {
@@ -61,15 +62,22 @@ class AddressFormController extends GetxController {
     addressType.value = address.value.addressType!;
   }
 
-  void getStateAndCity(var pincode) {
+  void getStateAndCity(var pincode) async {
     Get.put(PincodeAPI());
     if (pincode == null || pincode.length < 6)
       Get.snackbar("Incorrect Pincode", "Enter a correct pincode",
           snackPosition: SnackPosition.BOTTOM);
     else {
       Get.find<PincodeAPI>().fetchData(pincode);
-      state.text = Get.find<PincodeAPI>().getState;
-      city.text = Get.find<PincodeAPI>().getCity;
+      await Get.find<PincodeAPI>().fetchData(pincode).then((value) {
+        if (value) {
+          state.text = Get.find<PincodeAPI>().getState;
+          city.text = Get.find<PincodeAPI>().getCity;
+        } else {
+          state.clear();
+          city.clear();
+        }
+      });
     }
   }
 

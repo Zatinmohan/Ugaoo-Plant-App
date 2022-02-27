@@ -47,26 +47,23 @@ class AddressMain extends StatelessWidget {
             Flexible(
               flex: 1,
               child: GestureDetector(
-                onTap: () => print("Add new address"),
+                onTap: () {
+                  Get.find<AddressController>().setData(0, false);
+                },
                 child: Container(
                   width: width,
                   height: height * 0.08,
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.find<AddressController>().setData(0, false);
-                    },
-                    child: Center(
-                      child: Text(
-                        "Add New Address",
-                        style: TextStyle(
-                          fontSize: width * 0.045,
-                          fontWeight: FontWeight.w700,
-                          color: kBackgroundColor,
-                        ),
-                        textAlign: TextAlign.center,
+                  child: Center(
+                    child: Text(
+                      "Add New Address",
+                      style: TextStyle(
+                        fontSize: width * 0.045,
+                        fontWeight: FontWeight.w700,
+                        color: kBackgroundColor,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),

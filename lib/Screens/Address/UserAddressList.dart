@@ -85,6 +85,8 @@ class AddressList extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               fontSize: width * 0.045,
                             ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           SizedBox(height: 5.0),
                           Text(

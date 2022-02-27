@@ -9,15 +9,16 @@ import 'package:http/http.dart' as https;
 class PincodeAPI extends GetxController {
   var pincodeData = PincodeModel().obs;
   late String _city, _state;
+  RxBool loading = false.obs;
 
-  void fetchData(var pincode) async {
-    print("Inside Pincode");
+  Future<bool> fetchData(var pincode) async {
     var baseUrl = "http://www.postalpincode.in/api/pincode/";
     var url = Uri.parse(baseUrl + pincode);
     var response = await https.get(url);
 
     if (response.statusCode == 200) {
       try {
+        loading.value = true;
         var jsonResponse = jsonDecode(response.body);
         pincodeData.value = PincodeModel.fromJson(jsonResponse);
 
@@ -25,10 +26,15 @@ class PincodeAPI extends GetxController {
           _city = pincodeData.value.postOffice![0].taluk.toString();
           _state = pincodeData.value.postOffice![0].state.toString();
         }
+        return loading.value;
       } catch (e) {
-        Get.snackbar("Invalid Pincode!", "Please enter a valid pincode");
+        Get.snackbar("Invalid Pincode!", "Please enter a valid pincode",
+            snackPosition: SnackPosition.BOTTOM);
+        return false;
       }
     }
+
+    return false;
   }
 
   String get getCity => _city;

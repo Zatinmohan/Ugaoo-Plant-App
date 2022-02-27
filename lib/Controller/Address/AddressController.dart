@@ -60,20 +60,21 @@ class AddressController extends GetxController {
   }
 
   List<Map<String, dynamic>> dataToListOfMap() {
-    List<Map<String, dynamic>> temp = [];
+    List<Map<String, dynamic>> temp = <Map<String, dynamic>>[];
 
     for (int i = 0; i < _addressList!.length; i++) {
-      temp[i]["name"] = _addressList![i].addressName;
-      temp[i]["city"] = _addressList![i].addressCity;
-      temp[i]["flat"] = _addressList![i].addressFlat;
-      temp[i]["landmark"] = _addressList![i].landmark;
-      temp[i]["phone"] = _addressList![i].addressPhone;
-      temp[i]["pincode"] = _addressList![i].addressPincode;
-      temp[i]["state"] = _addressList![i].addressState;
-      temp[i]["street"] = _addressList![i].addressStreet;
-      temp[i]["type"] = _addressList![i].addressType;
+      temp.add({
+        'name': _addressList![i].addressName,
+        'flat': _addressList![i].addressFlat,
+        'city': _addressList![i].addressCity,
+        'pincode': _addressList![i].addressPincode,
+        'landmark': _addressList![i].landmark,
+        'phone': _addressList![i].addressPhone,
+        'state': _addressList![i].addressState,
+        'street': _addressList![i].addressStreet,
+        'type': _addressList![i].addressType,
+      });
     }
-
     return temp;
   }
 }
