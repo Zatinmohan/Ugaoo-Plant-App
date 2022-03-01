@@ -72,16 +72,7 @@ class AddressMain extends StatelessWidget {
             Flexible(
               flex: 1,
               child: GestureDetector(
-                onTap: () {
-                  // if (dummyAddressList.isNotEmpty)
-                  //   Get.toNamed('/Address/Payment');
-                  // else {
-                  //   final _snackbar = SnackBar(
-                  //       content:
-                  //           Text("Please add or select a address to continue"));
-                  //   ScaffoldMessenger.of(context).showSnackBar(_snackbar);
-                  // }
-                },
+                onTap: () => Get.find<AddressController>().goToPaymentPage(),
                 child: Container(
                   width: width,
                   height: height * 0.08,

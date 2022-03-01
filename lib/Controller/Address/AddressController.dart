@@ -21,6 +21,8 @@ class AddressController extends GetxController {
 
   List<Address>? get savedAddress => _addressList!;
 
+  Address get getSelectedAdress => _addressList![_selectIndex.value];
+
   int get totalAddress => _addressList!.length;
 
   int get selectIndexValue => _selectIndex.value;
@@ -76,5 +78,13 @@ class AddressController extends GetxController {
       });
     }
     return temp;
+  }
+
+  void goToPaymentPage() {
+    if (_addressList != null && _addressList!.length == 0)
+      Get.snackbar("No Address", "Please add an address to continue",
+          snackPosition: SnackPosition.BOTTOM);
+    else
+      Get.toNamed("/Address/Payment");
   }
 }

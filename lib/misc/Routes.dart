@@ -4,6 +4,7 @@ import 'package:ugaoo/Controller/Bindings/AddressFormBindings.dart';
 import 'package:ugaoo/Controller/Bindings/BottmNavBindings.dart';
 import 'package:ugaoo/Controller/Bindings/CartItemBindings.dart';
 import 'package:ugaoo/Controller/Bindings/LoginBindings.dart';
+import 'package:ugaoo/Controller/Bindings/PaymentBindings.dart';
 import 'package:ugaoo/Controller/Bindings/SignupBindings.dart';
 import 'package:ugaoo/Screens/Address/AddressMain.dart';
 import 'package:ugaoo/Screens/Address/newAddress.dart';
@@ -48,7 +49,10 @@ class Routes {
         name: '/Address/NewAddress',
         page: () => NewAddress(),
         binding: AddressFormBindings()),
-    // GetPage(name: '/Address/Payment', page: () => PaymentMainPage()),
+    GetPage(
+        name: '/Address/Payment',
+        page: () => PaymentMainPage(),
+        binding: PaymentBindings()),
     GetPage(name: '/Onboarding', page: () => OnBoarding()),
     GetPage(
         name: '/Profile',

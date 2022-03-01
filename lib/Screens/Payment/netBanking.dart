@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/Payment/PaymentController.dart';
 import 'package:ugaoo/misc/bankList.dart';
 
-class NetBanking extends StatefulWidget {
-  final netbanking;
-  const NetBanking({Key? key, this.netbanking}) : super(key: key);
-
-  @override
-  State<NetBanking> createState() => _NetBankingState();
-}
-
-class _NetBankingState extends State<NetBanking> {
-  String? val;
+class NetBanking extends StatelessWidget {
+  const NetBanking({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
@@ -19,33 +13,28 @@ class _NetBankingState extends State<NetBanking> {
         Padding(
           padding: EdgeInsets.all(10.0),
           child: Container(
-            height: 50.0,
-            child: Form(
-              key: widget.netbanking,
-              child: DropdownButtonFormField(
-                validator: (String? value) {
-                  if (value == null ||
-                      value == "Select a Bank" ||
-                      value.isEmpty == true) return "Select a bank";
-                  return null;
-                },
-                isExpanded: false,
-                value: val,
-                hint: Text("Select a Bank"),
-                items: bankName.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (String? value) {
-                  setState(() {
-                    val = value;
-                  });
-                },
-              ),
-            ),
-          ),
+              height: 50.0,
+              child: Obx(
+                () => Form(
+                  key: Get.find<PaymentController>().netbanking,
+                  child: DropdownButtonFormField(
+                    validator: (String? val) =>
+                        Get.find<PaymentController>().netbankingValidator(val),
+                    isExpanded: false,
+                    value: Get.find<PaymentController>().bankName?.value,
+                    hint: Text("Select a Bank"),
+                    items:
+                        bankNames.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) =>
+                        Get.find<PaymentController>().bankName?.value = value!,
+                  ),
+                ),
+              )),
         )
       ],
     );

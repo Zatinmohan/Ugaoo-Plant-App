@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/Payment/PaymentController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class UPI extends StatelessWidget {
-  final upi;
-  const UPI({Key? key, this.upi}) : super(key: key);
+  const UPI({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +14,10 @@ class UPI extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(8.0),
           child: Form(
-            key: upi,
+            key: Get.find<PaymentController>().upi,
             child: TextFormField(
-              validator: (value) {
-                if (value != null &&
-                    (value.isEmpty == true || value.contains("@") == false))
-                  return "Incorrect UPI";
-                return null;
-              },
+              validator: (value) =>
+                  Get.find<PaymentController>().upiValidator(value),
               textInputAction: TextInputAction.done,
               decoration: customInputDecoration.copyWith(label: Text("UPI ID")),
             ),

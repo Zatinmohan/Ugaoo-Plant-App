@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:ugaoo/Controller/Payment/PaymentController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class CreditDebitCard extends StatelessWidget {
-  final cardKey;
-  const CreditDebitCard({Key? key, this.cardKey}) : super(key: key);
+  const CreditDebitCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Form(
-          key: cardKey,
+          key: Get.find<PaymentController>().cardPayment,
           child: Column(
             children: [
               TextFormField(
-                validator: (value) {
-                  if (value != null && (value.isEmpty || value.length < 16))
-                    return "Incorrect Card number";
-                  return null;
-                },
+                validator: (value) =>
+                    Get.find<PaymentController>().cardPaymentValidator(value),
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
                 inputFormatters: [LengthLimitingTextInputFormatter(16)],
@@ -32,12 +30,8 @@ class CreditDebitCard extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: TextFormField(
-                      validator: (value) {
-                        if (value != null &&
-                            (value.isEmpty || value.length < 4))
-                          return "Incorrect Date";
-                        return null;
-                      },
+                      validator: (value) =>
+                          Get.find<PaymentController>().dateValidator(value),
                       keyboardType: TextInputType.number,
                       inputFormatters: [LengthLimitingTextInputFormatter(4)],
                       textInputAction: TextInputAction.next,
@@ -49,12 +43,8 @@ class CreditDebitCard extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: TextFormField(
-                      validator: (value) {
-                        if (value != null &&
-                            (value.isEmpty || value.length < 3))
-                          return "Incorrect CVV";
-                        return null;
-                      },
+                      validator: (value) =>
+                          Get.find<PaymentController>().cvvValidator(value),
                       inputFormatters: [LengthLimitingTextInputFormatter(3)],
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
