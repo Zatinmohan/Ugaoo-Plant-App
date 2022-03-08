@@ -73,7 +73,7 @@ class UserController extends GetxController {
 
   void addData(CartModel item) async {
     AuthController.instance.updateCartItemsInDatabase(item);
-    _cartCount.value = cartItems!.length;
+    if (cartItems != null) _cartCount.value = cartItems!.length;
   }
 
   bool get isCartEmpty =>
@@ -96,7 +96,8 @@ class UserController extends GetxController {
   }
 
   RxBool isFav(String? orderID) {
-    print("inside");
-    return userData.favItems!.contains(orderID) ? true.obs : false.obs;
+    if (userData.favItems != null)
+      return userData.favItems!.contains(orderID) ? true.obs : false.obs;
+    return false.obs;
   }
 }

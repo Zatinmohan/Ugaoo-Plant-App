@@ -11,7 +11,6 @@ class PaymentController extends GetxController {
   Rx<Address> _deliveryTo = Address().obs;
   RxInt _appPoints = 800.obs;
   RxBool appPointCheckbox = false.obs;
-  RxBool _idk = true.obs;
 
   RxString? bankName = bankNames[0].obs;
   RxBool cod = false.obs;
@@ -38,7 +37,7 @@ class PaymentController extends GetxController {
     if (_appPoints.value == 0)
       return null;
     else {
-      _idk.value = val!;
+      appPointCheckbox.value = val!;
     }
   }
 
@@ -94,8 +93,10 @@ class PaymentController extends GetxController {
   void validatePayment() {
     if (cardPayment.currentState?.validate() == true ||
         upi.currentState?.validate() == true ||
-        netbanking.currentState?.validate() == true)
-      print("Paid");
+        netbanking.currentState?.validate() == true ||
+        (appPointCheckbox.isTrue &&
+            _appPoints.value >= Get.find<CartController>().getPrice))
+      Get.toNamed('/Placed');
     else if (cardPayment.currentState?.validate() == false ||
         upi.currentState?.validate() == false ||
         netbanking.currentState?.validate() == false ||

@@ -13,6 +13,7 @@ import 'package:ugaoo/Screens/DetailPage/mainDetailPage.dart';
 import 'package:ugaoo/Screens/FirstPage/FirstPage.dart';
 import 'package:ugaoo/Screens/Login/login.dart';
 import 'package:ugaoo/Screens/MainPage/mainPage.dart';
+import 'package:ugaoo/Screens/Order%20Placed/placedMain.dart';
 import 'package:ugaoo/Screens/Payment/PaymentMain.dart';
 import 'package:ugaoo/Screens/Profile/profileMain.dart';
 import 'package:ugaoo/Screens/Signup/signup.dart';
@@ -58,5 +59,6 @@ class Routes {
         name: '/Profile',
         page: () => ProfilePage(),
         binding: LoginControllerBindings()),
+    GetPage(name: '/Placed', page: () => OrderPlaced()),
   ];
 }
