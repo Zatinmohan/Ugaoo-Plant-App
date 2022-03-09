@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ugaoo/Screens/FirstPage/customButton.dart';
 import 'package:ugaoo/misc/colors.dart';
 
@@ -24,13 +25,6 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
     _animation = new CurvedAnimation(parent: _controller, curve: Curves.easeIn);
 
     _controller.forward();
-  }
-
-  @override
-  void didChangeDependencies() {
-    width = MediaQuery.of(context).size.width;
-    height = MediaQuery.of(context).size.height;
-    super.didChangeDependencies();
   }
 
   @override
@@ -66,14 +60,14 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                           children: [
                             Image.asset(
                               "assets/misc/appIcon.png",
-                              width: width * 0.4,
+                              width: Get.width * 0.4,
                             ),
                             SizedBox(height: 15.0),
                             Text(
                               "UGAOO",
                               style: TextStyle(
                                 color: ksecondaryBackgroundColor,
-                                fontSize: width * 0.12,
+                                fontSize: Get.width * 0.12,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),

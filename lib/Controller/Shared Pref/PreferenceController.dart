@@ -8,16 +8,18 @@ class MyPref extends GetxController {
       GetStorage(); //Provided by Get_Storage lib, used as shared preference.
 
   //If newly installed, then set the shared pref to false, and return true; else false
-  bool get firstInstall =>
-      (box.read('firstInstall') == null || box.read('firstInstall') == true)
-          ? setFirst()
-          : false;
 
-  bool setFirst() {
-    box.write('firstInstall', false);
-    return true;
+  @override
+  void onInit() {
+    if (box.read('firstInstall') == null) box.write('firstInstall', true);
+    super.onInit();
   }
 
-  //Just a method that returns path for either splash screen or Login Page.
-  String get firstPage => firstInstall ? '/' : '/Login';
+  String checkFirstPage() {
+    if (box.read('firstInstall') == true) {
+      box.write('firstInstall', false);
+      return "/";
+    } else
+      return "/Login";
+  }
 }

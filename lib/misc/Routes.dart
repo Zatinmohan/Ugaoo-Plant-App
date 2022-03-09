@@ -17,6 +17,7 @@ import 'package:ugaoo/Screens/Order%20Placed/placedMain.dart';
 import 'package:ugaoo/Screens/Payment/PaymentMain.dart';
 import 'package:ugaoo/Screens/Profile/profileMain.dart';
 import 'package:ugaoo/Screens/Signup/signup.dart';
+import 'package:ugaoo/Screens/Splash/firstScreen.dart';
 import 'package:ugaoo/Screens/onBoardingPage/onBoarding.dart';
 
 //Contains all the App pages here.
@@ -24,6 +25,7 @@ import 'package:ugaoo/Screens/onBoardingPage/onBoarding.dart';
 class Routes {
   static final routes = [
     GetPage(name: '/', page: () => FirstPage()),
+    GetPage(name: '/Splash', page: () => SplashScreen()),
     GetPage(
         name: '/Login',
         page: () => Login(),

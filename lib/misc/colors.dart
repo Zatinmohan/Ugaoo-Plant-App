@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 // Contains Color and other formattting stuffs
 // such as width and height of device
@@ -12,8 +13,8 @@ const kPrimaryTextColor = Color(0xff033823);
 const kHeadingTextColor = Color(0xff333333);
 const kDeailHeadingColor = Color(0xff4a4a4a);
 
-late var height;
-late var width;
+var height = Get.height;
+var width = Get.width;
 
 var focusedBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(30.0),

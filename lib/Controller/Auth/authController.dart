@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/Cart/CartController.dart';
 import 'package:ugaoo/Controller/Product/ProductController.dart';
+import 'package:ugaoo/Controller/Shared%20Pref/PreferenceController.dart';
 import 'package:ugaoo/Controller/User/UserController.dart';
 import 'package:ugaoo/Database/database.dart';
 import 'package:ugaoo/Database/productDatabase.dart';
@@ -37,16 +38,21 @@ class AuthController extends GetxController {
 
     // Binding the stream with user. If something happens such as
     // User logs out, it will be contacted to firebaseUser databse immediately.
-    _firebaseUser.bindStream(_auth.userChanges());
 
+    _firebaseUser.bindStream(_auth.userChanges());
     ever(_firebaseUser, _initialScreen);
   }
 
   _initialScreen(User? user) {
-    if (user == null)
+    if (Get.find<MyPref>().checkFirstPage() == "/") {
+      print("Statement first");
+      Get.offAndToNamed("/");
+    } else if (user == null &&
+        Get.find<MyPref>().checkFirstPage() == "/Login") {
+      print("Statement Second");
       //If user has logged out or app is installed for the first time, it will show the login screen.
       Get.offAllNamed('/Login');
-    else {
+    } else {
       //If already logged in, user will get the details of logged in user from database.
       _fetchUser();
 
