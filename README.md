@@ -8,7 +8,7 @@ This application uses:
 - Firebase Auth
 - Shared Preference (Get Storage)
 
-<img src ="gif1.gif" alt="Main" width="250" height="450"> <img src="gif2.gif" alt="Second" width="250" height="450">
+<img src ="gif1.gif" alt="Main" width="200" height="450"> <img src="gif2.gif" alt="Second" width="200" height="450">
 
 **NOTE**
 - This is just a demo application used for educational purpose
