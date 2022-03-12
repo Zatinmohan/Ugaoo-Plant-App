@@ -49,10 +49,7 @@ class LoginController extends GetxController {
       Get.snackbar(
         "Sign In",
         "Please wait while we are signing in",
-        padding: EdgeInsets.all(10.0),
-        icon: CircularProgressIndicator(
-          color: kBackgroundColor,
-        ),
+        showProgressIndicator: true,
         margin: EdgeInsets.all(15),
         backgroundColor: kHeadingTextColor,
         progressIndicatorBackgroundColor: kBackgroundColor,

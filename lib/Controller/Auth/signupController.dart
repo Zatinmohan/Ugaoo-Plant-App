@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/Auth/authController.dart';
+import 'package:ugaoo/misc/colors.dart';
 
 // Contains the Logic for Signup
 
@@ -48,12 +49,24 @@ class SignupController extends GetxController {
   }
 
   //Form Check
-  void checkSignup() {
+  void checkSignup() async {
     final isValid = signupForm.currentState!.validate();
 
     if (isValid) {
       signupForm.currentState!.save();
-      AuthController.instance
+      Get.snackbar(
+        "Creating Account",
+        "Please wait while we are Creating your account",
+        showProgressIndicator: true,
+        margin: EdgeInsets.all(15),
+        backgroundColor: kHeadingTextColor,
+        progressIndicatorBackgroundColor: kBackgroundColor,
+        colorText: ksecondaryBackgroundColor,
+        snackPosition: SnackPosition.BOTTOM,
+        forwardAnimationCurve: Curves.easeOutBack,
+        isDismissible: false,
+      );
+      await AuthController.instance
           .signUp(email.text, password.text, fullName.text, phone.text);
     } else
       return;

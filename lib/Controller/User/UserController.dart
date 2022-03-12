@@ -9,7 +9,8 @@ class UserController extends GetxController {
   late RxInt _cartCount = 0.obs;
 
   RxList _likedProduct = [].obs;
-
+  RxMap<dynamic, dynamic> _cartItemsUser = {}.obs;
+  
   set userData(UserModel val) => this._userModel.value = val;
 
   String? get userName => userData.userName;
@@ -28,6 +29,8 @@ class UserController extends GetxController {
   @override
   void onReady() {
     _likedProduct.value = favItems ?? [];
+    _cartItemsUser.value = cartItems ?? {};
+
     if (cartItems != null) _cartCount.value = cartItems!.length;
     //NEED TO CHECK THIS
     super.onInit();
@@ -40,10 +43,31 @@ class UserController extends GetxController {
 
   bool cartDataItems(CartModel item) {
     try {
-      cartItems!.containsKey(item.orderID)
-          ? cartItems![item.orderID]++
-          : cartItems![item.orderID] = 1;
-      _cartCount.value = cartItems!.length;
+      _cartItemsUser.containsKey(item.orderID)
+          ? _cartItemsUser[item.orderID]++
+          : _cartItemsUser[item.orderID] = 1;
+      _cartCount.value = _cartItemsUser.length;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool addCartItemQty(CartModel item) {
+    try {
+      _cartItemsUser[item.orderID]++;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool subCartItemQty(CartModel item) {
+    try {
+      if (_cartItemsUser[item.orderID] == 1)
+        return false;
+      else
+        _cartItemsUser[item.orderID]--;
       return true;
     } catch (e) {
       return false;
@@ -100,4 +124,6 @@ class UserController extends GetxController {
       _likedProduct.contains(orderID) ? true.obs : false.obs;
 
   List get likedProductList => _likedProduct;
+
+  Map<dynamic, dynamic> get userCartList => _cartItemsUser;
 }

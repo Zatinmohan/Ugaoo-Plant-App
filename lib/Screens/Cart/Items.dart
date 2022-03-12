@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/Cart/CartController.dart';
+import 'package:ugaoo/Controller/User/UserController.dart';
 import 'package:ugaoo/Model/ProductModel.dart';
 import 'package:ugaoo/Model/userModel.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -11,7 +12,6 @@ class ItemCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.black,
       child: Obx(() {
         return ListView.builder(
           itemCount: Get.find<CartController>().cartLength,
@@ -20,11 +20,8 @@ class ItemCart extends StatelessWidget {
             var name = product.productName;
             var price = product.productPrice;
             var image = product.productImage;
-            var qty = 1;
-            // var qty = product.productQuantity;
             return Container(
               height: height * 0.30,
-              // color: Colors.black,
               child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -76,18 +73,35 @@ class ItemCart extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       IconButton(
-                                          onPressed: () => print("+"),
+                                          onPressed: () {
+                                            CartModel item = new CartModel(
+                                                qty: Get.find<UserController>()
+                                                        .userCartList[
+                                                    product.productID],
+                                                orderID: product.productID);
+                                            Get.find<CartController>()
+                                                .addQuantity(item);
+                                          },
                                           icon: Icon(Icons.add)),
                                       SizedBox(height: 5.0),
-                                      Text("$qty",
+                                      Obx(() => Text(
+                                          "${Get.find<UserController>().userCartList[product.productID]}",
                                           style: TextStyle(
                                             color: kHeadingTextColor,
                                             fontWeight: FontWeight.w700,
                                             fontSize: width * 0.05,
-                                          )),
+                                          ))),
                                       SizedBox(height: 5.0),
                                       IconButton(
-                                          onPressed: () => print("-"),
+                                          onPressed: () {
+                                            CartModel item = new CartModel(
+                                                qty: Get.find<UserController>()
+                                                        .userCartList[
+                                                    product.productID],
+                                                orderID: product.productID);
+                                            Get.find<CartController>()
+                                                .subQuantity(item);
+                                          },
                                           icon: Icon(Icons.remove)),
                                     ],
                                   ),

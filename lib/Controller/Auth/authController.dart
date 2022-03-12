@@ -73,7 +73,8 @@ class AuthController extends GetxController {
     }
   }
 
-  void signUp(String email, String password, String name, var phone) async {
+  Future<bool> signUp(
+      String email, String password, String name, var phone) async {
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -85,12 +86,14 @@ class AuthController extends GetxController {
           Get.find<UserController>().userData = _userData;
         }
       });
+      return true;
     } catch (e) {
       //Provided by Getx, No context needed.
       Get.snackbar("About User", "User Message",
           snackPosition: SnackPosition.BOTTOM,
           titleText: Text("Account Creation Failed"),
           messageText: Text(e.toString()));
+      return false;
     }
   }
 
@@ -120,6 +123,10 @@ class AuthController extends GetxController {
 
   void removeCartItemInDatabase(CartModel item) {
     Database().removeCartItem(_auth.currentUser!.uid, item);
+  }
+
+  void updateCartItemQty(CartModel item, bool toAdd) {
+    Database().updateCartItemsQty(_auth.currentUser!.uid, item, toAdd);
   }
 
   void updateUserFavList(String? orderID) {

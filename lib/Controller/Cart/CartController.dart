@@ -8,6 +8,7 @@ import 'package:ugaoo/Model/userModel.dart';
 class CartController extends GetxController {
   RxList<ProductList>? _cartItems = RxList();
   RxList<CartModel>? cartItemsID = RxList();
+
   RxInt _totalPrice = 0.obs;
   RxInt _totalItems = 0.obs;
 
@@ -66,7 +67,11 @@ class CartController extends GetxController {
     update();
   }
 
-  // removeAddress(data){
+  void addQuantity(CartModel item) {
+    AuthController.instance.updateCartItemQty(item, true);
+  }
 
-  // }
+  void subQuantity(CartModel item) {
+    AuthController.instance.updateCartItemQty(item, true);
+  }
 }

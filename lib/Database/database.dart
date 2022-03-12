@@ -62,6 +62,24 @@ class Database {
     }
   }
 
+  Future<bool> updateCartItemsQty(
+      String uid, CartModel cartItem, bool toAdd) async {
+    try {
+      if (toAdd)
+        Get.find<UserController>().addCartItemQty(cartItem);
+      else
+        Get.find<UserController>().subCartItemQty(cartItem);
+
+      await _firestore
+          .collection("User")
+          .doc(uid)
+          .update({'inCart': Get.find<UserController>().cartItems});
+      return true;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
   Future<bool> setFav(String userID, String? itemId) async {
     try {
       if (Get.find<UserController>().updateFavList(itemId)) {

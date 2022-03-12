@@ -57,7 +57,6 @@ class PageIndicatorWidget extends StatelessWidget {
     return Padding(
         padding: EdgeInsets.only(top: 5.0, bottom: 10.0),
         child: Container(
-            // color: Colors.black,
             height: 10.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
