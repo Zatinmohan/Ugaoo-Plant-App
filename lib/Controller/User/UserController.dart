@@ -8,6 +8,8 @@ class UserController extends GetxController {
   UserModel get userData => _userModel.value;
   late RxInt _cartCount = 0.obs;
 
+  RxList _likedProduct = [].obs;
+
   set userData(UserModel val) => this._userModel.value = val;
 
   String? get userName => userData.userName;
@@ -25,8 +27,8 @@ class UserController extends GetxController {
 
   @override
   void onReady() {
+    _likedProduct.value = favItems ?? [];
     if (cartItems != null) _cartCount.value = cartItems!.length;
-
     //NEED TO CHECK THIS
     super.onInit();
   }
@@ -52,10 +54,11 @@ class UserController extends GetxController {
     try {
       if (favItems == null)
         userData.setList();
-      else if (favItems!.contains(orderID))
-        favItems!.remove(orderID);
-      else
-        favItems?.add(orderID);
+      else if (favItems!.contains(orderID)) {
+        _likedProduct.remove(orderID);
+      } else {
+        _likedProduct.add(orderID);
+      }
       return true;
     } catch (e) {
       return false;
@@ -79,8 +82,6 @@ class UserController extends GetxController {
   bool get isCartEmpty =>
       (cartItems == null || totalCartItems == 0) ? true : false;
 
-  // int? get getLength => isCartEmpty ? 0 : totalCartItems;
-
   int? getLength() {
     return _userModel.value.userCartItems?.length;
   }
@@ -95,9 +96,8 @@ class UserController extends GetxController {
     }
   }
 
-  RxBool isFav(String? orderID) {
-    if (userData.favItems != null)
-      return userData.favItems!.contains(orderID) ? true.obs : false.obs;
-    return false.obs;
-  }
+  RxBool checkLikedList(String? orderID) =>
+      _likedProduct.contains(orderID) ? true.obs : false.obs;
+
+  List get likedProductList => _likedProduct;
 }

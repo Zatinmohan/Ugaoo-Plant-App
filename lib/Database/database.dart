@@ -66,7 +66,7 @@ class Database {
     try {
       if (Get.find<UserController>().updateFavList(itemId)) {
         await _firestore.collection("User").doc(userID).update({
-          'fav': Get.find<UserController>().favItems,
+          'fav': Get.find<UserController>().likedProductList,
         });
       }
       return true;

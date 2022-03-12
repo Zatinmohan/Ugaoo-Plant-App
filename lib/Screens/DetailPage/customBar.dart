@@ -44,25 +44,25 @@ class CustomBar extends StatelessWidget {
             flex: 1,
             child: Row(
               children: [
-                Obx(
-                  () => IconButton(
-                      onPressed: () {
-                        AuthController.instance.updateUserFavList(
-                            Get.find<ProductController>().productID);
-                      },
-                      icon: Get.find<UserController>()
-                              .isFav(Get.find<ProductController>().productID)
-                              .isTrue
-                          ? Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                              size: width * 0.065,
-                            )
-                          : Icon(
-                              Icons.favorite_border_outlined,
-                              color: Colors.black,
-                              size: width * 0.065,
-                            )),
+                IconButton(
+                  onPressed: () {
+                    AuthController.instance.updateUserFavList(
+                        Get.find<ProductController>().productID);
+                  },
+                  icon: Obx(() => Get.find<UserController>()
+                          .checkLikedList(
+                              Get.find<ProductController>().productID)
+                          .isTrue
+                      ? Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                          size: width * 0.065,
+                        )
+                      : Icon(
+                          Icons.favorite_border_outlined,
+                          color: Colors.black,
+                          size: width * 0.065,
+                        )),
                 ),
                 GestureDetector(
                   onTap: () => Get.toNamed('/Login/Cart'),

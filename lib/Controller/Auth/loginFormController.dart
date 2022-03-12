@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/Auth/authController.dart';
+import 'package:ugaoo/misc/colors.dart';
 
 //Controls Login Form and contains Validator.
 
@@ -40,12 +41,27 @@ class LoginController extends GetxController {
     return null;
   }
 
-  void checkLogin() {
+  void checkLogin() async {
     final isValid = loginKey.currentState!.validate();
 
     if (isValid) {
       loginKey.currentState!.save();
-      AuthController.instance.signIn(email, pass);
+      Get.snackbar(
+        "Sign In",
+        "Please wait while we are signing in",
+        padding: EdgeInsets.all(10.0),
+        icon: CircularProgressIndicator(
+          color: kBackgroundColor,
+        ),
+        margin: EdgeInsets.all(15),
+        backgroundColor: kHeadingTextColor,
+        progressIndicatorBackgroundColor: kBackgroundColor,
+        colorText: ksecondaryBackgroundColor,
+        snackPosition: SnackPosition.BOTTOM,
+        forwardAnimationCurve: Curves.easeOutBack,
+        isDismissible: false,
+      );
+      await AuthController.instance.signIn(email, pass);
     } else
       return;
   }

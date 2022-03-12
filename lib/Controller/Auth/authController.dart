@@ -49,14 +49,15 @@ class AuthController extends GetxController {
       Get.offAndToNamed("/");
     } else if (user == null &&
         Get.find<MyPref>().checkFirstPage() == "/Login") {
-      print("Statement Second");
       //If user has logged out or app is installed for the first time, it will show the login screen.
       Get.offAllNamed('/Login');
     } else {
+      Get.back(closeOverlays: true);
       //If already logged in, user will get the details of logged in user from database.
       _fetchUser();
 
       //If user signup, or logged in or already logged in, then it will directly takes you to the main page.
+
       Get.offAllNamed('/Login/Main');
     }
   }
@@ -93,18 +94,23 @@ class AuthController extends GetxController {
     }
   }
 
-  void signIn(String email, String pass) async {
+  Future<bool> signIn(String email, String pass) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: pass);
-      Get.find<UserController>().userData =
-          await Database().getUser(_auth.currentUser!.uid);
-      Get.find<ProductController>().setProduct =
-          await ProductDatabase().getProductData();
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: pass)
+          .then((value) async {
+        Get.find<UserController>().userData =
+            await Database().getUser(_auth.currentUser!.uid);
+        Get.find<ProductController>().setProduct =
+            await ProductDatabase().getProductData();
+      });
+      return true;
     } catch (e) {
       Get.snackbar("About Signin", "Message",
           snackPosition: SnackPosition.BOTTOM,
           titleText: Text("Sign in Failed"),
           messageText: Text(e.toString()));
+      return false;
     }
   }
 

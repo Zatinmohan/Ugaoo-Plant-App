@@ -11,7 +11,7 @@ This application uses:
 **NOTE**
 - This is just a demo application used for educational purpose
 - It is just to show how e-commerce application can be built using flutter. This application is not used to buy actual product. 
-- I have used [Ugaoo](https://www.ugaoo.com/) to get the data such as pictures and dtails regarding plants. Please visit once and help them out. 
+- I have used [Ugaoo](https://www.ugaoo.com/) to get the data such as pictures and details regarding products. Please visit once and help them out. 
 
 ## Resources
 - [Design Courtesy 1](https://www.behance.net/gallery/112245565/Grow-It-Plant-Care-APP?tracking_source=search_projects_recommended%7Cplant%20app)
