@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ugaoo/misc/colors.dart';
 
 //Controls the Bottom Bar Nav
 // Need Getx to get the index number
@@ -30,5 +31,10 @@ class BottomNavController extends GetxController {
       default:
         break;
     }
+  }
+
+  changeColor1() {
+    if (index.value != 1) return kBackgroundColor;
+    return kDeailHeadingColor;
   }
 }

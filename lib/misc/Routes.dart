@@ -27,10 +27,7 @@ class Routes {
   static final routes = [
     GetPage(name: '/', page: () => FirstPage()),
     GetPage(name: '/Splash', page: () => SplashScreen()),
-    GetPage(
-        name: '/LikedPage',
-        page: () => LikePage(),
-        binding: BottomNavBinding()),
+    GetPage(name: '/LikedPage', page: () => LikePage()),
     GetPage(
         name: '/Login',
         page: () => Login(),

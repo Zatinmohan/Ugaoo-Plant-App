@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/Cart/CartController.dart';
 import 'package:ugaoo/Controller/Product/ProductController.dart';
 import 'package:ugaoo/Controller/Shared%20Pref/PreferenceController.dart';
 import 'package:ugaoo/Controller/User/UserController.dart';

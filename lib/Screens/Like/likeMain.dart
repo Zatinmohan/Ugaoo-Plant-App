@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ugaoo/misc/bottomNavigationBar.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class LikePage extends StatelessWidget {
@@ -25,7 +24,7 @@ class LikePage extends StatelessWidget {
               )
             ],
           )),
-      bottomNavigationBar: customBottomNavigationBar(),
+      // bottomNavigationBar: customBottomNavigationBar(),
     );
   }
 }
