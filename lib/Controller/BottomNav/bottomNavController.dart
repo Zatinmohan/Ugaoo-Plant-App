@@ -16,7 +16,7 @@ class BottomNavController extends GetxController {
         break;
 
       case 1:
-        Get.toNamed("/Login/Main");
+        Get.toNamed("/LikedPage");
         break;
 
       case 2:

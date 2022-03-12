@@ -98,7 +98,6 @@ class _MainPageState extends State<MainPage> {
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    print("Tapped");
                                     categoryIndex = index;
                                   });
                                 },

@@ -1,16 +1,17 @@
 import 'package:get/get.dart';
-import 'package:ugaoo/Controller/Bindings/AddressBindings.dart';
-import 'package:ugaoo/Controller/Bindings/AddressFormBindings.dart';
-import 'package:ugaoo/Controller/Bindings/BottmNavBindings.dart';
-import 'package:ugaoo/Controller/Bindings/CartItemBindings.dart';
-import 'package:ugaoo/Controller/Bindings/LoginBindings.dart';
-import 'package:ugaoo/Controller/Bindings/PaymentBindings.dart';
-import 'package:ugaoo/Controller/Bindings/SignupBindings.dart';
+import 'package:ugaoo/Bindings/AddressBindings.dart';
+import 'package:ugaoo/Bindings/AddressFormBindings.dart';
+import 'package:ugaoo/Bindings/BottmNavBindings.dart';
+import 'package:ugaoo/Bindings/CartItemBindings.dart';
+import 'package:ugaoo/Bindings/LoginBindings.dart';
+import 'package:ugaoo/Bindings/PaymentBindings.dart';
+import 'package:ugaoo/Bindings/SignupBindings.dart';
 import 'package:ugaoo/Screens/Address/AddressMain.dart';
 import 'package:ugaoo/Screens/Address/newAddress.dart';
 import 'package:ugaoo/Screens/Cart/CartMain.dart';
 import 'package:ugaoo/Screens/DetailPage/mainDetailPage.dart';
 import 'package:ugaoo/Screens/FirstPage/FirstPage.dart';
+import 'package:ugaoo/Screens/Like/likeMain.dart';
 import 'package:ugaoo/Screens/Login/login.dart';
 import 'package:ugaoo/Screens/MainPage/mainPage.dart';
 import 'package:ugaoo/Screens/Order%20Placed/placedMain.dart';
@@ -26,6 +27,10 @@ class Routes {
   static final routes = [
     GetPage(name: '/', page: () => FirstPage()),
     GetPage(name: '/Splash', page: () => SplashScreen()),
+    GetPage(
+        name: '/LikedPage',
+        page: () => LikePage(),
+        binding: BottomNavBinding()),
     GetPage(
         name: '/Login',
         page: () => Login(),

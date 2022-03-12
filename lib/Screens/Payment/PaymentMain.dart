@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ugaoo/Controller/Cart/CartController.dart';
 import 'package:ugaoo/Controller/Payment/PaymentController.dart';
 import 'package:ugaoo/misc/PageIndication.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -58,7 +59,7 @@ class PaymentMainPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: Center(
                   child: Obx(() => Text(
-                        "Rs. ${Get.find<PaymentController>().totalPrice()}",
+                        "Rs. ${Get.find<CartController>().getPrice()}",
                         style: TextStyle(
                           fontSize: width * 0.045,
                           fontWeight: FontWeight.w700,
@@ -74,30 +75,6 @@ class PaymentMainPage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Get.find<PaymentController>().validatePayment();
-                  // if (_cardKey.currentState?.validate() == true ||
-                  //     _upi.currentState?.validate() == true ||
-                  //     _netbanking.currentState?.validate() == true ||
-                  //     _controller.cod.value == true ||
-                  //     (_controller.points.value == true &&
-                  //         _price.appPoints.value > _price.getPrice))
-                  //   print("Pay now");
-                  // else if (_controller.points.value == true &&
-                  //     _price.appPoints.value < _price.getPrice &&
-                  //     (_cardKey.currentState?.validate() == false ||
-                  //         _upi.currentState?.validate() == false ||
-                  //         _netbanking.currentState?.validate() == false ||
-                  //         _controller.cod.value == false)) {
-                  //   final _snackBar = SnackBar(
-                  //       content: Text(
-                  //           'Balance is Low! Please select a payment method'));
-
-                  //   ScaffoldMessenger.of(context).showSnackBar(_snackBar);
-                  // } else {
-                  //   final _snackBar = SnackBar(
-                  //       content: Text('Please select a payment method'));
-
-                  //   ScaffoldMessenger.of(context).showSnackBar(_snackBar);
-                  // }
                 },
                 child: Container(
                   width: width,

@@ -95,7 +95,7 @@ class PaymentController extends GetxController {
         upi.currentState?.validate() == true ||
         netbanking.currentState?.validate() == true ||
         (appPointCheckbox.isTrue &&
-            _appPoints.value >= Get.find<CartController>().getPrice))
+            _appPoints.value >= Get.find<CartController>().getPrice()))
       Get.toNamed('/Placed');
     else if (cardPayment.currentState?.validate() == false ||
         upi.currentState?.validate() == false ||

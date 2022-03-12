@@ -23,7 +23,7 @@ class CartPrice extends StatelessWidget {
               children: [
                 PriceWidget(
                     title: "Cart Total",
-                    price: Get.find<CartController>().getPrice,
+                    price: Get.find<CartController>().getPrice(),
                     isTotal: false),
                 SizedBox(height: 10.0),
                 PriceWidget(title: "GST", price: "Rs. 74.0", isTotal: false),
@@ -35,7 +35,7 @@ class CartPrice extends StatelessWidget {
                 SizedBox(height: 12.0),
                 PriceWidget(
                     title: "Total",
-                    price: "${Get.find<CartController>().getPrice + 50}",
+                    price: "${Get.find<CartController>().getPrice() + 50}",
                     isTotal: true)
               ],
             );

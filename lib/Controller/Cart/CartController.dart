@@ -50,12 +50,16 @@ class CartController extends GetxController {
   int cartProductPrice() {
     int sum = 0;
     _cartItems!.forEach((element) {
-      sum += element.productPrice!;
+      int qty = Get.find<UserController>().userCartList[element.productID];
+      sum += (element.productPrice! * qty);
     });
     return sum;
   }
 
-  int get getPrice => _totalPrice.value;
+  int getPrice() {
+    _totalPrice.value = cartProductPrice();
+    return _totalPrice.value;
+  }
 
   String? getOrderID(int index) {
     return _cartItems![index].productID;
@@ -72,6 +76,6 @@ class CartController extends GetxController {
   }
 
   void subQuantity(CartModel item) {
-    AuthController.instance.updateCartItemQty(item, true);
+    AuthController.instance.updateCartItemQty(item, false);
   }
 }

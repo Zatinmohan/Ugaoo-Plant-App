@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ugaoo/Controller/Auth/authController.dart';
+import 'package:ugaoo/Controller/Cart/CartController.dart';
 import 'package:ugaoo/Model/userModel.dart';
 
 class UserController extends GetxController {
@@ -10,7 +11,7 @@ class UserController extends GetxController {
 
   RxList _likedProduct = [].obs;
   RxMap<dynamic, dynamic> _cartItemsUser = {}.obs;
-  
+
   set userData(UserModel val) => this._userModel.value = val;
 
   String? get userName => userData.userName;
@@ -56,6 +57,7 @@ class UserController extends GetxController {
   bool addCartItemQty(CartModel item) {
     try {
       _cartItemsUser[item.orderID]++;
+      Get.find<CartController>().getPrice();
       return true;
     } catch (e) {
       return false;
@@ -66,8 +68,10 @@ class UserController extends GetxController {
     try {
       if (_cartItemsUser[item.orderID] == 1)
         return false;
-      else
+      else {
         _cartItemsUser[item.orderID]--;
+        Get.find<CartController>().getPrice();
+      }
       return true;
     } catch (e) {
       return false;

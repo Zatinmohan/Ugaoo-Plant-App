@@ -21,11 +21,17 @@ class customBottomNavigationBar extends StatelessWidget {
         items: [
           BottomNavigationBarItem(
             label: "Home",
-            icon: Icon(Icons.home, color: kBackgroundColor),
+            icon: Icon(Icons.home,
+                color: Get.find<BottomNavController>().index.value == 0
+                    ? kBackgroundColor
+                    : kDeailHeadingColor),
           ),
           BottomNavigationBarItem(
               label: "Favorite",
-              icon: Icon(Icons.favorite, color: kDeailHeadingColor)),
+              icon: Icon(Icons.favorite,
+                  color: Get.find<BottomNavController>().index.value == 1
+                      ? kBackgroundColor
+                      : kDeailHeadingColor)),
           BottomNavigationBarItem(
               label: "Cart",
               icon: Icon(Icons.shopping_cart, color: kDeailHeadingColor)),
