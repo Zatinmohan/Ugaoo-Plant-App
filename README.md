@@ -8,6 +8,8 @@ This application uses:
 - Firebase Auth
 - Shared Preference (Get Storage)
 
+<img src ="gif1.gif" alt="Main" width="250" height="450"> <img src="gif2.gif" alt="Second" width="250" height="450">
+
 **NOTE**
 - This is just a demo application used for educational purpose
 - It is just to show how e-commerce application can be built using flutter. This application is not used to buy actual product. 
