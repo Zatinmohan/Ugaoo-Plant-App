@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ugaoo/Controller/Auth/authController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
 class GoogleSignIn extends StatelessWidget {
@@ -10,7 +11,7 @@ class GoogleSignIn extends StatelessWidget {
       width: width * 0.8,
       height: height * 0.07,
       child: ElevatedButton(
-          onPressed: () => print("Sign In with google"),
+          onPressed: () => AuthController.instance.signInWithGoogle(),
           style: ElevatedButton.styleFrom(
             elevation: 4.0,
             primary: Colors.white,

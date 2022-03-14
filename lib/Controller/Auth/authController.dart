@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ugaoo/Controller/Product/ProductController.dart';
 import 'package:ugaoo/Controller/Shared%20Pref/PreferenceController.dart';
 import 'package:ugaoo/Controller/User/UserController.dart';
 import 'package:ugaoo/Database/database.dart';
 import 'package:ugaoo/Database/productDatabase.dart';
 import 'package:ugaoo/Model/userModel.dart';
+import 'package:ugaoo/misc/colors.dart';
 
 class AuthController extends GetxController {
   //No need to find it again and again.
@@ -20,6 +22,10 @@ class AuthController extends GetxController {
   //Firabase User, that will change.
   late Rx<User?> _firebaseUser;
 
+  //Instance of Google Signin
+  late GoogleSignIn _googleSignIn;
+  var googleAccount = Rx<GoogleSignInAccount?>(null);
+
   @override
   void onInit() {
     //Inatilizing the User and Product Controller once the user is logged in.
@@ -32,6 +38,7 @@ class AuthController extends GetxController {
   void onReady() {
     super.onReady();
 
+    _googleSignIn = GoogleSignIn();
     // Getting current user from firebase.
     _firebaseUser = Rx<User?>(_auth.currentUser);
 
@@ -44,7 +51,6 @@ class AuthController extends GetxController {
 
   _initialScreen(User? user) {
     if (Get.find<MyPref>().checkFirstPage() == "/") {
-      print("Statement first");
       Get.offAndToNamed("/");
     } else if (user == null &&
         Get.find<MyPref>().checkFirstPage() == "/Login") {
@@ -54,21 +60,69 @@ class AuthController extends GetxController {
       Get.back(closeOverlays: true);
       //If already logged in, user will get the details of logged in user from database.
       _fetchUser();
+    }
+  }
 
-      //If user signup, or logged in or already logged in, then it will directly takes you to the main page.
+  Future<bool> signInWithGoogle() async {
+    try {
+      googleAccount.value = await _googleSignIn.signIn();
 
-      Get.offAllNamed('/Login/Main');
+      if (googleAccount.value != null) {
+        final GoogleSignInAuthentication _googleSignInAuthentication =
+            await googleAccount.value!.authentication;
+
+        final AuthCredential _credential = GoogleAuthProvider.credential(
+          accessToken: _googleSignInAuthentication.accessToken,
+          idToken: _googleSignInAuthentication.idToken,
+        );
+
+        Get.snackbar(
+          "Signing In",
+          "Please wait while we are Signin you in",
+          showProgressIndicator: true,
+          margin: EdgeInsets.all(15),
+          backgroundColor: kHeadingTextColor,
+          progressIndicatorBackgroundColor: kBackgroundColor,
+          colorText: ksecondaryBackgroundColor,
+          snackPosition: SnackPosition.BOTTOM,
+          forwardAnimationCurve: Curves.easeOutBack,
+          isDismissible: false,
+        );
+
+        await _auth.signInWithCredential(_credential).whenComplete(() async {
+          UserModel _userData = UserModel(
+            id: _auth.currentUser?.uid,
+            name: googleAccount.value?.displayName,
+            phone: '',
+            email: googleAccount.value?.email,
+            cartItems: {},
+            favItems: [],
+            address: [],
+          );
+          await Database().createNewUser(_userData).then((value) {
+            if (value) Get.find<UserController>().userData = _userData;
+          });
+        });
+
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
     }
   }
 
   void _fetchUser() async {
-    if (_auth.currentUser?.uid != null ||
-        _auth.currentUser?.uid.isBlank == false) {
-      Get.find<UserController>().userData =
-          await Database().getUser(_auth.currentUser!.uid);
-
+    if ((_auth.currentUser?.uid != null ||
+        _auth.currentUser?.uid.isBlank == false)) {
       Get.find<ProductController>().setProduct =
           await ProductDatabase().getProductData();
+
+      Get.find<UserController>().userData =
+          await Database().getUser(_auth.currentUser!.uid).whenComplete(() {
+        Get.closeAllSnackbars();
+        Get.offAllNamed('/Login/Main');
+      });
     }
   }
 
@@ -79,7 +133,14 @@ class AuthController extends GetxController {
           .createUserWithEmailAndPassword(email: email, password: password)
           .whenComplete(() async {
         UserModel _userData = UserModel(
-            id: _auth.currentUser?.uid, name: name, phone: phone, email: email);
+          id: _auth.currentUser?.uid,
+          name: name,
+          phone: phone,
+          email: email,
+          cartItems: {},
+          favItems: [],
+          address: [],
+        );
 
         if (await Database().createNewUser(_userData)) {
           Get.find<UserController>().userData = _userData;

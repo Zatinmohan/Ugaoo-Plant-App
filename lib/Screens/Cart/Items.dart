@@ -20,6 +20,7 @@ class ItemCart extends StatelessWidget {
             var name = product.productName;
             var price = product.productPrice;
             var image = product.productImage;
+
             return Container(
               height: height * 0.30,
               child: Padding(

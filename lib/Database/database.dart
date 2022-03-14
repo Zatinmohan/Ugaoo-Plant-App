@@ -7,6 +7,15 @@ import 'package:ugaoo/Model/userModel.dart';
 class Database {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  Future<bool> userExist(String uid) async {
+    return await _firestore.collection("User").doc(uid).get().then((value) {
+      if (value.exists) {
+        return true;
+      }
+      return false;
+    });
+  }
+
   Future<bool> createNewUser(UserModel user) async {
     try {
       await _firestore.collection("User").doc(user.userID).set({
@@ -17,6 +26,7 @@ class Database {
         "fav": [],
         "inCart": {}
       });
+
       return true;
     } catch (e) {
       return false;
@@ -26,6 +36,7 @@ class Database {
   Future<UserModel> getUser(String uid) async {
     try {
       DocumentSnapshot ds = await _firestore.collection("User").doc(uid).get();
+
       return UserModel.fromDocumentSnapshot(ds);
     } catch (e) {
       print(e);
