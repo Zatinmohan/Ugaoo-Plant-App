@@ -4,8 +4,11 @@ import 'package:ugaoo/Bindings/AddressFormBindings.dart';
 import 'package:ugaoo/Bindings/BottmNavBindings.dart';
 import 'package:ugaoo/Bindings/CartItemBindings.dart';
 import 'package:ugaoo/Bindings/LoginBindings.dart';
+import 'package:ugaoo/Bindings/MainPageDataBindings.dart';
 import 'package:ugaoo/Bindings/PaymentBindings.dart';
+import 'package:ugaoo/Bindings/SearchBarBindings.dart';
 import 'package:ugaoo/Bindings/SignupBindings.dart';
+import 'package:ugaoo/Controller/SearchBar/searchController.dart';
 import 'package:ugaoo/Screens/Address/AddressMain.dart';
 import 'package:ugaoo/Screens/Address/newAddress.dart';
 import 'package:ugaoo/Screens/Cart/CartMain.dart';
@@ -17,6 +20,7 @@ import 'package:ugaoo/Screens/MainPage/mainPage.dart';
 import 'package:ugaoo/Screens/Order%20Placed/placedMain.dart';
 import 'package:ugaoo/Screens/Payment/PaymentMain.dart';
 import 'package:ugaoo/Screens/Profile/profileMain.dart';
+import 'package:ugaoo/Screens/Search/searchMain.dart';
 import 'package:ugaoo/Screens/Signup/signup.dart';
 import 'package:ugaoo/Screens/Splash/firstScreen.dart';
 import 'package:ugaoo/Screens/onBoardingPage/onBoarding.dart';
@@ -29,6 +33,10 @@ class Routes {
     GetPage(name: '/Splash', page: () => SplashScreen()),
     GetPage(name: '/LikedPage', page: () => LikePage()),
     GetPage(
+        name: '/Main/SearchList',
+        page: () => SearchProducts(),
+        binding: SearchBarBindings()),
+    GetPage(
         name: '/Login',
         page: () => Login(),
         binding: LoginControllerBindings()),
@@ -37,7 +45,7 @@ class Routes {
     GetPage(
         name: '/Login/Main',
         page: () => MainPage(),
-        binding: BottomNavBinding()),
+        bindings: [BottomNavBinding(), MainPageDataBindings()]),
     GetPage(
       name: '/Login/Main/Detail',
       page: () => DetailPage(),

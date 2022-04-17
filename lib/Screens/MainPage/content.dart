@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ugaoo/Controller/MainPage/mainPageController.dart';
 import 'package:ugaoo/Controller/Product/ProductController.dart';
 import 'package:ugaoo/misc/colors.dart';
 
@@ -8,10 +9,14 @@ class MainContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Get.find<ProductController>().getProduct == null
+    final _controller = Get.find<ProductController>();
+    final _controller2 = Get.find<MainPageController>();
+
+    return Obx(() => _controller2.productList.isEmpty ||
+            _controller2.productList.value == null
         ? Center(child: CircularProgressIndicator(color: kBackgroundColor))
         : GridView.builder(
-            itemCount: Get.find<ProductController>().getProduct?.length,
+            itemCount: _controller2.productList.length,
             padding: EdgeInsets.all(20.0),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -20,12 +25,11 @@ class MainContent extends StatelessWidget {
               childAspectRatio: (0.48 * height) / height,
             ),
             itemBuilder: (context, index) {
-              var productData =
-                  Get.find<ProductController>().getProduct?[index];
+              var productData = _controller2.productList[index];
 
               return GestureDetector(
                   onTap: () {
-                    Get.find<ProductController>().tappedProduct = index;
+                    _controller.tappedProduct = index;
                     Get.toNamed('/Login/Main/Detail');
                   },
                   child: Stack(children: [
@@ -47,7 +51,7 @@ class MainContent extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "${productData?.productName}",
+                                      "${productData.productName}",
                                       style: TextStyle(
                                         color: kHeadingTextColor,
                                         fontSize: width * 0.06,
@@ -56,7 +60,7 @@ class MainContent extends StatelessWidget {
                                     ),
                                     SizedBox(height: 2.5),
                                     Text(
-                                      "${productData?.productFamily}",
+                                      "${productData.productFamily}",
                                       style: TextStyle(
                                         color: kDeailHeadingColor,
                                         fontSize: width * 0.04,
@@ -65,7 +69,7 @@ class MainContent extends StatelessWidget {
                                     ),
                                     SizedBox(height: 5.0),
                                     Text(
-                                      "Rs. ${productData?.productPrice}",
+                                      "Rs. ${productData.productPrice}",
                                       style: TextStyle(
                                         color: kBackgroundColor,
                                         fontSize: width * 0.065,
@@ -80,7 +84,7 @@ class MainContent extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       child: Container(
                         child: Hero(
-                          tag: productData!.productImage.toString(),
+                          tag: productData.productImage.toString(),
                           child: Image.network(
                             productData.productImage.toString(),
                             alignment: Alignment.center,

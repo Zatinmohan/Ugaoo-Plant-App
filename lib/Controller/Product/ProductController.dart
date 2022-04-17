@@ -18,6 +18,19 @@ class ProductController extends GetxController {
 
   int get getTappedProduct => _selectedProduct.value;
 
+  List<ProductList> getSelectedItems(String subCategory) {
+    List<ProductList> temp = [];
+    for (int i = 0; i < _productData.value.productList!.length; i++) {
+      if (_productData.value.productList![i].productSubCategory!
+              .compareTo(subCategory) ==
+          0) {
+        temp.add(_productData.value.productList![i]);
+      }
+    }
+
+    return temp;
+  }
+
   void pageChange(int n) {
     _pageIndex.value = n;
   }

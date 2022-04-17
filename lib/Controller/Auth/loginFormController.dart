@@ -6,7 +6,7 @@ import 'package:ugaoo/misc/colors.dart';
 //Controls Login Form and contains Validator.
 
 class LoginController extends GetxController {
-  final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+  late GlobalKey<FormState> loginKey;
   late TextEditingController emailController, passController;
 
   var email = '';
@@ -14,6 +14,7 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
+    loginKey =  GlobalKey<FormState>();
     emailController = TextEditingController();
     passController = TextEditingController();
     super.onInit();
