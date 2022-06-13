@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -14,6 +12,7 @@ class UpperDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _controller = Get.find<ProductController>();
     return Container(
       height: height * 0.62,
       width: double.infinity,
@@ -42,24 +41,21 @@ class UpperDetail extends StatelessWidget {
                       children: [
                         PlantNeeds(icon: FontAwesomeIcons.tint, name: "Water"),
                         SizedBox(height: 10.0),
-                        Text(
-                            "${Get.find<ProductController>().productRequirement![0]}",
+                        Text("${_controller.productRequirement![0]}",
                             style: TextStyle(
                                 color: kDeailHeadingColor,
                                 fontSize: width * 0.055)),
                         SizedBox(height: 15.0),
                         PlantNeeds(icon: Icons.wb_sunny, name: "Light"),
                         SizedBox(height: 10.0),
-                        Text(
-                            "${Get.find<ProductController>().productRequirement![1]}",
+                        Text("${_controller.productRequirement![1]}",
                             style: TextStyle(
                                 color: kDeailHeadingColor,
                                 fontSize: width * 0.055)),
                         SizedBox(height: 15.0),
                         PlantNeeds(icon: Icons.thermostat, name: "Temperature"),
                         SizedBox(height: 10.0),
-                        Text(
-                            "${Get.find<ProductController>().productRequirement![2]} C",
+                        Text("${_controller.productRequirement![2]} C",
                             style: TextStyle(
                                 color: kDeailHeadingColor,
                                 fontSize: width * 0.055)),
@@ -70,14 +66,11 @@ class UpperDetail extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Hero(
-                      tag:
-                          Get.find<ProductController>().productImage.toString(),
+                      tag: _controller.productImage.toString(),
                       child: Center(
                         child: Container(
                           child: Image.network(
-                            Get.find<ProductController>()
-                                .productImage
-                                .toString(),
+                            _controller.productImage.toString(),
                             height: height * 0.6,
                           ),
                         ),
@@ -136,8 +129,7 @@ class UpperDetail extends StatelessWidget {
                                   primary: kPrimaryTextColor,
                                 ),
                                 onPressed: () {
-                                  Get.find<ProductController>()
-                                      .changePincodeField();
+                                  _controller.changePincodeField();
                                 },
                                 child: Text(
                                   "Check",
@@ -146,7 +138,7 @@ class UpperDetail extends StatelessWidget {
                         ],
                       ),
                       Obx(() {
-                        return Get.find<ProductController>().checkPincodeField()
+                        return _controller.checkPincodeField()
                             ? Text("Available in 3-5 Days",
                                 style: TextStyle(
                                   color: kHeadingTextColor,

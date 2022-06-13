@@ -7,7 +7,7 @@ import 'package:ugaoo/misc/categoryList.dart';
 class MainPageController extends GetxController
     with GetTickerProviderStateMixin {
   late TabController tabController;
-  RxList<ProductList> productList = RxList<ProductList>();
+  RxList<ProductList> _productList = RxList<ProductList>();
   RxInt categoryIndex = 0.obs;
   RxList<Widget> productPages = CategoryList.categoryList.seedsPages.obs;
 
@@ -17,18 +17,19 @@ class MainPageController extends GetxController
 
   @override
   void onInit() {
-    productList.value = _productController.getSelectedItems("Winter Season");
+    _productList.value = _productController.getSelectedItems("Winter Season");
     tabController = TabController(length: productPages.length, vsync: this);
 
     tabController.addListener(() {
       if (tabController.index == 0) {
-        productList.value =
+        _productList.value =
             _productController.getSelectedItems("Winter Season");
       } else if (tabController.index == 1) {
-        productList.value =
+        _productList.value =
             _productController.getSelectedItems("Summer Season");
       } else {
-        productList.value = _productController.getSelectedItems("Easy to grow");
+        _productList.value =
+            _productController.getSelectedItems("Easy to grow");
       }
     });
 
@@ -45,13 +46,13 @@ class MainPageController extends GetxController
 
         tabController.addListener(() {
           if (tabController.index == 0) {
-            productList.value =
+            _productList.value =
                 _productController.getSelectedItems("Winter Season");
           } else if (tabController.index == 1) {
-            productList.value =
+            _productList.value =
                 _productController.getSelectedItems("Summer Season");
           } else {
-            productList.value =
+            _productList.value =
                 _productController.getSelectedItems("Easy to grow");
           }
         });
@@ -64,16 +65,15 @@ class MainPageController extends GetxController
 
         tabController.addListener(() {
           if (tabController.index == 0) {
-            productList.value =
+            _productList.value =
                 _productController.getSelectedItems("Air Purifier");
           } else if (tabController.index == 1) {
-            productList.value =
+            _productList.value =
                 _productController.getSelectedItems("Foliage Pattern");
           } else if (tabController.index == 2) {
-            productList.value = _productController.getSelectedItems("Indoor");
+            _productList.value = _productController.getSelectedItems("Indoor");
           }
         });
-
         break;
       case 2:
         dataNameList.value = CategoryList.categoryList.subPots;
@@ -98,4 +98,9 @@ class MainPageController extends GetxController
   List<String> get mainCategory => CategoryList.categoryList.mainCategories;
 
   bool get tabListLength => dataNameList.length != 0 ? true : false;
+
+  bool get isListEmpty => _productList.isEmpty ? true : false;
+  int get productListLength => _productList.length;
+
+  ProductList getData(int index) => _productList[index];
 }

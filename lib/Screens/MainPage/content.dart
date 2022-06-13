@@ -12,11 +12,10 @@ class MainContent extends StatelessWidget {
     final _controller = Get.find<ProductController>();
     final _controller2 = Get.find<MainPageController>();
 
-    return Obx(() => _controller2.productList.isEmpty ||
-            _controller2.productList.value == null
+    return Obx(() => _controller2.isListEmpty
         ? Center(child: CircularProgressIndicator(color: kBackgroundColor))
         : GridView.builder(
-            itemCount: _controller2.productList.length,
+            itemCount: _controller2.productListLength,
             padding: EdgeInsets.all(20.0),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -25,8 +24,7 @@ class MainContent extends StatelessWidget {
               childAspectRatio: (0.48 * height) / height,
             ),
             itemBuilder: (context, index) {
-              var productData = _controller2.productList[index];
-
+              var productData = _controller2.getData(index);
               return GestureDetector(
                   onTap: () {
                     _controller.tappedProduct = index;

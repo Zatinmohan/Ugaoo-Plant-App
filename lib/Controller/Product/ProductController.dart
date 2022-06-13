@@ -9,6 +9,7 @@ class ProductController extends GetxController {
 
   Rx<ProductModel> _productData = ProductModel().obs;
   Rx<int> _selectedProduct = 0.obs;
+  RxList<ProductList> _selectiveProducts = RxList.empty();
 
   List<ProductList>? get getProduct => _productData.value.productList;
 
@@ -19,16 +20,15 @@ class ProductController extends GetxController {
   int get getTappedProduct => _selectedProduct.value;
 
   List<ProductList> getSelectedItems(String subCategory) {
-    List<ProductList> temp = [];
+    _selectiveProducts.clear();
     for (int i = 0; i < _productData.value.productList!.length; i++) {
       if (_productData.value.productList![i].productSubCategory!
               .compareTo(subCategory) ==
           0) {
-        temp.add(_productData.value.productList![i]);
+        _selectiveProducts.add(_productData.value.productList![i]);
       }
     }
-
-    return temp;
+    return _selectiveProducts;
   }
 
   void pageChange(int n) {
@@ -43,24 +43,27 @@ class ProductController extends GetxController {
 
   bool checkPincodeField() => _pincodeField.value;
 
-  //Product Getter Methods
-  String? get productName => getProduct![_selectedProduct.value].productName;
+  //Product Getter Methods for All Products
+  String? get productName =>
+      _selectiveProducts[_selectedProduct.value].productName;
 
   String? get productDescription =>
-      getProduct![_selectedProduct.value].productDescription;
+      _selectiveProducts[_selectedProduct.value].productDescription;
 
-  int? get productPrice => getProduct![_selectedProduct.value].productPrice;
+  int? get productPrice =>
+      _selectiveProducts[_selectedProduct.value].productPrice;
 
-  String? get productImage => getProduct![_selectedProduct.value].productImage;
+  String? get productImage =>
+      _selectiveProducts[_selectedProduct.value].productImage;
 
   List<dynamic>? get productRequirement =>
-      getProduct![_selectedProduct.value].productRequirement;
+      _selectiveProducts[_selectedProduct.value].productRequirement;
 
   Map<String, dynamic>? get productEssential =>
-      getProduct![_selectedProduct.value].productEssential;
+      _selectiveProducts[_selectedProduct.value].productEssential;
 
   Map<String, dynamic>? get productProblems =>
-      getProduct![_selectedProduct.value].productProblems;
+      _selectiveProducts[_selectedProduct.value].productProblems;
 
-  String? get productID => getProduct![_selectedProduct.value].productID;
+  String? get productID => _selectiveProducts[_selectedProduct.value].productID;
 }
