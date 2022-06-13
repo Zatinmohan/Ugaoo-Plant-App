@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ugaoo/Controller/Auth/authController.dart';
+import 'package:ugaoo/Controller/PushNotification/notification_controller.dart';
 import 'package:ugaoo/Controller/Shared%20Pref/PreferenceController.dart';
 import 'package:ugaoo/misc/Routes.dart';
 import 'package:ugaoo/misc/colors.dart';
@@ -16,6 +16,7 @@ void main() async {
 
   await Firebase.initializeApp().then((value) {
     Get.put(AuthController());
+    Get.put(PushNotification());
   });
   WidgetsFlutterBinding
       .ensureInitialized(); //ensures all the bindings before the app runs
