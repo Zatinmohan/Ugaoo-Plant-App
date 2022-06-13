@@ -7,6 +7,8 @@ This application uses:
 - API management 
 - Firebase Auth
 - Shared Preference (Get Storage)
+- Fllutter Local Notification
+- Firebase Cloud Messaging
 
 <img src ="gif1.gif" alt="Main" width="200" height="450"> <img src="gif2.gif" alt="Second" width="200" height="450">
 
