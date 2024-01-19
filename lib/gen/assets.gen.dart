@@ -36,12 +36,25 @@ class $AssetsMiscGen {
   /// File path: assets/misc/profile.png
   AssetGenImage get profile => const AssetGenImage('assets/misc/profile.png');
 
+  /// File path: assets/misc/registration_page_image.jpg
+  AssetGenImage get registrationPageImage =>
+      const AssetGenImage('assets/misc/registration_page_image.jpg');
+
   /// File path: assets/misc/soon.png
   AssetGenImage get soon => const AssetGenImage('assets/misc/soon.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [appIcon, background, emptyCart, emptyList, gLogo, placed, profile, soon];
+  List<AssetGenImage> get values => [
+        appIcon,
+        background,
+        emptyCart,
+        emptyList,
+        gLogo,
+        placed,
+        profile,
+        registrationPageImage,
+        soon
+      ];
 }
 
 class $AssetsOnboardingGen {

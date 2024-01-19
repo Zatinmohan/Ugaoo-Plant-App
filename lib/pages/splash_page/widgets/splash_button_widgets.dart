@@ -6,7 +6,7 @@ class SplashButtonWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _buttonWidth = MediaQuery.sizeOf(context).width * 0.65;
-    double _buttonHeight = MediaQuery.sizeOf(context).width * 0.13;
+    double _buttonHeight = MediaQuery.sizeOf(context).width * 0.14;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -17,7 +17,7 @@ class SplashButtonWidgets extends StatelessWidget {
                 minimumSize: MaterialStateProperty.all(
                   Size(
                     _buttonWidth,
-                    MediaQuery.sizeOf(context).width * 0.14,
+                    _buttonHeight,
                   ),
                 ),
               ),
@@ -25,7 +25,12 @@ class SplashButtonWidgets extends StatelessWidget {
         ),
         const SizedBox(height: 16.0),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const RegistrationPage()),
+            );
+          },
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 backgroundColor: const MaterialStatePropertyAll(
                   ColorConstants.kBackgroundColor,

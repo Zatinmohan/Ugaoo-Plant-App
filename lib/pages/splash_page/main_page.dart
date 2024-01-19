@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
+import 'package:ugaoo/pages/registration_page/registration_page.dart';
 import 'package:ugaoo/utils/color_constants.dart';
 
 part 'widgets/text_widget.dart';
