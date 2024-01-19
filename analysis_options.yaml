@@ -1,0 +1,27 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    missing_required_param: error
+    missing_return: error
+    todo: ignore
+  language:
+    strict-inference: true
+    strict-raw-types: true
+
+linter:
+  rules:
+    avoid_print: true
+    avoid_unnecessary_containers: true
+    no_logic_in_create_state: true
+    prefer_const_constructors: true
+    prefer_const_constructors_in_immutables: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: true
+    sized_box_for_whitespace: true
+    sort_child_properties_last: true
+    use_build_context_synchronously: true
+    use_key_in_widget_constructors: true
+    lines_longer_than_80_chars: true 
+    require_trailing_commas: true
+    always_declare_return_types: true
