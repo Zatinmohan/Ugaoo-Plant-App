@@ -15,9 +15,9 @@ class $AssetsMiscGen {
   /// File path: assets/misc/appIcon.png
   AssetGenImage get appIcon => const AssetGenImage('assets/misc/appIcon.png');
 
-  /// File path: assets/misc/background.jpg
+  /// File path: assets/misc/background.jpeg
   AssetGenImage get background =>
-      const AssetGenImage('assets/misc/background.jpg');
+      const AssetGenImage('assets/misc/background.jpeg');
 
   /// File path: assets/misc/emptyCart.png
   AssetGenImage get emptyCart =>
