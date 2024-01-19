@@ -5,6 +5,8 @@ class SplashButtonWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double _buttonWidth = MediaQuery.sizeOf(context).width * 0.65;
+    double _buttonHeight = MediaQuery.sizeOf(context).width * 0.13;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -14,7 +16,7 @@ class SplashButtonWidgets extends StatelessWidget {
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 minimumSize: MaterialStateProperty.all(
                   Size(
-                    MediaQuery.sizeOf(context).width * 0.6,
+                    _buttonWidth,
                     MediaQuery.sizeOf(context).width * 0.14,
                   ),
                 ),
@@ -30,8 +32,8 @@ class SplashButtonWidgets extends StatelessWidget {
                 ),
                 minimumSize: MaterialStateProperty.all(
                   Size(
-                    MediaQuery.sizeOf(context).width * 0.6,
-                    MediaQuery.sizeOf(context).width * 0.14,
+                    _buttonWidth,
+                    _buttonHeight,
                   ),
                 ),
               ),
