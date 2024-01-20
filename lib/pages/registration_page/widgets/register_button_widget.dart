@@ -19,7 +19,7 @@ class RegisterButtonWidget extends StatelessWidget {
           onPressed: () {},
           child: const Text("Register"),
         ),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 12.0),
         Padding(
           padding: const EdgeInsets.only(left: 20.0, right: 20.0),
           child: Text(

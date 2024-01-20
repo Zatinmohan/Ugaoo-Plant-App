@@ -15,24 +15,25 @@ class RegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Flexible(
+          Expanded(
             flex: 3,
             child: RegistrationImageWidget(),
           ),
-          SizedBox(height: 16.0),
-          Flexible(
+          SizedBox(height: 12.0),
+          Expanded(
             flex: 1,
             child: RegistrationTextWidget(),
           ),
-          SizedBox(height: 16.0),
-          Flexible(
-            flex: 4,
+          SizedBox(height: 10.0),
+          Expanded(
+            flex: 3,
             child: RegistrationFormWidget(),
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: 10.0),
           Expanded(
             child: const RegisterButtonWidget(),
           ),
@@ -41,3 +42,19 @@ class RegistrationPage extends StatelessWidget {
     );
   }
 }
+
+
+
+// Expanded(
+//             flex: 4,
+//             child: Column(
+//               children: [
+//                 const SizedBox(height: 8.0),
+//                 RegistrationTextWidget(),
+//                 const SizedBox(height: 8.0),
+//                 RegistrationFormWidget(),
+//                 const SizedBox(height: 12.0),
+//                 RegisterButtonWidget(),
+//               ],
+//             ),
+//           ),
