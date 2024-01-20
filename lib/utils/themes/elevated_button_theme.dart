@@ -4,8 +4,7 @@ class CustomElevatedButtonTheme {
   final BuildContext _context;
   late ElevatedButtonThemeData _themeData;
 
-  CustomElevatedButtonTheme( BuildContext context)
-      : _context = context {
+  CustomElevatedButtonTheme(BuildContext context) : _context = context {
     setThemeData();
   }
 
@@ -13,6 +12,8 @@ class CustomElevatedButtonTheme {
     _themeData = ElevatedButtonThemeData(
       style: ButtonStyle(
         elevation: const MaterialStatePropertyAll(2.0),
+        iconSize:
+            MaterialStatePropertyAll(MediaQuery.sizeOf(_context).width * 0.05),
         minimumSize: MaterialStateProperty.all(
           Size(
             MediaQuery.sizeOf(_context).width * 0.5,

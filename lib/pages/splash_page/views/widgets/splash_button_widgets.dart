@@ -12,7 +12,12 @@ class SplashButtonWidgets extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+            );
+          },
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 minimumSize: MaterialStateProperty.all(
                   Size(

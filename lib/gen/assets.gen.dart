@@ -15,9 +15,15 @@ class $AssetsMiscGen {
   /// File path: assets/misc/appIcon.png
   AssetGenImage get appIcon => const AssetGenImage('assets/misc/appIcon.png');
 
+  /// File path: assets/misc/apple.png
+  AssetGenImage get apple => const AssetGenImage('assets/misc/apple.png');
+
   /// File path: assets/misc/background.jpeg
   AssetGenImage get background =>
       const AssetGenImage('assets/misc/background.jpeg');
+
+  /// File path: assets/misc/email.png
+  AssetGenImage get email => const AssetGenImage('assets/misc/email.png');
 
   /// File path: assets/misc/emptyCart.png
   AssetGenImage get emptyCart =>
@@ -26,6 +32,9 @@ class $AssetsMiscGen {
   /// File path: assets/misc/emptyList.png
   AssetGenImage get emptyList =>
       const AssetGenImage('assets/misc/emptyList.png');
+
+  /// File path: assets/misc/facebook.png
+  AssetGenImage get facebook => const AssetGenImage('assets/misc/facebook.png');
 
   /// File path: assets/misc/gLogo.png
   AssetGenImage get gLogo => const AssetGenImage('assets/misc/gLogo.png');
@@ -46,9 +55,12 @@ class $AssetsMiscGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         appIcon,
+        apple,
         background,
+        email,
         emptyCart,
         emptyList,
+        facebook,
         gLogo,
         placed,
         profile,
