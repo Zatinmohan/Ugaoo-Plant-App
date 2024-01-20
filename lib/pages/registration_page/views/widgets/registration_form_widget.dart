@@ -1,4 +1,5 @@
-part of '../registration_page.dart';
+part of '../../views/registration_page.dart';
+
 
 class RegistrationFormWidget extends StatelessWidget {
   const RegistrationFormWidget({Key? key}) : super(key: key);

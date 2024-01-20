@@ -1,4 +1,4 @@
-part of '../registration_page.dart';
+part of '../../views/registration_page.dart';
 
 class RegistrationImageWidget extends StatelessWidget {
   const RegistrationImageWidget({Key? key}) : super(key: key);

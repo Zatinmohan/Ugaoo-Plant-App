@@ -1,4 +1,4 @@
-part of '../main_page.dart';
+part of '../../views/main_page.dart';
 
 class SplashButtonWidgets extends StatelessWidget {
   const SplashButtonWidgets({Key? key}) : super(key: key);

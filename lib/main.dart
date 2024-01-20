@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ugaoo/pages/splash_page/main_page.dart';
+import 'package:ugaoo/pages/splash_page/views/main_page.dart';
 import 'package:ugaoo/utils/color_constants.dart';
 import 'package:ugaoo/utils/themes/custom_button_theme.dart';
 import 'package:ugaoo/utils/themes/text_theme_data.dart';
