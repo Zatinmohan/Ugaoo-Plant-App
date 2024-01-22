@@ -1,0 +1,1 @@
+enum LoginStates { EMAIL, GOOGLE, FACEBOOK, APPLE, SIGNOUT }
