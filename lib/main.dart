@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugaoo/utils/routes/routes_implementation.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 import 'package:ugaoo/utils/themes/custom_button_theme.dart';
+import 'package:ugaoo/utils/themes/custom_text_field_theme.dart';
 import 'package:ugaoo/utils/themes/text_theme_data.dart';
 
 import 'utils/themes/elevated_button_theme.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         elevatedButtonTheme:
             CustomElevatedButtonTheme(context).elevatedThemeData,
         buttonTheme: CustomButtonTheme(context).buttomThemeData,
+        inputDecorationTheme: CustomInputFieldTheme(context).themeData,
       ),
       routerConfig: Routes.instance.router,
     );

@@ -14,13 +14,13 @@ class LoginButtonsWidget extends StatelessWidget {
           onTap: () {},
           buttonImage: Assets.misc.gLogo.path,
         ),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 24.0),
         CustomLoginButtonWidget(
           buttonName: "Sign in with Facebook",
           onTap: () {},
           buttonImage: Assets.misc.facebook.path,
         ),
-        Platform.isIOS ? const SizedBox(height: 16.0) : const SizedBox.shrink(),
+        Platform.isIOS ? const SizedBox(height: 24.0) : const SizedBox.shrink(),
         Platform.isIOS
             ? CustomLoginButtonWidget(
                 buttonName: "Sign in with Apple",
@@ -28,7 +28,7 @@ class LoginButtonsWidget extends StatelessWidget {
                 buttonImage: Assets.misc.apple.path,
               )
             : const SizedBox.shrink(),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 24.0),
         CustomLoginButtonWidget(
           buttonName: "Sign in With Email",
           onTap: () {},

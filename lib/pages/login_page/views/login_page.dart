@@ -17,49 +17,40 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Expanded(
-            flex: 1,
-            child: LoginImageWidget(),
-          ),
+          const Expanded(flex: 2, child: LoginImageWidget()),
           const SizedBox(height: 16.0),
           Expanded(
             flex: 2,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Hi There,",
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ColorConstants.kPrimaryAccentColor,
-                        height: 0.0,
-                      ),
-                ),
-                Text(
-                  "Please signin to continue",
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ColorConstants.kPrimaryAccentColor,
-                      ),
-                ),
-                const SizedBox(height: 24.0),
-                const LoginButtonsWidget(),
                 Expanded(
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0,
-                      vertical: 12.0,
-                    ),
+                  flex: 2,
+                  child: FittedBox(
                     child: Text(
-                      "Don't have an account, Sign-up Here",
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      "Hi There,",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: ColorConstants.kPrimaryAccentColor,
-                            fontWeight: FontWeight.w400,
-                            fontSize: MediaQuery.sizeOf(context).width * 0.05,
+                            height: 0.0,
                           ),
                     ),
                   ),
                 ),
+                Expanded(
+                  flex: 1,
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(
+                      "Please sign-in to continue",
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: ColorConstants.kPrimaryAccentColor,
+                          ),
+                    ),
+                  ),
+                ),
+                const Expanded(flex: 12, child: LoginButtonsWidget()),
               ],
             ),
           ),

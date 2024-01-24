@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
-import 'package:ugaoo/pages/login_page/views/login_page.dart';
-import 'package:ugaoo/pages/registration_page/views/registration_page.dart';
 import 'package:ugaoo/utils/routes/routes_name.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 
@@ -24,17 +22,14 @@ class SplashPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Expanded(
-              flex: 5,
-              child: const SplashTextWidget(),
+            const Center(child: SplashTextWidget()),
+            SizedBox(
+              height: MediaQuery.sizeOf(context).width * 0.75,
             ),
-            Flexible(
-              flex: 2,
-              child: const SplashButtonWidgets(),
-            ),
+            const SplashButtonWidgets(),
           ],
         ),
       ),

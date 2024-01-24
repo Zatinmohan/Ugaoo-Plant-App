@@ -1,6 +1,5 @@
 part of '../../views/registration_page.dart';
 
-
 class RegisterButtonWidget extends StatelessWidget {
   const RegisterButtonWidget({Key? key}) : super(key: key);
 
@@ -23,12 +22,18 @@ class RegisterButtonWidget extends StatelessWidget {
         const SizedBox(height: 12.0),
         Padding(
           padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          child: Text(
-            "Already have an account? Login here",
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: MediaQuery.sizeOf(context).width * 0.04,
-                ),
+          child: InkWell(
+            onTap: () {
+              context.replace(RoutesName.LOGIN_SCREEN);
+            },
+            child: Text(
+              "Already have an account? Login here",
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: MediaQuery.sizeOf(context).width * 0.04,
+                    color: ColorConstants.kPrimaryAccentColor,
+                  ),
+            ),
           ),
         ),
       ],

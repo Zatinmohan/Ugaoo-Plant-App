@@ -1,6 +1,5 @@
 part of '../../views/registration_page.dart';
 
-
 class RegistrationTextWidget extends StatelessWidget {
   const RegistrationTextWidget({Key? key}) : super(key: key);
 
@@ -12,8 +11,8 @@ class RegistrationTextWidget extends StatelessWidget {
         Text(
           "Register",
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                // fontSize: MediaQuery.sizeOf(context).width * 0.14,
                 height: 0.0,
+                color: ColorConstants.kPrimaryAccentColor,
               ),
         ),
         Text(
@@ -21,6 +20,7 @@ class RegistrationTextWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontSize: MediaQuery.sizeOf(context).width * 0.07,
                 letterSpacing: 1.4,
+                color: ColorConstants.kPrimaryAccentColor,
               ),
         ),
       ],
