@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ugaoo/utils/errors/login_exceptions/login_with_email_error.dart';
 import 'package:ugaoo/utils/services/auth_service/repositories/auth_types_services.dart';
-import 'package:ugaoo/utils/services/auth_service/errors/login_with_email_passwords_error.dart';
 
 class AuthServiceWithFirebase implements AuthServicesRepo {
   FirebaseAuth _auth;
@@ -12,8 +12,10 @@ class AuthServiceWithFirebase implements AuthServicesRepo {
   Future<void> loginViaGoogle() async {}
 
   @override
-  Future<UserCredential> loginWithEmailAndPassword(
-      {required String email, required String password}) async {
+  Future<UserCredential> loginWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
       final UserCredential _credentails =
           await _auth.signInWithEmailAndPassword(
@@ -22,9 +24,9 @@ class AuthServiceWithFirebase implements AuthServicesRepo {
       );
       return _credentails;
     } on FirebaseAuthException catch (error) {
-      throw LoginWithEmailPasswordErrors.fromCode(error.code);
+      throw LoginWithEmailPasswordException.fromCode(code: error.code);
     } catch (error) {
-      throw const LoginWithEmailPasswordErrors();
+      throw LoginWithEmailPasswordException();
     }
   }
 

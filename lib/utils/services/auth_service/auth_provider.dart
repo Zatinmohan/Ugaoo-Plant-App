@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ugaoo/utils/services/auth_service/auth_firebaes_service.dart';
+import 'package:ugaoo/utils/services/auth_service/auth_firebase_service.dart';
 import 'package:ugaoo/utils/services/auth_service/constants/login_states.dart';
 
 class AuthProvider extends ChangeNotifier {

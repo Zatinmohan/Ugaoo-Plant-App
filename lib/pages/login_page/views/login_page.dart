@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
 import 'dart:math' as math;
 
-import 'package:ugaoo/utils/color_constants.dart';
+import 'package:ugaoo/utils/themes/color_constants.dart';
 
 part 'widgets/login_image_widget.dart';
 part 'widgets/custom_login_button_widget.dart';

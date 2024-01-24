@@ -13,10 +13,7 @@ class SplashButtonWidgets extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginPage()),
-            );
+            context.push(RoutesName.LOGIN_SCREEN);
           },
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 minimumSize: MaterialStateProperty.all(
@@ -31,10 +28,7 @@ class SplashButtonWidgets extends StatelessWidget {
         const SizedBox(height: 16.0),
         ElevatedButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const RegistrationPage()),
-            );
+            context.push(RoutesName.REGISTER_SCREEN);
           },
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 backgroundColor: const MaterialStatePropertyAll(

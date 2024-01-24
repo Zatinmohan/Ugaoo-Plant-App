@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
 import 'dart:math' as math;
 
-import 'package:ugaoo/utils/color_constants.dart';
+import 'package:ugaoo/utils/themes/color_constants.dart';
 
 part 'widgets/registration_image_widget.dart';
 part 'widgets/registration_text_widgets.dart';

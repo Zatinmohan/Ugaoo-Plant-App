@@ -11,6 +11,11 @@ class CustomElevatedButtonTheme {
   void setThemeData() {
     _themeData = ElevatedButtonThemeData(
       style: ButtonStyle(
+        shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+        ),
         elevation: const MaterialStatePropertyAll(2.0),
         iconSize:
             MaterialStatePropertyAll(MediaQuery.sizeOf(_context).width * 0.05),
@@ -30,5 +35,5 @@ class CustomElevatedButtonTheme {
     );
   }
 
-  ElevatedButtonThemeData get elevatedThemeDta => _themeData;
+  ElevatedButtonThemeData get elevatedThemeData => _themeData;
 }

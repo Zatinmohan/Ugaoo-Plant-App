@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ugaoo/utils/color_constants.dart';
+import 'package:ugaoo/utils/themes/color_constants.dart';
 
 class CustomButtonTheme {
   final BuildContext _context;
