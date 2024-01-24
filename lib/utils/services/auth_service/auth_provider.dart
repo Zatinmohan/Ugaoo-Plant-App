@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ugaoo/utils/services/auth_service/auth_firebase_service.dart';
 import 'package:ugaoo/utils/services/auth_service/constants/login_states.dart';
 
-class AuthProvider extends ChangeNotifier {
+class AuthenticationProvider extends ChangeNotifier {
   final AuthServiceWithFirebase _authService;
 
-  AuthProvider({required AuthServiceWithFirebase service})
+  AuthenticationProvider({required AuthServiceWithFirebase service})
       : _authService = service;
 
   Future<void> login(
@@ -16,6 +16,11 @@ class AuthProvider extends ChangeNotifier {
           email: email!,
           password: password!,
         );
+        
+        break;
+
+      case LoginStates.GOOGLE:
+        await _authService.loginViaGoogle();
         break;
 
       case LoginStates.SIGNOUT:

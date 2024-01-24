@@ -1,17 +1,20 @@
 part of '../../views/login_page.dart';
 
-class LoginButtonsWidget extends StatelessWidget {
+class LoginButtonsWidget extends ConsumerWidget {
   const LoginButtonsWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.watch(loginProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
         CustomLoginButtonWidget(
           buttonName: "Sign in with Google",
-          onTap: () {},
+          onTap: () async {
+            await auth.login(status: LoginStates.GOOGLE);
+          },
           buttonImage: Assets.misc.gLogo.path,
         ),
         const SizedBox(height: 24.0),

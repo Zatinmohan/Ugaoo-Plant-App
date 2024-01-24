@@ -1,7 +1,13 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
+import 'package:ugaoo/utils/services/auth_service/auth_firebase_service.dart';
+import 'package:ugaoo/utils/services/auth_service/auth_provider.dart';
+import 'package:ugaoo/utils/services/auth_service/constants/login_states.dart';
+
 import 'dart:math' as math;
 
 import 'package:ugaoo/utils/themes/color_constants.dart';
@@ -9,6 +15,12 @@ import 'package:ugaoo/utils/themes/color_constants.dart';
 part 'widgets/login_image_widget.dart';
 part 'widgets/custom_login_button_widget.dart';
 part 'widgets/login_buttons_widget.dart';
+
+final loginProvider = Provider<AuthenticationProvider>((ref) {
+  return AuthenticationProvider(
+    service: AuthServiceWithFirebase(auth: FirebaseAuth.instance),
+  );
+});
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
