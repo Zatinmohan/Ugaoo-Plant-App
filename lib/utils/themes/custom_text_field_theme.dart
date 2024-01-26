@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 
 class CustomInputFieldTheme {
+  // ignore: unused_field
   final BuildContext _context;
   late InputDecorationTheme _themeData;
 

@@ -5,7 +5,7 @@ class LoginButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.watch(loginProvider);
+    final _auth = ref.watch(loginProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -13,7 +13,19 @@ class LoginButtonsWidget extends ConsumerWidget {
         CustomLoginButtonWidget(
           buttonName: "Sign in with Google",
           onTap: () async {
-            await auth.login(status: LoginStates.GOOGLE);
+            try {
+              await _auth.login(status: LoginType.GOOGLE);
+              context.mounted
+                  ? context.pushReplacement(RoutesName.HOME_PAGE)
+                  : null;
+            } catch (error) {
+              if (context.mounted) {
+                Utilities.showSnackBar(
+                  context: context,
+                  message: error.toString(),
+                );
+              }
+            }
           },
           buttonImage: Assets.misc.gLogo.path,
         ),

@@ -1,14 +1,20 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ugaoo/utils/errors/login_exceptions/login_with_email_error.dart';
 import 'package:ugaoo/utils/errors/login_exceptions/firebase_auth_errors.dart';
 import 'package:ugaoo/utils/services/auth_service/repositories/auth_types_services.dart';
 
-class AuthServiceWithFirebase implements AuthServicesRepo {
-  FirebaseAuth _firebaseAuth;
+const String _logName = "Firebase Login Service";
 
-  AuthServiceWithFirebase({required FirebaseAuth? auth})
-      : _firebaseAuth = auth ?? FirebaseAuth.instance;
+class LoginServiceWithFirebase implements LoginServiceRepo {
+  final FirebaseAuth _firebaseAuth;
+
+  LoginServiceWithFirebase({required FirebaseAuth? auth})
+      : _firebaseAuth = auth ?? FirebaseAuth.instance {
+    log("Firebase Auth Service Started", name: _logName);
+  }
 
   @override
   Future<void> loginViaGoogle() async {
@@ -21,9 +27,12 @@ class AuthServiceWithFirebase implements AuthServicesRepo {
         idToken: googleAuth?.idToken,
       );
       await _firebaseAuth.signInWithCredential(credential);
+      log("Google Login Success", name: _logName);
     } on FirebaseAuthException catch (e) {
+      log("", name: _logName, error: e);
       throw FirebaseAuthExceptions(e.toString());
     } catch (error) {
+      log("", name: _logName, error: error);
       throw const FirebaseAuthExceptions();
     }
   }
