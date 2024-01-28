@@ -1,31 +1,35 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ugaoo/pages/home_page/views/home_page_main.dart';
 import 'package:ugaoo/pages/login_page/login_page.dart';
 import 'package:ugaoo/pages/registration_page/views/registration_page.dart';
 import 'package:ugaoo/pages/splash_page/views/main_page.dart';
-import 'package:ugaoo/routes/routes_name.dart';
+import 'package:ugaoo/routes/repositories/routes_repo_impl.dart';
+import 'package:ugaoo/routes/constants/routes_name.dart';
 
-class Routes {
-  static late GoRouter _router;
-  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
-  static final Routes instance = Routes._instance();
+const String _logName = "Go Router";
 
-  Routes._instance() {
-    _initilizeRoutes();
+class GoRouterService implements RoutesRepoImpl<GoRouter> {
+  late final GoRouter _router;
+  late final GlobalKey<NavigatorState> _navigatorKey;
+
+  GoRouterService({
+    required GlobalKey<NavigatorState> navigationKey,
+  }) : _navigatorKey = navigationKey {
+    log("Go Router Service Started", name: _logName);
   }
 
-  factory Routes() {
-    return instance;
-  }
-
-  GlobalKey get navigationKey => _navigatorKey;
-
+  @override
   GoRouter get router => _router;
 
-  void _initilizeRoutes() {
+  @override
+  GlobalKey<NavigatorState> get navigationKey => _navigatorKey;
+
+  @override
+  void initilizeRoutes() {
     _router = GoRouter(
-      // redirect: (context, state) async {},
       navigatorKey: _navigatorKey,
       initialLocation: RoutesName.ROOT,
       routes: <RouteBase>[

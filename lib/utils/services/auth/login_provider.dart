@@ -1,16 +1,21 @@
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
-import 'package:ugaoo/utils/services/auth_service/constants/login_states.dart';
-import 'package:ugaoo/utils/services/auth_service/repositories/auth_types_services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ugaoo/dependency_injection/global_dependency_injections.dart';
+import 'package:ugaoo/utils/services/auth/constants/login_states.dart';
+import 'package:ugaoo/utils/services/auth/repositories/auth_types_services.dart';
 
 const String _logName = "Login Provider";
 
 class LoginProvider extends ChangeNotifier {
   final LoginServiceRepo _authService;
+  final Ref _ref;
 
   LoginProvider({
     required LoginServiceRepo service,
-  }) : _authService = service;
+    required Ref ref,
+  })  : _authService = service,
+        _ref = ref;
 
   Future<void> login({
     required LoginType status,
@@ -26,7 +31,13 @@ class LoginProvider extends ChangeNotifier {
         break;
 
       case LoginType.GOOGLE:
-        await _authService.loginViaGoogle();
+        try {
+          await _authService.loginViaGoogle();
+          setLoginPreferences();
+        } catch (error) {
+          rethrow;
+        }
+
         break;
 
       case LoginType.SIGNOUT:
@@ -36,6 +47,12 @@ class LoginProvider extends ChangeNotifier {
       default:
         break;
     }
+  }
+
+  void setLoginPreferences() {
+    _ref.read(GlobalDependencyInjection.preferenceProvider).whenData((value) {
+      value.setLoginPreferences();
+    });
   }
 
   @override

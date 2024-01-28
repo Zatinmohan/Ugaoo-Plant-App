@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugaoo/firebase_options.dart';
 import 'package:ugaoo/dependency_injection/global_dependency_injections.dart';
-import 'package:ugaoo/routes/routes_implementation.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 import 'package:ugaoo/utils/themes/custom_button_theme.dart';
 import 'package:ugaoo/utils/themes/custom_text_field_theme.dart';
@@ -17,7 +16,9 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
-    const ProviderScope(child: MyApp()),
+    const ProviderScope(
+      child: MyApp(),
+    ),
   );
 }
 
@@ -28,6 +29,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(GlobalDependencyInjection.preferenceProvider);
     ref.watch(GlobalDependencyInjection.apiProvider);
+    final route = ref.watch(GlobalDependencyInjection.routerProvider);
     return MaterialApp.router(
       title: 'Ugaoo',
       theme: ThemeData(
@@ -42,7 +44,7 @@ class MyApp extends ConsumerWidget {
         snackBarTheme:
             CustomSnackBarThemeData(context: context).snackBarThemeData,
       ),
-      routerConfig: Routes.instance.router,
+      routerConfig: route.router,
     );
   }
 }

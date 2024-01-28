@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:ugaoo/errors/http_exceptions.dart';
-import 'package:ugaoo/utils/services/api_provider/repositories/network_request_repo.dart';
+import 'package:ugaoo/utils/services/api/repositories/network_request_repo.dart';
 
 const String _logName = "Dio Client Activated";
 
