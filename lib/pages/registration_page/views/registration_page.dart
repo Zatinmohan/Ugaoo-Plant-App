@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
-import 'package:ugaoo/utils/routes/routes_name.dart';
+import 'package:ugaoo/routes/routes_name.dart';
 import 'dart:math' as math;
 
 import 'package:ugaoo/utils/themes/color_constants.dart';

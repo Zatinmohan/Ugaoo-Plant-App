@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
-import 'package:ugaoo/utils/routes/routes_name.dart';
+import 'package:ugaoo/routes/routes_name.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 
 part 'widgets/splash_button_widgets.dart';
@@ -29,7 +29,10 @@ class SplashPage extends StatelessWidget {
             SizedBox(
               height: MediaQuery.sizeOf(context).width * 0.75,
             ),
-            const SplashButtonWidgets(),
+            const SizedBox(
+              width: double.maxFinite,
+              child: SplashButtonWidgets(),
+            ),
           ],
         ),
       ),

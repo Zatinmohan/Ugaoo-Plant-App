@@ -27,7 +27,7 @@ abstract class PreferencesRepo {
     List<String>? defaultValue,
   });
 
-  Future<List<String>> getBool({
+  Future<bool> getBool({
     required String key,
     bool? defaultValue,
   });

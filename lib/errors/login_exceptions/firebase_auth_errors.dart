@@ -1,4 +1,4 @@
-import 'package:ugaoo/utils/errors/base_exception.dart';
+import 'package:ugaoo/errors/base_exception.dart';
 
 class FirebaseAuthExceptions extends BaseException {
   const FirebaseAuthExceptions([super.message]);

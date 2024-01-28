@@ -1,4 +1,4 @@
-part of '../../views/login_page.dart';
+part of '../../login_page.dart';
 
 class CustomLoginButtonWidget extends StatelessWidget {
   final String buttonName;
@@ -15,14 +15,6 @@ class CustomLoginButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-            fixedSize: MaterialStateProperty.all(
-              Size(
-                MediaQuery.sizeOf(context).width,
-                MediaQuery.sizeOf(context).width * 0.5,
-              ),
-            ),
-          ),
       onPressed: onTap,
       child: Row(
         children: [

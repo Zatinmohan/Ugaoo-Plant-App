@@ -1,4 +1,4 @@
-import 'package:ugaoo/utils/errors/base_exception.dart';
+import 'package:ugaoo/errors/base_exception.dart';
 
 class LoginWithEmailPasswordException extends BaseException {
   LoginWithEmailPasswordException([super.message]);

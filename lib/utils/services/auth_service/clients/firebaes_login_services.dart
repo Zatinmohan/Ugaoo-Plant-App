@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:ugaoo/utils/errors/login_exceptions/login_with_email_error.dart';
-import 'package:ugaoo/utils/errors/login_exceptions/firebase_auth_errors.dart';
+import 'package:ugaoo/errors/login_exceptions/login_with_email_error.dart';
+import 'package:ugaoo/errors/login_exceptions/firebase_auth_errors.dart';
 import 'package:ugaoo/utils/services/auth_service/repositories/auth_types_services.dart';
 
 const String _logName = "Firebase Login Service";

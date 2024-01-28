@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ugaoo/utils/errors/shared_preference_exception.dart';
+import 'package:ugaoo/errors/shared_preference_exception.dart';
 import 'package:ugaoo/utils/services/preferences/repositories/preference_repository.dart';
 
 const String _logName = "Shared Preference Service";
@@ -9,8 +9,9 @@ const String _logName = "Shared Preference Service";
 class SharedPreferenceService extends PreferencesRepo {
   final SharedPreferences? _preference;
 
-  SharedPreferenceService({required SharedPreferences sharedPreferences})
-      : _preference = sharedPreferences {
+  SharedPreferenceService({
+    required SharedPreferences sharedPreferences,
+  }) : _preference = sharedPreferences {
     log("Shared Preference Service Started", name: _logName);
   }
 
@@ -99,13 +100,13 @@ class SharedPreferenceService extends PreferencesRepo {
   }
 
   @override
-  Future<List<String>> getBool({
+  Future<bool> getBool({
     required String key,
     bool? defaultValue,
   }) async {
     try {
-      List<String>? _temp;
-      _temp = await _preference?.getStringList(key);
+      bool? _temp;
+      _temp = await _preference?.getBool(key);
 
       if (_temp == null && defaultValue != null) {
         await _preference?.setBool(key, defaultValue);

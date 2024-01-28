@@ -1,6 +1,5 @@
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
-
-import 'package:ugaoo/utils/services/auth_service/firebaes_login_services.dart';
 import 'package:ugaoo/utils/services/auth_service/constants/login_states.dart';
 import 'package:ugaoo/utils/services/auth_service/repositories/auth_types_services.dart';
 
@@ -10,7 +9,7 @@ class LoginProvider extends ChangeNotifier {
   final LoginServiceRepo _authService;
 
   LoginProvider({
-    required LoginServiceWithFirebase service,
+    required LoginServiceRepo service,
   }) : _authService = service;
 
   Future<void> login({
@@ -37,5 +36,11 @@ class LoginProvider extends ChangeNotifier {
       default:
         break;
     }
+  }
+
+  @override
+  void dispose() {
+    log("Login Provider Disposed", name: _logName);
+    super.dispose();
   }
 }
