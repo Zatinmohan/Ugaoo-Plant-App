@@ -5,12 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugaoo/routes/clients/go_router_service.dart';
 import 'package:ugaoo/routes/routes_provider.dart';
-import 'package:ugaoo/utils/services/api/api_provider.dart';
-import 'package:ugaoo/utils/services/api/clients/dio_http_client.dart';
-import 'package:ugaoo/utils/services/auth/clients/firebaes_login_services.dart';
-import 'package:ugaoo/utils/services/auth/login_provider.dart';
-import 'package:ugaoo/utils/services/preferences/preference_provider.dart';
-import 'package:ugaoo/utils/services/preferences/clients/shared_preferences_service.dart';
+import 'package:ugaoo/services/api/api_provider.dart';
+import 'package:ugaoo/services/api/clients/dio_http_client.dart';
+import 'package:ugaoo/services/auth/clients/firebaes_login_services.dart';
+import 'package:ugaoo/services/auth/login_provider.dart';
+import 'package:ugaoo/services/preferences/preference_provider.dart';
+import 'package:ugaoo/services/preferences/clients/shared_preferences_service.dart';
 
 class GlobalDependencyInjection {
   static final routerProvider = Provider<RoutesProvider<GoRouter>>((ref) {

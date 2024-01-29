@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugaoo/errors/shared_preference_exception.dart';
-import 'package:ugaoo/utils/services/preferences/repositories/preference_repository.dart';
+import 'package:ugaoo/services/preferences/repositories/preference_repository.dart';
 
 const String _logName = "Shared Preference Service";
 

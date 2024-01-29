@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ugaoo/utils/services/preferences/pref_keys.dart';
-import 'package:ugaoo/utils/services/preferences/repositories/preference_repository.dart';
+import 'package:ugaoo/services/preferences/pref_keys.dart';
+import 'package:ugaoo/services/preferences/repositories/preference_repository.dart';
 
 class PreferenceProvider extends ChangeNotifier {
   final PreferencesRepo _preferenceService;

@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugaoo/dependency_injection/global_dependency_injections.dart';
-import 'package:ugaoo/utils/services/auth/constants/login_states.dart';
-import 'package:ugaoo/utils/services/auth/repositories/auth_types_services.dart';
+import 'package:ugaoo/services/auth/constants/login_states.dart';
+import 'package:ugaoo/services/auth/repositories/auth_types_services.dart';
 
 const String _logName = "Login Provider";
 

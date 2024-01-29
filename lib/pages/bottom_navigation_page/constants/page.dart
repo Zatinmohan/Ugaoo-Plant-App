@@ -1,0 +1,1 @@
+enum PAGES { HOME, LIKE, CART, PROFILE }

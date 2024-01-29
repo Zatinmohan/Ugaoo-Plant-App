@@ -11,7 +11,7 @@ class SplashButtonWidgets extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () {
-            context.push(RoutesName.LOGIN_SCREEN);
+            context.push(RoutesName.HOME_PAGE);
           },
           child: const Text("LOGIN"),
         ),

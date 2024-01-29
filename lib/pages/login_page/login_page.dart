@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
 import 'package:ugaoo/dependency_injection/global_dependency_injections.dart';
-import 'package:ugaoo/utils/services/auth/constants/login_states.dart';
+import 'package:ugaoo/services/auth/constants/login_states.dart';
 import 'dart:math' as math;
 import 'package:ugaoo/utils/themes/color_constants.dart';
 import 'package:ugaoo/utils/utilities/utilities.dart';

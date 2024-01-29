@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugaoo/firebase_options.dart';
 import 'package:ugaoo/dependency_injection/global_dependency_injections.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
+import 'package:ugaoo/utils/themes/custom_app_bar_theme.dart';
 import 'package:ugaoo/utils/themes/custom_button_theme.dart';
 import 'package:ugaoo/utils/themes/custom_text_field_theme.dart';
 import 'package:ugaoo/utils/themes/snackbar_theme.dart';
@@ -36,6 +37,7 @@ class MyApp extends ConsumerWidget {
         useMaterial3: true,
         colorSchemeSeed: ColorConstants.kBackgroundColor,
         scaffoldBackgroundColor: Colors.white,
+        appBarTheme: CustomAppBarTheme(context).themeData,
         textTheme: CustomTextTheme(context).textTheme,
         elevatedButtonTheme:
             CustomElevatedButtonTheme(context).elevatedThemeData,

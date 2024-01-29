@@ -9,4 +9,5 @@ class ColorConstants {
   static const Color kErrorButtonColor = Color(0xffd19191);
   static const Color kSecondaryTextColor = Color(0xffFFFFFF);
   static const Color kPrimaryIconColor = Color(0xff000000);
+  static const Color kPrimaryAppBarColor = Color(0xffDFF2EA);
 }
