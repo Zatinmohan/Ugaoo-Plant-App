@@ -1,3 +1,5 @@
+import 'package:ugaoo/user/user_model.dart';
+
 abstract class PreferencesRepo {
   Future<void> clearPreferences();
   Future<void> setStringData({
@@ -27,6 +29,11 @@ abstract class PreferencesRepo {
     List<String>? defaultValue,
   });
 
+  Future<String> getString({
+    required String key,
+    String? defaultValue,
+  });
+
   Future<bool> getBool({
     required String key,
     bool? defaultValue,
@@ -41,4 +48,8 @@ abstract class PreferencesRepo {
     required String key,
     double? defaultValue,
   });
+
+  Future<void> setUserAfterLogin({required UserModel user});
+
+  Future<void> clearUserDataAfterLogout();
 }

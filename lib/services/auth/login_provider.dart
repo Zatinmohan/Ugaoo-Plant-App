@@ -1,7 +1,5 @@
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ugaoo/dependency_injection/global_dependency_injections.dart';
 import 'package:ugaoo/services/auth/constants/login_states.dart';
 import 'package:ugaoo/services/auth/repositories/auth_types_services.dart';
 
@@ -9,13 +7,10 @@ const String _logName = "Login Provider";
 
 class LoginProvider extends ChangeNotifier {
   final LoginServiceRepo _authService;
-  final Ref _ref;
 
   LoginProvider({
     required LoginServiceRepo service,
-    required Ref ref,
-  })  : _authService = service,
-        _ref = ref;
+  }) : _authService = service;
 
   Future<void> login({
     required LoginType status,
@@ -33,7 +28,6 @@ class LoginProvider extends ChangeNotifier {
       case LoginType.GOOGLE:
         try {
           await _authService.loginViaGoogle();
-          setLoginPreferences();
         } catch (error) {
           rethrow;
         }
@@ -47,12 +41,6 @@ class LoginProvider extends ChangeNotifier {
       default:
         break;
     }
-  }
-
-  void setLoginPreferences() {
-    _ref.read(GlobalDependencyInjection.preferenceProvider).whenData((value) {
-      value.setLoginPreferences();
-    });
   }
 
   @override

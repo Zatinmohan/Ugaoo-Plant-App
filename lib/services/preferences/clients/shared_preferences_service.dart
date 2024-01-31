@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugaoo/errors/shared_preference_exception.dart';
+import 'package:ugaoo/services/preferences/pref_keys.dart';
 import 'package:ugaoo/services/preferences/repositories/preference_repository.dart';
+import 'package:ugaoo/user/user_model.dart';
 
 const String _logName = "Shared Preference Service";
 
@@ -75,6 +77,28 @@ class SharedPreferenceService extends PreferencesRepo {
   @override
   bool exist({required String key}) {
     return _preference?.containsKey(key) ?? false;
+  }
+
+  @override
+  Future<String> getString({
+    required String key,
+    String? defaultValue,
+  }) async {
+    try {
+      String? _temp;
+
+      _temp = await _preference?.getString(key);
+      if (_temp == null && defaultValue != null) {
+        await _preference?.setString(key, defaultValue);
+      } else if (_temp == null && defaultValue == null) {
+        throw SharedPreferenceException.fromCode(
+          error: "Please add some default value",
+        );
+      }
+      return _temp!;
+    } catch (e) {
+      throw SharedPreferenceException.fromCode(error: e.toString());
+    }
   }
 
   @override
@@ -163,5 +187,29 @@ class SharedPreferenceService extends PreferencesRepo {
     } catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
     }
+  }
+
+  @override
+  Future<void> setUserAfterLogin({required UserModel user}) async {
+    await _preference?.setString(
+      PreferenceKeys.LOGINTOKEN.name,
+      user.loginToken,
+    );
+    await _preference?.setString(PreferenceKeys.FIRSTNAME.name, user.firstName);
+    await _preference?.setString(PreferenceKeys.LASTNAME.name, user.lastName);
+    await _preference?.setBool(
+      PreferenceKeys.ISLOGIN.name,
+      user.isLoginSuccessful,
+    );
+    await _preference?.setString(PreferenceKeys.LOGINTYPE.name, user.loginType);
+  }
+
+  @override
+  Future<void> clearUserDataAfterLogout() async {
+    await _preference?.setBool(PreferenceKeys.ISLOGIN.name, false);
+    await _preference?.setString(PreferenceKeys.FIRSTNAME.name, "");
+    await _preference?.setString(PreferenceKeys.LASTNAME.name, "");
+    await _preference?.setString(PreferenceKeys.LOGINTOKEN.name, "");
+    await _preference?.setString(PreferenceKeys.LOGINTYPE.name, "");
   }
 }

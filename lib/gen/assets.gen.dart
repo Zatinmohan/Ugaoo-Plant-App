@@ -22,6 +22,10 @@ class $AssetsMiscGen {
   AssetGenImage get background =>
       const AssetGenImage('assets/misc/background.jpeg');
 
+  /// File path: assets/misc/demo_plant.png
+  AssetGenImage get demoPlant =>
+      const AssetGenImage('assets/misc/demo_plant.png');
+
   /// File path: assets/misc/email.png
   AssetGenImage get email => const AssetGenImage('assets/misc/email.png');
 
@@ -57,6 +61,7 @@ class $AssetsMiscGen {
         appIcon,
         apple,
         background,
+        demoPlant,
         email,
         emptyCart,
         emptyList,

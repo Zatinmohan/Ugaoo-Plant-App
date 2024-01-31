@@ -1,1 +1,7 @@
-enum PreferenceKeys { ISLOGIN }
+enum PreferenceKeys {
+  FIRSTNAME,
+  LASTNAME,
+  LOGINTYPE,
+  ISLOGIN,
+  LOGINTOKEN,
+}

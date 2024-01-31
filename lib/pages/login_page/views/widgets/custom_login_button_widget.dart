@@ -29,7 +29,7 @@ class CustomLoginButtonWidget extends StatelessWidget {
           const SizedBox(width: 12.0),
           FittedBox(
             child: Text(
-              buttonName,
+            buttonName,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: ColorConstants.kPrimaryTextColor,
                     fontWeight: FontWeight.w400,

@@ -5,14 +5,20 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ugaoo/errors/login_exceptions/login_with_email_error.dart';
 import 'package:ugaoo/errors/login_exceptions/firebase_auth_errors.dart';
 import 'package:ugaoo/services/auth/repositories/auth_types_services.dart';
+import 'package:ugaoo/services/preferences/repositories/preference_repository.dart';
+import 'package:ugaoo/user/user_model.dart';
 
 const String _logName = "Firebase Login Service";
 
 class LoginServiceWithFirebase implements LoginServiceRepo {
   final FirebaseAuth _firebaseAuth;
+  final PreferencesRepo _prefence;
 
-  LoginServiceWithFirebase({required FirebaseAuth? auth})
-      : _firebaseAuth = auth ?? FirebaseAuth.instance {
+  LoginServiceWithFirebase({
+    required FirebaseAuth? auth,
+    required PreferencesRepo preference,
+  })  : _firebaseAuth = auth ?? FirebaseAuth.instance,
+        _prefence = preference {
     log("Firebase Auth Service Started", name: _logName);
   }
 
@@ -27,6 +33,14 @@ class LoginServiceWithFirebase implements LoginServiceRepo {
         idToken: googleAuth?.idToken,
       );
       await _firebaseAuth.signInWithCredential(credential);
+      final UserModel userModel = UserModel(
+        firstName: googleUser?.displayName ?? "",
+        lastName: "",
+        loginType: credential.signInMethod,
+        loginToken: credential.token.toString(),
+        isLoginSuccessful: true,
+      );
+      _prefence.setUserAfterLogin(user: userModel);
       log("Google Login Success", name: _logName);
     } on FirebaseAuthException catch (e) {
       log("", name: _logName, error: e);
@@ -60,6 +74,7 @@ class LoginServiceWithFirebase implements LoginServiceRepo {
   Future<void> logout() async {
     try {
       await _firebaseAuth.signOut();
+      await _prefence.clearUserDataAfterLogout();
     } catch (error) {
       //TODO
       //Same goes to here

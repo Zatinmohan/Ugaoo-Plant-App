@@ -32,8 +32,14 @@ class GlobalDependencyInjection {
   static final AutoDisposeProvider<LoginProvider> loginProvider =
       Provider.autoDispose<LoginProvider>(
     (ref) => LoginProvider(
-      service: LoginServiceWithFirebase(auth: FirebaseAuth.instance),
-      ref: ref,
+      service: LoginServiceWithFirebase(
+        auth: FirebaseAuth.instance,
+        preference: ref
+            .read<PreferenceProvider>(
+              preferenceProvider as ProviderListenable<PreferenceProvider>,
+            )
+            .preference,
+      ),
     ),
   );
 
