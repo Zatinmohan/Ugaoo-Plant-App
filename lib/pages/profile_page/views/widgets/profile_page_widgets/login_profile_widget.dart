@@ -1,8 +1,14 @@
 part of '../../profile_page.dart';
 
-class LoginProfilePage extends StatelessWidget {
-  LoginProfilePage({super.key});
+class LoginProfilePage extends ConsumerStatefulWidget {
+  const LoginProfilePage({super.key});
 
+  @override
+  ConsumerState<LoginProfilePage> createState() => _LoginProfilePageState();
+}
+
+class _LoginProfilePageState extends ConsumerState<LoginProfilePage> {
+  late final ProfilePageProvider provider;
   final List<ProfileSettingsModel> settingsButton = [
     ProfileSettingsModel(name: "My Orders", onTap: () {}),
     ProfileSettingsModel(name: "Addresses", onTap: () {}),
@@ -11,7 +17,16 @@ class LoginProfilePage extends StatelessWidget {
   ];
 
   @override
+  void initState() {
+    provider = ref.read(ProfileDependencyInjection.profileProvider);
+    provider.getAppVersion();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final watchProvider = ref.watch(ProfileDependencyInjection.profileProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -45,11 +60,11 @@ class LoginProfilePage extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: Text(
-            "Version 1.0",
+            "Version: ${watchProvider.appVersion}",
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: Colors.blueGrey,
-                  fontSize: MediaQuery.sizeOf(context).width * 0.035,
+                  fontSize: MediaQuery.sizeOf(context).width * 0.032,
                 ),
           ),
         ),
