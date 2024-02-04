@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugaoo/routes/clients/go_router_service.dart';
 import 'package:ugaoo/routes/routes_provider.dart';
 import 'package:ugaoo/services/api/api_provider.dart';
@@ -20,12 +19,10 @@ class GlobalDependencyInjection {
       ),
     );
   });
-  static final FutureProvider<PreferenceProvider> preferenceProvider =
-      FutureProvider<PreferenceProvider>((ref) async {
+  static final Provider<PreferenceProvider> preferenceProvider =
+      Provider<PreferenceProvider>((ref) {
     return PreferenceProvider(
-      service: SharedPreferenceService(
-        sharedPreferences: await SharedPreferences.getInstance(),
-      ),
+      service: SharedPreferenceService(),
     );
   });
 
@@ -34,11 +31,7 @@ class GlobalDependencyInjection {
     (ref) => LoginProvider(
       service: LoginServiceWithFirebase(
         auth: FirebaseAuth.instance,
-        preference: ref
-            .read<PreferenceProvider>(
-              preferenceProvider as ProviderListenable<PreferenceProvider>,
-            )
-            .preference,
+        preference: ref.read<PreferenceProvider>(preferenceProvider).preference,
       ),
     ),
   );

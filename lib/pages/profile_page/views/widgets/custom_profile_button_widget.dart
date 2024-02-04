@@ -1,4 +1,4 @@
-part of '../../profile_page.dart';
+part of '../profile_page.dart';
 
 class CustomProfileButtonWidget extends StatelessWidget {
   final ProfileSettingsModel data;

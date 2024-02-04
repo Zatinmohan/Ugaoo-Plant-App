@@ -9,12 +9,15 @@ import 'package:ugaoo/user/user_model.dart';
 const String _logName = "Shared Preference Service";
 
 class SharedPreferenceService extends PreferencesRepo {
-  final SharedPreferences? _preference;
+  late final SharedPreferences? _preference;
 
-  SharedPreferenceService({
-    required SharedPreferences sharedPreferences,
-  }) : _preference = sharedPreferences {
+  SharedPreferenceService() {
+    _initService();
     log("Shared Preference Service Started", name: _logName);
+  }
+
+  Future<void> _initService() async {
+    _preference = await SharedPreferences.getInstance();
   }
 
   @override
