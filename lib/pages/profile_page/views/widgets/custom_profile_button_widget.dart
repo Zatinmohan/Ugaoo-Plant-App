@@ -7,6 +7,7 @@ class CustomProfileButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: data.onTap,
       child: Container(
         width: MediaQuery.sizeOf(context).width * 0.5,
         height: MediaQuery.sizeOf(context).width * 0.18,

@@ -11,8 +11,4 @@ class RoutesProvider<T> {
   T get router => _routerService.router;
 
   RoutesRepoImpl<T> get routerService => _routerService;
-
-  void justAnExapmle(){
-    
-  }
 }

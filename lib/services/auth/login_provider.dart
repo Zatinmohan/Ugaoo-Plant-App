@@ -43,6 +43,17 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
+  LoginServiceRepo get loginService => _authService;
+
+  Future<void> signOut() async {
+    try {
+      await _authService.logout();
+      
+    } catch (error) {
+      throw error;
+    }
+  }
+
   @override
   void dispose() {
     log("Login Provider Disposed", name: _logName);

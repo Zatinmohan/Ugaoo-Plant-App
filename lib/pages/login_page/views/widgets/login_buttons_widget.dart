@@ -9,13 +9,13 @@ class LoginButtonsWidget extends ConsumerWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      // mainAxisSize: MainAxisSize.min,
       children: [
         CustomLoginButtonWidget(
           buttonName: "Sign in with Google",
           onTap: () async {
             try {
               await _auth.login(status: LoginType.GOOGLE);
+              context.mounted ? context.push(RoutesName.HOME_PAGE) : null;
             } catch (error) {
               if (context.mounted) {
                 Utilities.showSnackBar(

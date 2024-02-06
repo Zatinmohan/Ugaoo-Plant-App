@@ -1,41 +1,78 @@
 part of '../../profile_page.dart';
 
-class LoginProfilePage extends StatelessWidget {
+class LoginProfilePage extends StatefulWidget {
   final String appVersion;
-  LoginProfilePage({
+  final UserModel? user;
+  final WidgetRef ref;
+  const LoginProfilePage({
     super.key,
     required this.appVersion,
+    required this.user,
+    required this.ref,
   });
+  @override
+  State<LoginProfilePage> createState() => _LoginProfilePageState();
+}
 
-  late final ProfilePageProvider provider;
+class _LoginProfilePageState extends State<LoginProfilePage> {
+  late final List<ProfileSettingsModel> settingsButton;
 
-  final List<ProfileSettingsModel> settingsButton = [
-    ProfileSettingsModel(name: "My Orders", onTap: () {}),
-    ProfileSettingsModel(name: "Addresses", onTap: () {}),
-    ProfileSettingsModel(name: "Settings", onTap: () {}),
-    ProfileSettingsModel(name: "Sign out", onTap: () {}),
-  ];
+  @override
+  void initState() {
+    settingsButton = [
+      ProfileSettingsModel(name: "My Orders", onTap: () {}),
+      ProfileSettingsModel(name: "Addresses", onTap: () {}),
+      ProfileSettingsModel(name: "Settings", onTap: () {}),
+      ProfileSettingsModel(
+        name: "Sign out",
+        onTap: () async {
+          try {
+            await widget.ref
+                .read<LoginProvider>(GlobalDependencyInjection.loginProvider)
+                .signOut();
+
+            context.mounted
+                ? context.pushReplacement(RoutesName.LOGIN_SCREEN)
+                : null;
+          } catch (e) {
+            context.mounted
+                ? Utilities.showSnackBar(
+                    context: context,
+                    message: "Something went wrong. Please try again later",
+                  )
+                : null;
+          }
+        },
+      ),
+    ];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final _size = MediaQuery.sizeOf(context).width;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          width: MediaQuery.sizeOf(context).width,
-          height: MediaQuery.sizeOf(context).width * 0.5,
-          child: const Row(
+          width: _size,
+          height: _size * 0.5,
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Flexible(
+              Flexible(
                 flex: 1,
-                child: const UserProfileImageWidget(),
+                child: UserProfileImageWidget(
+                  userProfile: widget.user?.profileImage ?? "",
+                ),
               ),
-              const Flexible(
+              Flexible(
                 flex: 1,
-                child: UserInfoWidget(),
+                child: UserInfoWidget(
+                  name: widget.user?.userName ?? "",
+                  email: widget.user?.userEmail ?? "",
+                ),
               ),
             ],
           ),
@@ -44,18 +81,20 @@ class LoginProfilePage extends StatelessWidget {
           child: ListView.builder(
             itemCount: settingsButton.length,
             itemBuilder: (context, index) {
-              return CustomProfileButtonWidget(data: settingsButton[index]);
+              return CustomProfileButtonWidget(
+                data: settingsButton[index],
+              );
             },
           ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Text(
-            "Version: $appVersion",
+            "Version: ${widget.appVersion}",
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: Colors.blueGrey,
-                  fontSize: MediaQuery.sizeOf(context).width * 0.032,
+                  fontSize: _size * 0.032,
                 ),
           ),
         ),
@@ -65,7 +104,11 @@ class LoginProfilePage extends StatelessWidget {
 }
 
 class UserProfileImageWidget extends StatelessWidget {
-  const UserProfileImageWidget({super.key});
+  final String userProfile;
+  const UserProfileImageWidget({
+    super.key,
+    required this.userProfile,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +124,9 @@ class UserProfileImageWidget extends StatelessWidget {
         ),
         child: CircleAvatar(
           radius: MediaQuery.sizeOf(context).width * 0.3,
+          child: userProfile.isEmpty
+              ? const SizedBox.shrink()
+              : CustomNetworkImage(imageUrl: userProfile),
         ),
       ),
     );

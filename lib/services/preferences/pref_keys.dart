@@ -4,4 +4,6 @@ enum PreferenceKeys {
   LOGINTYPE,
   ISLOGIN,
   LOGINTOKEN,
+  EMAIL,
+  PROFILEIMAGE,
 }

@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ugaoo/errors/login_exceptions/login_with_email_error.dart';
 import 'package:ugaoo/errors/login_exceptions/firebase_auth_errors.dart';
 import 'package:ugaoo/services/auth/repositories/auth_types_services.dart';
+import 'package:ugaoo/services/preferences/pref_keys.dart';
 import 'package:ugaoo/services/preferences/repositories/preference_repository.dart';
 import 'package:ugaoo/user/user_model.dart';
 
@@ -12,13 +13,13 @@ const String _logName = "Firebase Login Service";
 
 class LoginServiceWithFirebase implements LoginServiceRepo {
   final FirebaseAuth _firebaseAuth;
-  final PreferencesRepo _prefence;
+  final PreferencesRepo? _preference;
 
   LoginServiceWithFirebase({
     required FirebaseAuth? auth,
-    required PreferencesRepo preference,
+    required PreferencesRepo? preference,
   })  : _firebaseAuth = auth ?? FirebaseAuth.instance,
-        _prefence = preference {
+        _preference = preference {
     log("Firebase Auth Service Started", name: _logName);
   }
 
@@ -39,8 +40,10 @@ class LoginServiceWithFirebase implements LoginServiceRepo {
         loginType: credential.signInMethod,
         loginToken: credential.token.toString(),
         isLoginSuccessful: true,
+        userEmail: googleUser?.email ?? "",
+        profileImage: googleUser?.photoUrl ?? "",
       );
-      _prefence.setUserAfterLogin(user: userModel);
+      await _preference?.setUserAfterLogin(user: userModel);
       log("Google Login Success", name: _logName);
     } on FirebaseAuthException catch (e) {
       log("", name: _logName, error: e);
@@ -70,11 +73,19 @@ class LoginServiceWithFirebase implements LoginServiceRepo {
     }
   }
 
+  Future<bool> isUserLoggedIn() async {
+    return await _preference?.getBool(
+          key: PreferenceKeys.ISLOGIN.name,
+          defaultValue: false,
+        ) ??
+        false;
+  }
+
   @override
   Future<void> logout() async {
     try {
       await _firebaseAuth.signOut();
-      await _prefence.clearUserDataAfterLogout();
+      await _preference?.clearUserDataAfterLogout();
     } catch (error) {
       //TODO
       //Same goes to here

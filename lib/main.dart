@@ -29,27 +29,35 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(GlobalDependencyInjection.preferenceProvider);
-    ref.watch(GlobalDependencyInjection.apiProvider);
-    final route = ref.watch(GlobalDependencyInjection.routerProvider);
-    return MaterialApp.router(
-      title: 'Ugaoo',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: ColorConstants.kBackgroundColor,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: CustomAppBarTheme(context).themeData,
-        textTheme: CustomTextTheme(context).textTheme,
-        elevatedButtonTheme:
-            CustomElevatedButtonTheme(context).elevatedThemeData,
-        buttonTheme: CustomButtonTheme(context).buttomThemeData,
-        inputDecorationTheme: CustomInputFieldTheme(context).themeData,
-        snackBarTheme:
-            CustomSnackBarThemeData(context: context).snackBarThemeData,
-        bottomNavigationBarTheme:
-            CustomBottomNavBarTheme(context: context).themeData,
-      ),
-      routerConfig: route.router,
+    final data = ref.watch(GlobalDependencyInjection.preferenceProvider);
+    return data.when(
+      data: (refProvider) {
+        ref.watch(GlobalDependencyInjection.apiProvider);
+        final route = ref.watch(GlobalDependencyInjection.routerProvider);
+        return MaterialApp.router(
+          title: 'Ugaoo',
+          theme: ThemeData(
+            useMaterial3: true,
+            colorSchemeSeed: ColorConstants.kBackgroundColor,
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: CustomAppBarTheme(context).themeData,
+            textTheme: CustomTextTheme(context).textTheme,
+            elevatedButtonTheme:
+                CustomElevatedButtonTheme(context).elevatedThemeData,
+            buttonTheme: CustomButtonTheme(context).buttomThemeData,
+            inputDecorationTheme: CustomInputFieldTheme(context).themeData,
+            snackBarTheme:
+                CustomSnackBarThemeData(context: context).snackBarThemeData,
+            bottomNavigationBarTheme:
+                CustomBottomNavBarTheme(context: context).themeData,
+          ),
+          routerConfig: route.router,
+        );
+      },
+      error: (_, error) => const Center(child: CircularProgressIndicator()),
+      loading: () {
+        return const Center(child: CircularProgressIndicator.adaptive());
+      },
     );
   }
 }
