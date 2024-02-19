@@ -27,25 +27,32 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0, right: 10.0, left: 10.0),
-      child: NestedScrollView(
-        headerSliverBuilder: (context, isInnerBoxScrolled) {
-          return [
-            const SliverToBoxAdapter(child: HomePageSerchWidget()),
-            const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
-            const SliverToBoxAdapter(child: HomePageSalesWidget()),
-            const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
-          ];
-        },
-        body: Column(
-          children: [
-            CustomHomeTabBarWidget(controller: _controller),
-            const SizedBox(height: 24.0),
-            Expanded(
-              child: HomeTabView(controller: _controller),
-            ),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: const SizedBox.shrink(),
+        title: const Text("Ugaoo"),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 20.0, right: 10.0, left: 10.0),
+        child: NestedScrollView(
+          headerSliverBuilder: (context, isInnerBoxScrolled) {
+            return [
+              const SliverToBoxAdapter(child: HomePageSerchWidget()),
+              const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
+              const SliverToBoxAdapter(child: HomePageSalesWidget()),
+              const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
+            ];
+          },
+          body: Column(
+            children: [
+              CustomHomeTabBarWidget(controller: _controller),
+              const SizedBox(height: 24.0),
+              Expanded(
+                child: HomeTabView(controller: _controller),
+              ),
+            ],
+          ),
         ),
       ),
     );

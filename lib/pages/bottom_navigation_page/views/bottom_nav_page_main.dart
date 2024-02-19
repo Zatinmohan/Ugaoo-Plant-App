@@ -23,11 +23,6 @@ class BottomNavigationPage extends ConsumerWidget {
       BottomNavigationDependencyInjection.bottomNavigationProvier,
     );
     return Scaffold(
-      appBar: AppBar(
-        leading: const SizedBox.shrink(),
-        title: const Text("Ugaoo"),
-        centerTitle: true,
-      ),
       body: pages[_bottomProvider.index],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _bottomProvider.index,

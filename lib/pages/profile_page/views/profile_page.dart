@@ -48,17 +48,23 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   Widget build(BuildContext context) {
     final watchProvider = ref.watch(ProfileDependencyInjection.profileProvider);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: user?.isLoginSuccessful ?? false
-          ? LoginProfilePage(
-              appVersion: watchProvider.appVersion ?? "",
-              user: user,
-              ref: ref,
-            )
-          : ProfileSignInWidget(
-              appVersion: watchProvider.appVersion ?? "",
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Profile"),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: user?.isLoginSuccessful ?? false
+            ? LoginProfilePage(
+                appVersion: watchProvider.appVersion ?? "",
+                user: user,
+                ref: ref,
+              )
+            : ProfileSignInWidget(
+                appVersion: watchProvider.appVersion ?? "",
+              ),
+      ),
     );
   }
 }
