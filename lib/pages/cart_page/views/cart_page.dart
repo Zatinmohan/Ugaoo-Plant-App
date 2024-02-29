@@ -21,10 +21,10 @@ class CartPage extends StatelessWidget {
               "4 Items",
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontSize: MediaQuery.sizeOf(context).width * 0.04,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.w400,
                   ),
             ),
-            const SizedBox(height: 2.0),
+            const SizedBox(height: 8.0),
           ],
         ),
       ),
@@ -34,6 +34,7 @@ class CartPage extends StatelessWidget {
             width: MediaQuery.sizeOf(context).width,
             height: MediaQuery.sizeOf(context).width * 1.1,
             child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
               itemCount: 4,
               itemBuilder: (context, index) {
                 return const Padding(

@@ -47,9 +47,7 @@ class CartPriceDetailWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12.0),
-            const Divider(
-              height: 1.0,
-            ),
+            const Divider(height: 1.0),
             const SizedBox(height: 12.0),
             const Expanded(
               flex: 1,
