@@ -26,7 +26,7 @@ class GrandTotalTextWidget extends StatelessWidget {
           "Rs. $amount.00",
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontSize: _size * 0.045,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
         ),
       ],

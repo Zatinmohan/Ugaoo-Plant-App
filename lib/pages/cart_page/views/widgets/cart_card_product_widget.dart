@@ -123,14 +123,15 @@ class _CardDescription extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        const SizedBox(height: 8.0),
+        // const SizedBox(height: 8.0),
         Flexible(
           flex: 1,
           child: Text(
             "Rs. $price",
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ColorConstants.kPrimaryAccentColor,
-                  fontSize: MediaQuery.sizeOf(context).width * 0.06,
+                  fontSize: MediaQuery.sizeOf(context).width * 0.065,
+                  fontWeight: FontWeight.w600,
                 ),
           ),
         ),

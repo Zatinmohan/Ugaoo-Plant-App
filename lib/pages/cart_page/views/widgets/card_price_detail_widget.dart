@@ -14,55 +14,69 @@ class CartPriceDetailWidget extends StatelessWidget {
           topRight: Radius.circular(20.0),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16.0,
-          vertical: 16.0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            const Expanded(
-              flex: 1,
-              child: GrandTotalTextWidget(
-                amount: "42",
-                title: "Sub Total",
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 16.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: GrandTotalTextWidget(
+                      amount: "42",
+                      title: "Sub Total",
+                    ),
+                  ),
+                  const SizedBox(height: 12.0),
+                  const Expanded(
+                    flex: 1,
+                    child: GrandTotalTextWidget(
+                      amount: "10",
+                      title: "Shipping",
+                    ),
+                  ),
+                  const SizedBox(height: 12.0),
+                  const Expanded(
+                    flex: 1,
+                    child: GrandTotalTextWidget(
+                      amount: "40",
+                      title: "Discount",
+                    ),
+                  ),
+                  const SizedBox(height: 12.0),
+                  const Divider(height: 1.0),
+                  const SizedBox(height: 12.0),
+                  const Expanded(
+                    flex: 1,
+                    child: GrandTotalTextWidget(
+                      amount: "12",
+                      title: "Total",
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 12.0),
-            const Expanded(
-              flex: 1,
-              child: GrandTotalTextWidget(
-                amount: "10",
-                title: "Shipping",
+          ),
+          Flexible(
+            flex: 1,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 8.0,
+                right: 8.0,
+                bottom: 10.0,
               ),
+              child: const ContinueToAddressButton(),
             ),
-            const SizedBox(height: 12.0),
-            const Expanded(
-              flex: 1,
-              child: GrandTotalTextWidget(
-                amount: "40",
-                title: "Discount",
-              ),
-            ),
-            const SizedBox(height: 12.0),
-            const Divider(height: 1.0),
-            const SizedBox(height: 12.0),
-            const Expanded(
-              flex: 1,
-              child: GrandTotalTextWidget(
-                amount: "12",
-                title: "Total",
-              ),
-            ),
-            const SizedBox(height: 12.0),
-            const Flexible(
-              flex: 2,
-              child: ContinueToAddressButton(),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
