@@ -37,7 +37,7 @@ class CartPage extends StatelessWidget {
               itemCount: 4,
               itemBuilder: (context, index) {
                 return const Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: AspectRatio(
                     aspectRatio: 16 / 9.5,
                     child: const CartProductCardWidget(),
