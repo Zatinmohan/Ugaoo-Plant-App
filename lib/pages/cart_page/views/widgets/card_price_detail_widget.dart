@@ -57,7 +57,7 @@ class CartPriceDetailWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12.0),
-            const Expanded(
+            const Flexible(
               flex: 2,
               child: ContinueToAddressButton(),
             ),
