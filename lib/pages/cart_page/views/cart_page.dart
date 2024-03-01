@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
+import 'package:ugaoo/routes/constants/routes_name.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 
 part '../views/widgets/grand_total_text_widget.dart';
@@ -37,11 +39,16 @@ class CartPage extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemCount: 4,
               itemBuilder: (context, index) {
-                return const Padding(
+                return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9.5,
-                    child: const CartProductCardWidget(),
+                  child: GestureDetector(
+                    onTap: () {
+                      // context.push(RoutesName.ADDRESS_PAGE);
+                    },
+                    child: const AspectRatio(
+                      aspectRatio: 16 / 9.5,
+                      child: const CartProductCardWidget(),
+                    ),
                   ),
                 );
               },

@@ -15,7 +15,7 @@ class LoginButtonsWidget extends ConsumerWidget {
           onTap: () async {
             try {
               await _auth.login(status: LoginType.GOOGLE);
-              context.mounted ? context.push(RoutesName.HOME_PAGE) : null;
+              context.mounted ? context.goNamed(RoutesName.HOME_PAGE) : null;
             } catch (error) {
               if (context.mounted) {
                 Utilities.showSnackBar(

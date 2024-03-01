@@ -31,9 +31,7 @@ class _LoginProfilePageState extends State<LoginProfilePage> {
                 .read<LoginProvider>(GlobalDependencyInjection.loginProvider)
                 .signOut();
 
-            context.mounted
-                ? context.pushReplacement(RoutesName.LOGIN_SCREEN)
-                : null;
+            context.mounted ? context.goNamed(RoutesName.LOGIN_SCREEN) : null;
           } catch (e) {
             context.mounted
                 ? Utilities.showSnackBar(

@@ -5,7 +5,7 @@ class CartPriceDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
+    return Card(
       elevation: 2.0,
       color: ColorConstants.kBackgroundColor,
       shape: const RoundedRectangleBorder(
@@ -17,7 +17,7 @@ class CartPriceDetailWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
+          const Expanded(
             flex: 2,
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -67,13 +67,18 @@ class CartPriceDetailWidget extends StatelessWidget {
           ),
           Flexible(
             flex: 1,
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 8.0,
-                right: 8.0,
-                bottom: 10.0,
+            child: GestureDetector(
+              onTap: () {
+                context.goNamed(RoutesName.ADDRESS_PAGE);
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(
+                  left: 8.0,
+                  right: 8.0,
+                  bottom: 10.0,
+                ),
+                child: const ContinueToAddressButton(),
               ),
-              child: const ContinueToAddressButton(),
             ),
           ),
         ],
