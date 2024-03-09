@@ -1,4 +1,4 @@
-part of '../pages/address_page.dart';
+part of '../../pages/address_page.dart';
 
 
 class AddNewAddressWidget extends StatelessWidget {

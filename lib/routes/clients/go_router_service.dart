@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ugaoo/pages/address_page/views/pages/address_page.dart';
+import 'package:ugaoo/pages/address_page/views/pages/new_address_page.dart';
 import 'package:ugaoo/pages/bottom_navigation_page/views/bottom_nav_page_main.dart';
 import 'package:ugaoo/pages/login_page/login_page.dart';
 import 'package:ugaoo/pages/registration_page/views/registration_page.dart';
@@ -81,8 +82,17 @@ class GoRouterService implements RoutesRepoImpl<GoRouter> {
               name: RoutesName.ADDRESS_PAGE,
               path: "${RoutesName.ADDRESS_PAGE}",
               builder: (context, state) {
-                return AddressPage();
+                return const AddressPage();
               },
+              routes: [
+                GoRoute(
+                  name: RoutesName.NEW_ADDRESS_PAGE,
+                  path: RoutesName.NEW_ADDRESS_PAGE,
+                  builder: (context, state) {
+                    return const AddAddressPage();
+                  },
+                ),
+              ],
             ),
           ],
         ),
