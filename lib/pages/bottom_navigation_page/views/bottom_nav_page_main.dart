@@ -26,7 +26,11 @@ class BottomNavigationPage extends ConsumerWidget {
       body: pages[_bottomProvider.index],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _bottomProvider.index,
-        onTap: (index) => _bottomProvider.onTap(index),
+        onTap: (index) => ref
+            .read(
+              BottomNavigationDependencyInjection.bottomNavigationProvier,
+            )
+            .onTap(index),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
