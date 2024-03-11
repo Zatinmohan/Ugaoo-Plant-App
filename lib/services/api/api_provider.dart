@@ -8,4 +8,32 @@ class ApiProvider extends ChangeNotifier {
       : _networkService = networkService;
 
   NetworkRepoImpl get networkService => _networkService;
+
+  Future<Map<String, dynamic>> getRequest({
+    required String endPoint,
+    Map<String, dynamic>? params,
+  }) async {
+    try {
+      return await _networkService.getRequest(
+        endPoint: endPoint,
+        params: params,
+      );
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> postRequest({
+    required String endPoint,
+    Map<String, dynamic>? params,
+  }) async {
+    try {
+      return await _networkService.postRequest(
+        endPoint: endPoint,
+        params: params,
+      );
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

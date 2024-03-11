@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Utilities {
   static late Utilities utilities;
@@ -19,5 +20,25 @@ class Utilities {
         duration: Duration(seconds: seconds ?? 4),
       ),
     );
+  }
+
+  static void hideKeyboard() {
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+  }
+
+  static bool validPhoneNumber({required String phoneNumber}) {
+    final numericRegex = RegExp(r'^[\d]+$');
+    if (phoneNumber.length >= 10 && numericRegex.hasMatch(phoneNumber)) {
+      return true;
+    }
+    return false;
+  }
+
+  static bool isValidPincode({required String pincode}) {
+    final numericRegex = RegExp(r'^[\d]+$');
+    if (pincode.length == 6 && numericRegex.hasMatch(pincode)) {
+      return true;
+    }
+    return false;
   }
 }

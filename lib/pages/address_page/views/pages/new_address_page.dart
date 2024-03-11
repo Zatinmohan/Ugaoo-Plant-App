@@ -3,21 +3,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ugaoo/pages/address_page/address_page_dependency_injection.dart';
+import 'package:ugaoo/pages/address_page/constants/all_indian_states.dart';
 import 'package:ugaoo/pages/address_page/constants/text_field_styles.dart';
+import 'package:ugaoo/pages/address_page/domain/entities/pincode_entities/pincode_result_entity.dart';
 import 'package:ugaoo/pages/address_page/states/new_address_page_provider.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
+import 'package:ugaoo/utils/utilities/utilities.dart';
 
 part '../widgets/new_address_widgets/use_my_location_widget.dart';
 part '../widgets/new_address_widgets/address_type_widget.dart';
 
-class AddAddressPage extends StatefulWidget {
+class AddAddressPage extends ConsumerStatefulWidget {
   const AddAddressPage({super.key});
 
   @override
-  State<AddAddressPage> createState() => _AddAddressPageState();
+  ConsumerState<AddAddressPage> createState() => _AddAddressPageState();
 }
 
-class _AddAddressPageState extends State<AddAddressPage> {
+class _AddAddressPageState extends ConsumerState<AddAddressPage> {
   late final TextEditingController _nameTextField;
   late final TextEditingController _phoneTextField;
   late final TextEditingController _pincodeTextField;
@@ -27,6 +30,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
   late final TextEditingController _cityTextField;
   late final GlobalKey<FormState> formKey;
   static const double _spaceBetweenTextFields = 16.0;
+  String? _dropDownValue;
 
   @override
   void initState() {
@@ -99,7 +103,6 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 ),
                 const SizedBox(height: _spaceBetweenTextFields),
                 Flexible(
-                  // height: _textFieldHeight,
                   child: TextFormField(
                     controller: _phoneTextField,
                     keyboardType: TextInputType.number,
@@ -107,11 +110,11 @@ class _AddAddressPageState extends State<AddAddressPage> {
                       LengthLimitingTextInputFormatter(10),
                     ],
                     validator: (value) {
-                      final numericRegex = RegExp(r'^[\d]+$');
                       if (value?.isEmpty ?? true) {
                         return "Required Field";
-                      } else if (value!.length < 10 ||
-                          !(numericRegex.hasMatch(value))) {
+                      } else if (!Utilities.validPhoneNumber(
+                        phoneNumber: value!,
+                      )) {
                         return "Enter a valid phone number";
                       }
                       return null;
@@ -143,14 +146,35 @@ class _AddAddressPageState extends State<AddAddressPage> {
                     ],
                     keyboardType: TextInputType.number,
                     validator: (value) {
-                      final numericRegex = RegExp(r'^[\d]+$');
                       if (value?.isEmpty ?? true) {
                         return "Required Field";
-                      } else if (value!.length < 6 ||
-                          !(numericRegex.hasMatch(value))) {
+                      } else if (!Utilities.isValidPincode(pincode: value!)) {
                         return "Enter a valid pincode";
                       }
                       return null;
+                    },
+                    onChanged: (value) async {
+                      if (value.isNotEmpty && value.length == 6) {
+                        try {
+                          final PincodeResultEntity data = await ref
+                              .read<NewAddressPageProvider>(
+                                AddressPageDependencyInjection
+                                    .addNewAddressProvider,
+                              )
+                              .getStatesByPincode(pincode: value);
+
+                          _cityTextField.text = data.district ?? "";
+                          _dropDownValue = data.state;
+                        } catch (error) {
+                          if (context.mounted) {
+                            Utilities.hideKeyboard();
+                            Utilities.showSnackBar(
+                              context: context,
+                              message: error.toString(),
+                            );
+                          }
+                        }
+                      }
                     },
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w600,
@@ -165,6 +189,17 @@ class _AddAddressPageState extends State<AddAddressPage> {
                       enabledBorder:
                           TextFieldStyles.enabledTextFieldBorderStyle(),
                       border: TextFieldStyles.selectedTextFieldBorderStyle(),
+                      suffixIcon: ref
+                              .watch<NewAddressPageProvider>(
+                                AddressPageDependencyInjection
+                                    .addNewAddressProvider,
+                              )
+                              .isLoading
+                          ? const Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: CircularProgressIndicator(),
+                            )
+                          : const SizedBox.shrink(),
                     ),
                     textInputAction: TextInputAction.next,
                   ),
@@ -175,7 +210,6 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 ),
                 const SizedBox(height: _spaceBetweenTextFields),
                 Flexible(
-                  // height: _textFieldHeight,
                   child: TextFormField(
                     controller: _houseTextField,
                     keyboardType: TextInputType.streetAddress,
@@ -286,33 +320,37 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 const SizedBox(height: _spaceBetweenTextFields),
                 Flexible(
                   child: DropdownButtonFormField(
+                    validator: (value) {
+                      if (value?.isEmpty ?? true) {
+                        return "Required Value";
+                      }
+                      return null;
+                    },
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w600,
                           fontSize: MediaQuery.sizeOf(context).width * 0.04,
                         ),
+                    value: _dropDownValue,
                     decoration: InputDecoration(
                       labelText: "State*",
                       filled: false,
                       labelStyle: TextFieldStyles.getlabelTextStyle(context),
                       enabledBorder:
                           TextFieldStyles.enabledTextFieldBorderStyle(),
+                      errorStyle: TextFieldStyles.geterrorTextStyle(context),
                       border: TextFieldStyles.enabledTextFieldBorderStyle(),
                     ),
-                    items: const [
-                      DropdownMenuItem(
-                        value: "CITY - A",
-                        child: Text("City - A"),
-                      ),
-                      DropdownMenuItem(
-                        value: "CITY - B",
-                        child: Text("City - B"),
-                      ),
-                      DropdownMenuItem(
-                        value: "City-C",
-                        child: Text("City - C"),
-                      ),
-                    ],
-                    onChanged: (value) {},
+                    items: LIST_OF_INDIAN_STATES
+                        .map<DropdownMenuItem<String>>(
+                          (String value) => DropdownMenuItem(
+                            value: value,
+                            child: Text("$value"),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      _dropDownValue = value;
+                    },
                   ),
                 ),
                 const SizedBox(height: _spaceBetweenTextFields + 8),
