@@ -45,6 +45,15 @@ class _AddAddressPageState extends ConsumerState<AddAddressPage> {
     super.initState();
   }
 
+  bool checkStateInList({required String state}) {
+    String value = LIST_OF_INDIAN_STATES.firstWhere(
+      (element) => element.toLowerCase().contains(state.toLowerCase()),
+      orElse: () => "null",
+    );
+    if (value == "null") return false;
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     final double _size = MediaQuery.sizeOf(context).width;
@@ -164,7 +173,9 @@ class _AddAddressPageState extends ConsumerState<AddAddressPage> {
                               .getStatesByPincode(pincode: value);
 
                           _cityTextField.text = data.district ?? "";
-                          _dropDownValue = data.state;
+                          if (checkStateInList(state: data.state ?? "")) {
+                            _dropDownValue = data.state;
+                          }
                         } catch (error) {
                           if (context.mounted) {
                             Utilities.hideKeyboard();
