@@ -1,4 +1,4 @@
-part of '../../pages/new_address_page.dart';
+part of '../pages/new_address_page.dart';
 
 class AdressTypeWidget extends ConsumerWidget {
   const AdressTypeWidget({super.key});
@@ -6,10 +6,10 @@ class AdressTypeWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final providerReader = ref.read<NewAddressPageProvider>(
-      AddressPageDependencyInjection.addNewAddressProvider,
+      NewAddressPageDependencyInjection.addNewAddressProvider,
     );
     ref.watch<NewAddressPageProvider>(
-      AddressPageDependencyInjection.addNewAddressProvider,
+      NewAddressPageDependencyInjection.addNewAddressProvider,
     );
     return InputDecorator(
       decoration: InputDecoration(

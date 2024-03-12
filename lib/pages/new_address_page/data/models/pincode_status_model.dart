@@ -1,4 +1,5 @@
-import 'package:ugaoo/pages/address_page/data/models/pincode_model/pincode_result_model.dart';
+
+import 'package:ugaoo/pages/new_address_page/data/models/pincode_result_model.dart';
 
 class PincodeStatusModel {
   final String? message;

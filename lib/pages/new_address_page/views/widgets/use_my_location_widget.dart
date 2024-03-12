@@ -1,4 +1,4 @@
-part of '../../pages/new_address_page.dart';
+part of '../pages/new_address_page.dart';
 
 class UseMyLocationWidget extends StatelessWidget {
   const UseMyLocationWidget({super.key});

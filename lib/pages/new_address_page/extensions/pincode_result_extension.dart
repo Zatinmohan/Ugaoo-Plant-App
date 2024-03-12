@@ -1,5 +1,5 @@
-import 'package:ugaoo/pages/address_page/data/models/pincode_model/pincode_result_model.dart';
 import 'package:ugaoo/pages/address_page/domain/entities/pincode_entities/pincode_result_entity.dart';
+import 'package:ugaoo/pages/new_address_page/data/models/pincode_result_model.dart';
 
 extension XPincodeResultModel on PincodeResultModel {
   PincodeResultEntity toEntity() => PincodeResultEntity(

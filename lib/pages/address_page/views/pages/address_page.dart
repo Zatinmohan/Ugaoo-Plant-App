@@ -6,10 +6,10 @@ import 'package:ugaoo/pages/address_page/states/address_page_provider.dart';
 import 'package:ugaoo/routes/constants/routes_name.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 
-part '../widgets/user_address_list_widgets/address_card_button_widget.dart';
-part '../widgets/user_address_list_widgets/add_new_address_button.dart';
-part '../widgets/user_address_list_widgets/payment_button_widget.dart';
-part '../widgets/user_address_list_widgets/address_card_widget.dart';
+part '../widgets/address_card_button_widget.dart';
+part '../widgets/add_new_address_button.dart';
+part '../widgets/payment_button_widget.dart';
+part '../widgets/address_card_widget.dart';
 
 class AddressPage extends ConsumerWidget {
   const AddressPage({super.key});

@@ -39,6 +39,7 @@ dependencies:
   l10n_flutter: ^1.0.7
   dio: ^5.4.0
   package_info_plus: ^4.2.0
+  cloud_firestore: ^4.14.0
   
 dev_dependencies:
   flutter_test:

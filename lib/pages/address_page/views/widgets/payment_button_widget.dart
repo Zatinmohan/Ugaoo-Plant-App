@@ -1,4 +1,4 @@
-part of '../../pages/address_page.dart';
+part of '../pages/address_page.dart';
 
 class PaymentButtonWidget extends StatelessWidget {
   const PaymentButtonWidget({super.key});

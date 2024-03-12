@@ -1,4 +1,4 @@
-import 'package:ugaoo/pages/address_page/data/models/pincode_model/pincode_status_model.dart';
+import 'package:ugaoo/pages/new_address_page/data/models/pincode_status_model.dart';
 import 'package:ugaoo/services/api/api_constants.dart';
 import 'package:ugaoo/services/api/api_provider.dart';
 

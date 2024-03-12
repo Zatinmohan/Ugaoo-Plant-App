@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ugaoo/pages/address_page/address_page_dependency_injection.dart';
-import 'package:ugaoo/pages/address_page/constants/all_indian_states.dart';
-import 'package:ugaoo/pages/address_page/constants/text_field_styles.dart';
+import 'package:ugaoo/pages/new_address_page/constants/all_indian_states.dart';
+import 'package:ugaoo/pages/new_address_page/constants/text_field_styles.dart';
 import 'package:ugaoo/pages/address_page/domain/entities/pincode_entities/pincode_result_entity.dart';
-import 'package:ugaoo/pages/address_page/states/new_address_page_provider.dart';
+import 'package:ugaoo/pages/new_address_page/new_address_page_dependency_injection.dart';
+import 'package:ugaoo/pages/new_address_page/states/new_address_page_provider.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 import 'package:ugaoo/utils/utilities/utilities.dart';
 
-part '../widgets/new_address_widgets/use_my_location_widget.dart';
-part '../widgets/new_address_widgets/address_type_widget.dart';
+part '../widgets/address_type_widget.dart';
+part '../widgets/use_my_location_widget.dart';
 
 class AddAddressPage extends ConsumerStatefulWidget {
   const AddAddressPage({super.key});
@@ -167,7 +167,7 @@ class _AddAddressPageState extends ConsumerState<AddAddressPage> {
                         try {
                           final PincodeResultEntity data = await ref
                               .read<NewAddressPageProvider>(
-                                AddressPageDependencyInjection
+                                NewAddressPageDependencyInjection
                                     .addNewAddressProvider,
                               )
                               .getStatesByPincode(pincode: value);
@@ -202,7 +202,7 @@ class _AddAddressPageState extends ConsumerState<AddAddressPage> {
                       border: TextFieldStyles.selectedTextFieldBorderStyle(),
                       suffixIcon: ref
                               .watch<NewAddressPageProvider>(
-                                AddressPageDependencyInjection
+                                NewAddressPageDependencyInjection
                                     .addNewAddressProvider,
                               )
                               .isLoading

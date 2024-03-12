@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ugaoo/pages/address_page/domain/entities/pincode_entities/pincode_result_entity.dart';
-import 'package:ugaoo/pages/address_page/domain/usecases/fetch_status_by_pincode_usecase.dart';
+import 'package:ugaoo/pages/new_address_page/domain/usecase/fetch_status_by_pincode_usecase.dart';
 
 enum HOME_TYPE { HOME, OFFICE, OTHER }
 
 class NewAddressPageProvider extends ChangeNotifier {
   HOME_TYPE homeType = HOME_TYPE.HOME;
   final FetchStatesByPincodeUsecase _fetchStatesByPincode;
-  PincodeResultEntity? _pincodeResultEntity;
 
   bool _isLoading = false;
 
