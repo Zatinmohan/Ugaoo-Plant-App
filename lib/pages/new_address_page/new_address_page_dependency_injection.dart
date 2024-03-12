@@ -21,7 +21,7 @@ class NewAddressPageDependencyInjection {
   });
 
   static final addNewAddressProvider =
-      ChangeNotifierProvider<NewAddressPageProvider>((ref) {
+      ChangeNotifierProvider.autoDispose<NewAddressPageProvider>((ref) {
     return NewAddressPageProvider(
       fetchStates: ref.read(fetchAddressByPincodeUsecase),
     );

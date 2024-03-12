@@ -45,6 +45,19 @@ class _AddAddressPageState extends ConsumerState<AddAddressPage> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _nameTextField.dispose();
+    _phoneTextField.dispose();
+    _pincodeTextField.dispose();
+    _houseTextField.dispose();
+    _streetTextField.dispose();
+    _landmarkTextField.dispose();
+    _cityTextField.dispose();
+
+    super.dispose();
+  }
+
   bool checkStateInList({required String state}) {
     String value = LIST_OF_INDIAN_STATES.firstWhere(
       (element) => element.toLowerCase().contains(state.toLowerCase()),
