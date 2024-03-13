@@ -12,11 +12,13 @@ class ApiProvider extends ChangeNotifier {
   Future<Map<String, dynamic>> getRequest({
     required String endPoint,
     Map<String, dynamic>? params,
+    bool useBaseUrl = false,
   }) async {
     try {
       return await _networkService.getRequest(
         endPoint: endPoint,
         params: params,
+        useBaseUrl: useBaseUrl,
       );
     } catch (error) {
       rethrow;
@@ -26,11 +28,13 @@ class ApiProvider extends ChangeNotifier {
   Future<Map<String, dynamic>> postRequest({
     required String endPoint,
     Map<String, dynamic>? params,
+    bool useBaseUrl = false,
   }) async {
     try {
       return await _networkService.postRequest(
         endPoint: endPoint,
         params: params,
+        useBaseUrl: useBaseUrl,
       );
     } catch (error) {
       rethrow;

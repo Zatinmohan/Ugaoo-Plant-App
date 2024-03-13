@@ -44,3 +44,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Private files that contains private keys
+lib/private_keys/private_keys.dart

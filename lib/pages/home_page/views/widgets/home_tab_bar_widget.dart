@@ -2,9 +2,12 @@ part of '../home_page.dart';
 
 class CustomHomeTabBarWidget extends StatelessWidget {
   final TabController controller;
+  final List<CategoryListEntity> categories;
+
   const CustomHomeTabBarWidget({
     super.key,
     required this.controller,
+    required this.categories,
   });
 
   @override
@@ -28,29 +31,17 @@ class CustomHomeTabBarWidget extends StatelessWidget {
           ),
           controller: controller,
           dividerColor: Colors.transparent,
-          tabs: const [
-            FittedBox(
-              fit: BoxFit.contain,
-              child: Tab(
-                text: "House Plant",
-                iconMargin: EdgeInsets.zero,
-              ),
-            ),
-            FittedBox(
-              fit: BoxFit.contain,
-              child: Tab(
-                text: "EverGreen Plant",
-                iconMargin: EdgeInsets.zero,
-              ),
-            ),
-            FittedBox(
-              fit: BoxFit.contain,
-              child: Tab(
-                text: "Palm Tree",
-                iconMargin: EdgeInsets.zero,
-              ),
-            ),
-          ],
+          tabs: List.generate(
+            controller.length,
+            (index) {
+              final String categoriesName =
+                  categories[index].fields?.categoryName?.stringValue ?? "";
+              return FittedBox(
+                fit: BoxFit.contain,
+                child: Tab(text: categoriesName),
+              );
+            },
+          ),
         ),
       ),
     );
