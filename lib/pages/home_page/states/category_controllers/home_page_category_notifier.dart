@@ -15,7 +15,7 @@ class HomePageCategoryNotifier extends AsyncNotifier<HomepageCategoryState> {
   @override
   HomepageCategoryState build() {
     _categoriesUsecase = ref.read<FetchProductCategoriesUsecase>(
-      HomePageDependencyInjection.fetchProductUsecaseProvider,
+      HomePageDependencyInjection.fetchProductCategoryUsecaseProvider,
     );
     return const HomepageCategoryState.initial();
   }

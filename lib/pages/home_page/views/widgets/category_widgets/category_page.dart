@@ -1,30 +1,30 @@
 part of '../../home_page.dart';
 
 class CategoryWidget extends StatelessWidget {
-  final String categoryName;
-  final List<String> data;
+  final String subCategoryName;
+  final List<SubCategoryEntity> data;
 
   const CategoryWidget({
     super.key,
-    required this.categoryName,
+    required this.subCategoryName,
     required this.data,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 4,
+      itemCount: subCategoryName.length,
       itemBuilder: (context, index) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            categoryName.isEmpty
+            subCategoryName.isEmpty
                 ? const SizedBox.shrink()
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: Text(
-                      categoryName,
+                      subCategoryName,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ColorConstants.kPrimaryTextColor,
                             fontWeight: FontWeight.w500,

@@ -20,21 +20,21 @@ mixin _$HomePageDataStates {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadingState,
-    required TResult Function() loadedState,
+    required TResult Function(ProductDataEntity productData) loadedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadingState,
-    TResult? Function()? loadedState,
+    TResult? Function(ProductDataEntity productData)? loadedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadingState,
-    TResult Function()? loadedState,
+    TResult Function(ProductDataEntity productData)? loadedState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,7 +120,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadingState,
-    required TResult Function() loadedState,
+    required TResult Function(ProductDataEntity productData) loadedState,
   }) {
     return initial();
   }
@@ -130,7 +130,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadingState,
-    TResult? Function()? loadedState,
+    TResult? Function(ProductDataEntity productData)? loadedState,
   }) {
     return initial?.call();
   }
@@ -140,7 +140,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadingState,
-    TResult Function()? loadedState,
+    TResult Function(ProductDataEntity productData)? loadedState,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -228,7 +228,7 @@ class _$DataLoadingStateImpl implements _DataLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadingState,
-    required TResult Function() loadedState,
+    required TResult Function(ProductDataEntity productData) loadedState,
   }) {
     return loadingState();
   }
@@ -238,7 +238,7 @@ class _$DataLoadingStateImpl implements _DataLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadingState,
-    TResult? Function()? loadedState,
+    TResult? Function(ProductDataEntity productData)? loadedState,
   }) {
     return loadingState?.call();
   }
@@ -248,7 +248,7 @@ class _$DataLoadingStateImpl implements _DataLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadingState,
-    TResult Function()? loadedState,
+    TResult Function(ProductDataEntity productData)? loadedState,
     required TResult orElse(),
   }) {
     if (loadingState != null) {
@@ -301,6 +301,10 @@ abstract class _$$DataLoadedStateImplCopyWith<$Res> {
   factory _$$DataLoadedStateImplCopyWith(_$DataLoadedStateImpl value,
           $Res Function(_$DataLoadedStateImpl) then) =
       __$$DataLoadedStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ProductDataEntity productData});
+
+  $ProductDataEntityCopyWith<$Res> get productData;
 }
 
 /// @nodoc
@@ -310,35 +314,69 @@ class __$$DataLoadedStateImplCopyWithImpl<$Res>
   __$$DataLoadedStateImplCopyWithImpl(
       _$DataLoadedStateImpl _value, $Res Function(_$DataLoadedStateImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? productData = null,
+  }) {
+    return _then(_$DataLoadedStateImpl(
+      productData: null == productData
+          ? _value.productData
+          : productData // ignore: cast_nullable_to_non_nullable
+              as ProductDataEntity,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductDataEntityCopyWith<$Res> get productData {
+    return $ProductDataEntityCopyWith<$Res>(_value.productData, (value) {
+      return _then(_value.copyWith(productData: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$DataLoadedStateImpl implements _DataLoadedState {
-  const _$DataLoadedStateImpl();
+  const _$DataLoadedStateImpl({required this.productData});
+
+  @override
+  final ProductDataEntity productData;
 
   @override
   String toString() {
-    return 'HomePageDataStates.loadedState()';
+    return 'HomePageDataStates.loadedState(productData: $productData)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DataLoadedStateImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$DataLoadedStateImpl &&
+            (identical(other.productData, productData) ||
+                other.productData == productData));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, productData);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DataLoadedStateImplCopyWith<_$DataLoadedStateImpl> get copyWith =>
+      __$$DataLoadedStateImplCopyWithImpl<_$DataLoadedStateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadingState,
-    required TResult Function() loadedState,
+    required TResult Function(ProductDataEntity productData) loadedState,
   }) {
-    return loadedState();
+    return loadedState(productData);
   }
 
   @override
@@ -346,9 +384,9 @@ class _$DataLoadedStateImpl implements _DataLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadingState,
-    TResult? Function()? loadedState,
+    TResult? Function(ProductDataEntity productData)? loadedState,
   }) {
-    return loadedState?.call();
+    return loadedState?.call(productData);
   }
 
   @override
@@ -356,11 +394,11 @@ class _$DataLoadedStateImpl implements _DataLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadingState,
-    TResult Function()? loadedState,
+    TResult Function(ProductDataEntity productData)? loadedState,
     required TResult orElse(),
   }) {
     if (loadedState != null) {
-      return loadedState();
+      return loadedState(productData);
     }
     return orElse();
   }
@@ -401,5 +439,11 @@ class _$DataLoadedStateImpl implements _DataLoadedState {
 }
 
 abstract class _DataLoadedState implements HomePageDataStates {
-  const factory _DataLoadedState() = _$DataLoadedStateImpl;
+  const factory _DataLoadedState(
+      {required final ProductDataEntity productData}) = _$DataLoadedStateImpl;
+
+  ProductDataEntity get productData;
+  @JsonKey(ignore: true)
+  _$$DataLoadedStateImplCopyWith<_$DataLoadedStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

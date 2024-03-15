@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
 import 'package:ugaoo/pages/home_page/domain/entities/categories_entities/category_entity.dart';
+import 'package:ugaoo/pages/home_page/domain/entities/product_entities/product_category_entity.dart';
+import 'package:ugaoo/pages/home_page/domain/entities/product_entities/product_data_entity.dart';
+import 'package:ugaoo/pages/home_page/domain/entities/product_entities/sub_category_entity.dart';
 import 'package:ugaoo/pages/home_page/home_page_dependency_injection.dart';
 import 'package:ugaoo/pages/home_page/states/category_controllers/home_page_category_notifier.dart';
+import 'package:ugaoo/pages/home_page/states/data_controllers/home_page_data_notifier.dart';
+import 'package:ugaoo/pages/home_page/states/data_controllers/home_page_data_states.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 
 part '../views/widgets/search_widget.dart';
@@ -37,16 +42,25 @@ class _HomePageState extends ConsumerState<HomePage>
   Future<void> fetchData() async {
     await ref
         .read<HomePageCategoryNotifier>(
-          HomePageDependencyInjection.homepageProvider.notifier,
+          HomePageDependencyInjection.homepageCategoryProvider.notifier,
         )
         .fetchProductCategories();
+
+    await ref
+        .read<HomePageDataNotifier>(
+          HomePageDependencyInjection.homepageProductProvider.notifier,
+        )
+        .fetchProducts();
   }
 
   @override
   Widget build(BuildContext context) {
-    final homeProvider = ref.watch(
-      HomePageDependencyInjection.homepageProvider,
+    final homeCategoryProvider = ref.watch(
+      HomePageDependencyInjection.homepageCategoryProvider,
     );
+    final homeProductProvider =
+        ref.watch(HomePageDependencyInjection.homepageProductProvider);
+
     return Scaffold(
       appBar: AppBar(
         leading: const SizedBox.shrink(),
@@ -55,7 +69,7 @@ class _HomePageState extends ConsumerState<HomePage>
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0, right: 10.0, left: 10.0),
-        child: homeProvider.when(
+        child: homeCategoryProvider.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stackTrace) => Container(),
           data: (data) {
@@ -70,6 +84,7 @@ class _HomePageState extends ConsumerState<HomePage>
                 _controller = TabController(
                   length: categoryData.categoriesList?.length ?? 0,
                   vsync: this,
+                  initialIndex: 0,
                 );
 
                 return NestedScrollView(
@@ -88,8 +103,19 @@ class _HomePageState extends ConsumerState<HomePage>
                         categories: categoryData.categoriesList ?? [],
                       ),
                       Expanded(
-                        child: HomeTabView(
-                          controller: _controller,
+                        child: homeProductProvider.when(
+                          data: (state) => state.when(
+                            initial: () => const SizedBox.shrink(),
+                            loadingState: () => const SizedBox.shrink(),
+                            loadedState: (productData) {
+                              return HomeTabView(
+                                controller: _controller,
+                                data: productData,
+                              );
+                            },
+                          ),
+                          error: (error, stackTrace) => const SizedBox.shrink(),
+                          loading: () => const SizedBox.shrink(),
                         ),
                       ),
                     ],
