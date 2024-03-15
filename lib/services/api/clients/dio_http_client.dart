@@ -21,7 +21,7 @@ class DioClient implements NetworkRepoImpl {
   }) {
     final String _finalEndPoint;
     if (useBaseUrl) {
-      _finalEndPoint = "${ApiConstants.BASE_URL}/${PROJECT_NAME}$endpoint";
+      _finalEndPoint = "${ApiConstants.BASE_URL}$endpoint";
     } else {
       _finalEndPoint = endpoint;
     }

@@ -1,5 +1,6 @@
+import 'package:ugaoo/pages/home_page/data/model/category_models/home_page_category_model.dart';
 import 'package:ugaoo/pages/home_page/data/repositories_impl/home_page_repo_impl.dart';
-import 'package:ugaoo/pages/home_page/domain/entities/categories_entities/product_category_entity.dart';
+import 'package:ugaoo/pages/home_page/domain/entities/categories_entities/home_page_category_entity.dart';
 import 'package:ugaoo/pages/home_page/extensions/product_categories_extension.dart';
 
 class FetchProductCategoriesUsecase {
@@ -8,10 +9,10 @@ class FetchProductCategoriesUsecase {
   const FetchProductCategoriesUsecase({required HomePageRepoImpl repo})
       : _repo = repo;
 
-  Future<ProductCategoryEntity?> fetchProductCategories() async {
+  Future<HomePageCategoryEntity?> fetchProductCategories() async {
     try {
-      final categoryData = await _repo.fetchCategories();
-      final ProductCategoryEntity? data = categoryData.toEntity();
+      final HomePageCategoryModel categoryData = await _repo.fetchCategories();
+      final HomePageCategoryEntity? data = categoryData.toEntity();
       return data;
     } catch (error) {
       rethrow;

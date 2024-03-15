@@ -2,7 +2,7 @@ part of '../home_page.dart';
 
 class CustomHomeTabBarWidget extends StatelessWidget {
   final TabController controller;
-  final List<CategoryListEntity> categories;
+  final List<CategoryDataEntity> categories;
 
   const CustomHomeTabBarWidget({
     super.key,
@@ -34,12 +34,9 @@ class CustomHomeTabBarWidget extends StatelessWidget {
           tabs: List.generate(
             controller.length,
             (index) {
-              final String categoriesName =
-                  categories[index].fields?.categoryName?.stringValue ?? "";
-              return FittedBox(
-                fit: BoxFit.contain,
-                child: Tab(text: categoriesName),
-              );
+              final String categoryName = categories[index].name ?? "";
+
+              return FittedBox(child: Tab(text: categoryName));
             },
           ),
         ),
