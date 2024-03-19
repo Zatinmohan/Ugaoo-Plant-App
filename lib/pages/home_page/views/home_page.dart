@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugaoo/gen/assets.gen.dart';
 import 'package:ugaoo/pages/home_page/domain/entities/categories_entities/category_entity.dart';
-import 'package:ugaoo/pages/home_page/domain/entities/product_entities/product_category_entity.dart';
 import 'package:ugaoo/pages/home_page/domain/entities/product_entities/product_data_entity.dart';
+import 'package:ugaoo/pages/home_page/domain/entities/product_entities/product_entity.dart';
 import 'package:ugaoo/pages/home_page/domain/entities/product_entities/sub_category_entity.dart';
 import 'package:ugaoo/pages/home_page/home_page_dependency_injection.dart';
 import 'package:ugaoo/pages/home_page/states/category_controllers/home_page_category_notifier.dart';
-import 'package:ugaoo/pages/home_page/states/data_controllers/home_page_data_notifier.dart';
-import 'package:ugaoo/pages/home_page/states/data_controllers/home_page_data_states.dart';
+import 'package:ugaoo/pages/home_page/states/home_data_controllers/home_page_data_notifier.dart';
 import 'package:ugaoo/utils/themes/color_constants.dart';
 
 part '../views/widgets/search_widget.dart';
@@ -75,11 +74,8 @@ class _HomePageState extends ConsumerState<HomePage>
           data: (data) {
             return data.when(
               initial: () => const Center(child: CircularProgressIndicator()),
-              categoryLoadingState: () => const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.pink,
-                ),
-              ),
+              categoryLoadingState: () =>
+                  const Center(child: CircularProgressIndicator()),
               categoryLoadedState: (categoryData) {
                 _controller = TabController(
                   length: categoryData.categoriesList?.length ?? 0,

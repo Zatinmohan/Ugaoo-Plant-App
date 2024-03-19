@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:ugaoo/pages/home_page/data/model/category_models/home_page_category_model.dart';
 import 'package:ugaoo/pages/home_page/data/model/product_models/home_page_model.dart';
-import 'package:ugaoo/pages/home_page/data/model/product_models/product_category_model.dart';
 import 'package:ugaoo/services/api/api_constants.dart';
 import 'package:ugaoo/services/api/api_provider.dart';
 

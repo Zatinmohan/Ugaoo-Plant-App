@@ -15,32 +15,11 @@ class HomeTabView extends StatelessWidget {
     return TabBarView(
       controller: controller,
       children: List.generate(controller.length, (index) {
-        final String subCategoryName = data.categories?[currentTabIndex]
-                .subCategories?[index].subCategoryName ??
-            "";
         final List<SubCategoryEntity> products =
             data.categories?[currentTabIndex].subCategories ?? [];
 
-        log("AJFKLAF: ${subCategoryName}");
-        return CategoryWidget(
-          subCategoryName: subCategoryName,
-          data: products,
-        );
+        return CategoryWidget(data: products);
       }),
-      // children: const [
-      //   const CategoryWidget(
-      //     categoryName: "Trending",
-      //     data: ["AA", "AA", "AA", "AA"],
-      //   ),
-      //   CategoryWidget(
-      //     categoryName: "Trending",
-      //     data: ["AA", "AA", "AA", "AA"],
-      //   ),
-      //   CategoryWidget(
-      //     categoryName: "Trending",
-      //     data: ["AA", "AA", "AA", "AA"],
-      //   ),
-      // ],
     );
   }
 }

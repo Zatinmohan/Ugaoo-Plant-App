@@ -1,30 +1,28 @@
 part of '../../home_page.dart';
 
 class CategoryWidget extends StatelessWidget {
-  final String subCategoryName;
   final List<SubCategoryEntity> data;
 
   const CategoryWidget({
     super.key,
-    required this.subCategoryName,
     required this.data,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: subCategoryName.length,
+      itemCount: data.length,
       itemBuilder: (context, index) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            subCategoryName.isEmpty
+            data[index].subCategoryName?.isEmpty ?? true
                 ? const SizedBox.shrink()
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: Text(
-                      subCategoryName,
+                      data[index].subCategoryName ?? "",
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ColorConstants.kPrimaryTextColor,
                             fontWeight: FontWeight.w500,
@@ -36,12 +34,14 @@ class CategoryWidget extends StatelessWidget {
               aspectRatio: 16 / 11,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 4,
-                itemBuilder: (context, index) {
+                itemCount: data[index].products?.length ?? 0,
+                itemBuilder: (context, innerIndex) {
                   return Container(
                     width: MediaQuery.sizeOf(context).width * 0.46,
                     margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: const CategoryCardWidget(),
+                    child: CategoryCardWidget(
+                      product: data[index].products?[innerIndex],
+                    ),
                   );
                 },
               ),

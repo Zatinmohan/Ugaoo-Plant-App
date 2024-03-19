@@ -5,8 +5,8 @@ import 'package:ugaoo/pages/home_page/domain/usecases/fetch_product_categories_u
 import 'package:ugaoo/pages/home_page/domain/usecases/fetch_products_usecase.dart';
 import 'package:ugaoo/pages/home_page/states/category_controllers/home_page_category_notifier.dart';
 import 'package:ugaoo/pages/home_page/states/category_controllers/home_page_category_states.dart';
-import 'package:ugaoo/pages/home_page/states/data_controllers/home_page_data_notifier.dart';
-import 'package:ugaoo/pages/home_page/states/data_controllers/home_page_data_states.dart';
+import 'package:ugaoo/pages/home_page/states/home_data_controllers/home_page_data_notifier.dart';
+import 'package:ugaoo/pages/home_page/states/home_data_controllers/home_page_data_states.dart';
 import 'package:ugaoo/services/api/api_provider.dart';
 
 class HomePageDependencyInjection {

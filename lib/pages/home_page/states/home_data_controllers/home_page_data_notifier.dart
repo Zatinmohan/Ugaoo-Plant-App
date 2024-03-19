@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugaoo/pages/home_page/domain/entities/product_entities/product_data_entity.dart';
 import 'package:ugaoo/pages/home_page/domain/usecases/fetch_products_usecase.dart';
 import 'package:ugaoo/pages/home_page/home_page_dependency_injection.dart';
-import 'package:ugaoo/pages/home_page/states/data_controllers/home_page_data_states.dart';
+import 'package:ugaoo/pages/home_page/states/home_data_controllers/home_page_data_states.dart';
 
 class HomePageDataNotifier extends AsyncNotifier<HomePageDataStates> {
   late final FetchProductDataUsecase _fetchProductDataUsecase;

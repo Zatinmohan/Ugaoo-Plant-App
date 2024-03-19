@@ -1,7 +1,11 @@
 part of '../../home_page.dart';
 
 class CategoryCardWidget extends StatelessWidget {
-  const CategoryCardWidget({super.key});
+  final ProductEntity? product;
+  const CategoryCardWidget({
+    super.key,
+    required this.product,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +20,12 @@ class CategoryCardWidget extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
-              child: const Padding(
+              child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: _DescriptionWidget(),
+                child: _DescriptionWidget(
+                  name: product?.itemName ?? "",
+                  price: product?.itemPrice?.toString() ?? "",
+                ),
               ),
             ),
           ),
@@ -41,7 +48,12 @@ class CategoryCardWidget extends StatelessWidget {
 }
 
 class _DescriptionWidget extends StatelessWidget {
-  const _DescriptionWidget();
+  final String name;
+  final String price;
+  const _DescriptionWidget({
+    required this.name,
+    required this.price,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +66,7 @@ class _DescriptionWidget extends StatelessWidget {
           child: FittedBox(
             fit: BoxFit.contain,
             child: Text(
-              "Jade Plant Mini",
+              name,
               maxLines: 2,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w500,
@@ -72,7 +84,7 @@ class _DescriptionWidget extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.contain,
                 child: Text(
-                  "Rs.400",
+                  "Rs.${price}",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.w600,
                         fontSize: MediaQuery.sizeOf(context).width * 0.045,
