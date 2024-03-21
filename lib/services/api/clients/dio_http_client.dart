@@ -2,13 +2,12 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:ugaoo/errors/http_exceptions.dart';
-import 'package:ugaoo/private_keys/private_keys.dart';
 import 'package:ugaoo/services/api/api_constants.dart';
 import 'package:ugaoo/services/api/repositories/network_request_repo.dart';
 
 const String _logName = "Dio Client Activated";
 
-class DioClient implements NetworkRepoImpl {
+class DioClient implements NetworkRepo {
   final Dio _dio;
 
   DioClient() : _dio = Dio() {

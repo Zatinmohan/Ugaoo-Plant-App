@@ -12,27 +12,31 @@ class PreferenceProvider {
   PreferencesRepo get preference => _preferenceService;
 
   Future<UserModel> getUserData() async {
-    final UserModel data = UserModel(
-      firstName: await _preferenceService.getString(
-        key: PreferenceKeys.FIRSTNAME.name,
-      ),
-      lastName: await _preferenceService.getString(
-        key: PreferenceKeys.LASTNAME.name,
-      ),
-      isLoginSuccessful: await _preferenceService.getBool(
-        key: PreferenceKeys.ISLOGIN.name,
-      ),
-      userEmail: await _preferenceService.getString(
-        key: PreferenceKeys.EMAIL.name,
-      ),
-      loginToken: await _preferenceService.getString(
-        key: PreferenceKeys.LOGINTOKEN.name,
-      ),
-      loginType: await _preferenceService.getString(
-        key: PreferenceKeys.LOGINTYPE.name,
-      ),
-    );
+    try {
+      final UserModel data = UserModel(
+        firstName: await _preferenceService.getString(
+          key: PreferenceKeys.FIRSTNAME.name,
+        ),
+        lastName: await _preferenceService.getString(
+          key: PreferenceKeys.LASTNAME.name,
+        ),
+        isLoginSuccessful: await _preferenceService.getBool(
+          key: PreferenceKeys.ISLOGIN.name,
+        ),
+        userEmail: await _preferenceService.getString(
+          key: PreferenceKeys.EMAIL.name,
+        ),
+        loginToken: await _preferenceService.getString(
+          key: PreferenceKeys.LOGINTOKEN.name,
+        ),
+        loginType: await _preferenceService.getString(
+          key: PreferenceKeys.LOGINTYPE.name,
+        ),
+      );
 
-    return data;
+      return data;
+    } catch (error) {
+      rethrow;
+    }
   }
 }

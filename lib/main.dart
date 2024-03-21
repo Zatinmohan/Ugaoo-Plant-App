@@ -54,7 +54,8 @@ class MyApp extends ConsumerWidget {
           routerConfig: route.router,
         );
       },
-      error: (_, error) => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) =>
+          const Center(child: CircularProgressIndicator()),
       loading: () {
         return const Center(child: CircularProgressIndicator.adaptive());
       },

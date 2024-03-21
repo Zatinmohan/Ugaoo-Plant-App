@@ -1,7 +1,11 @@
 import 'package:ugaoo/errors/base_exception.dart';
 
 class HttpExceptions extends BaseException {
-  const HttpExceptions([super.message]);
+  final int? statusCode;
+  const HttpExceptions([
+    super.message,
+    this.statusCode,
+  ]);
 
   factory HttpExceptions.fromCode({int? errorCode}) {
     switch (errorCode) {

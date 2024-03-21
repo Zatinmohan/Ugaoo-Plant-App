@@ -1,4 +1,4 @@
-abstract class NetworkRepoImpl {
+abstract class NetworkRepo {
   Future<Map<String, dynamic>> getRequest({
     required String endPoint,
     Map<String, dynamic>? params,

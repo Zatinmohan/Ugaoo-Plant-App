@@ -20,8 +20,10 @@ class SharedPreferenceService extends PreferencesRepo {
   Future<void> clearPreferences() async {
     try {
       await _preference.clear();
+    } on SharedPreferenceException catch (error) {
+      throw SharedPreferenceException.fromCode(error: error.message);
     } catch (error) {
-      throw SharedPreferenceException.fromCode(error: error.toString());
+      throw const SharedPreferenceException();
     }
   }
 
@@ -32,8 +34,10 @@ class SharedPreferenceService extends PreferencesRepo {
   }) async {
     try {
       await _preference.setString(key, value);
+    } on SharedPreferenceException catch (error) {
+      throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
-      throw SharedPreferenceException.fromCode(error: e.toString());
+      throw const SharedPreferenceException();
     }
   }
 
@@ -44,8 +48,10 @@ class SharedPreferenceService extends PreferencesRepo {
   }) async {
     try {
       await _preference.setStringList(key, value);
+    } on SharedPreferenceException catch (error) {
+      throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
-      throw SharedPreferenceException.fromCode(error: e.toString());
+      throw const SharedPreferenceException();
     }
   }
 
@@ -56,8 +62,10 @@ class SharedPreferenceService extends PreferencesRepo {
   }) async {
     try {
       await _preference.setBool(key, value);
+    } on SharedPreferenceException catch (error) {
+      throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
-      throw SharedPreferenceException.fromCode(error: e.toString());
+      throw const SharedPreferenceException();
     }
   }
 
@@ -68,8 +76,10 @@ class SharedPreferenceService extends PreferencesRepo {
   }) async {
     try {
       await _preference.setDouble(key, value);
+    } on SharedPreferenceException catch (error) {
+      throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
-      throw SharedPreferenceException.fromCode(error: e.toString());
+      throw const SharedPreferenceException();
     }
   }
 
@@ -96,8 +106,10 @@ class SharedPreferenceService extends PreferencesRepo {
         );
       }
       return _temp!;
+    } on SharedPreferenceException catch (error) {
+      throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
-      throw SharedPreferenceException.fromCode(error: e.toString());
+      throw const SharedPreferenceException();
     }
   }
 
@@ -119,8 +131,10 @@ class SharedPreferenceService extends PreferencesRepo {
         );
       }
       return _temp!;
-    } catch (error) {
+    } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
+    } catch (e) {
+      throw const SharedPreferenceException();
     }
   }
 
@@ -142,9 +156,10 @@ class SharedPreferenceService extends PreferencesRepo {
         );
       }
       return _temp!;
-    } catch (error) {
-      log("${error.toString()}", name: _logName);
+    } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
+    } catch (e) {
+      throw const SharedPreferenceException();
     }
   }
 
@@ -166,8 +181,10 @@ class SharedPreferenceService extends PreferencesRepo {
         );
       }
       return _temp!;
-    } catch (error) {
+    } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
+    } catch (e) {
+      throw const SharedPreferenceException();
     }
   }
 
@@ -188,49 +205,66 @@ class SharedPreferenceService extends PreferencesRepo {
         );
       }
       return _temp!;
-    } catch (error) {
+    } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
+    } catch (e) {
+      throw const SharedPreferenceException();
     }
   }
 
   @override
   Future<void> setUserAfterLogin({required UserModel user}) async {
-    await _preference.setString(
-      PreferenceKeys.LOGINTOKEN.name,
-      user.loginToken,
-    );
-    await _preference.setString(
-      PreferenceKeys.FIRSTNAME.name,
-      user.userName.split(' ')[0],
-    );
-    await _preference.setString(
-      PreferenceKeys.LASTNAME.name,
-      user.userName.split(' ')[1],
-    );
-    await _preference.setBool(
-      PreferenceKeys.ISLOGIN.name,
-      user.isLoginSuccessful,
-    );
+    try {
+      await _preference.setString(
+        PreferenceKeys.LOGINTOKEN.name,
+        user.loginToken,
+      );
+      await _preference.setString(
+        PreferenceKeys.FIRSTNAME.name,
+        user.userName.split(' ')[0],
+      );
+      await _preference.setString(
+        PreferenceKeys.LASTNAME.name,
+        user.userName.split(' ')[1],
+      );
+      await _preference.setBool(
+        PreferenceKeys.ISLOGIN.name,
+        user.isLoginSuccessful,
+      );
 
-    await _preference.setString(PreferenceKeys.EMAIL.name, user.userEmail);
-    await _preference.setString(PreferenceKeys.LOGINTYPE.name, user.loginType);
-    await _preference.setString(
-      PreferenceKeys.LOGINTOKEN.name,
-      user.loginToken,
-    );
-    await _preference.setString(
-      PreferenceKeys.PROFILEIMAGE.name,
-      user.profileImage,
-    );
+      await _preference.setString(PreferenceKeys.EMAIL.name, user.userEmail);
+      await _preference.setString(
+        PreferenceKeys.LOGINTYPE.name,
+        user.loginType,
+      );
+      await _preference.setString(
+        PreferenceKeys.LOGINTOKEN.name,
+        user.loginToken,
+      );
+      await _preference.setString(
+        PreferenceKeys.PROFILEIMAGE.name,
+        user.profileImage,
+      );
+    } on SharedPreferenceException catch (error) {
+      throw SharedPreferenceException.fromCode(error: error.toString());
+    } catch (e) {
+      throw const SharedPreferenceException();
+    }
   }
 
   @override
   Future<void> clearUserDataAfterLogout() async {
-    await _preference.setBool(PreferenceKeys.ISLOGIN.name, false);
-    await _preference.setString(PreferenceKeys.FIRSTNAME.name, "");
-    await _preference.setString(PreferenceKeys.LASTNAME.name, "");
-    await _preference.setString(PreferenceKeys.LOGINTOKEN.name, "");
-    await _preference.setString(PreferenceKeys.LOGINTYPE.name, "");
-    await _preference.setString(PreferenceKeys.PROFILEIMAGE.name, "");
+    try {
+      await _preference.setBool(PreferenceKeys.ISLOGIN.name, false);
+      await _preference.setString(PreferenceKeys.FIRSTNAME.name, "");
+      await _preference.setString(PreferenceKeys.LASTNAME.name, "");
+      await _preference.setString(PreferenceKeys.LOGINTOKEN.name, "");
+      await _preference.setString(PreferenceKeys.LOGINTYPE.name, "");
+      await _preference.setString(PreferenceKeys.PROFILEIMAGE.name, "");
+    } on SharedPreferenceException catch (error) {
+      throw SharedPreferenceException.fromCode(error: error.toString());
+    } catch (e) {
+      throw const SharedPreferenceException();
+    }
   }
 }

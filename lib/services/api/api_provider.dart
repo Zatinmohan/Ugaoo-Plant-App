@@ -1,13 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:ugaoo/services/api/repositories/network_request_repo.dart';
 
-class ApiProvider extends ChangeNotifier {
-  final NetworkRepoImpl _networkService;
+class ApiProvider {
+  final NetworkRepo _networkService;
 
-  ApiProvider({required NetworkRepoImpl networkService})
+  ApiProvider({required NetworkRepo networkService})
       : _networkService = networkService;
 
-  NetworkRepoImpl get networkService => _networkService;
+  NetworkRepo get networkService => _networkService;
 
   Future<Map<String, dynamic>> getRequest({
     required String endPoint,
@@ -15,11 +14,12 @@ class ApiProvider extends ChangeNotifier {
     bool useBaseUrl = false,
   }) async {
     try {
-      return await _networkService.getRequest(
+      final response = await _networkService.getRequest(
         endPoint: endPoint,
         params: params,
         useBaseUrl: useBaseUrl,
       );
+      return response;
     } catch (error) {
       rethrow;
     }
