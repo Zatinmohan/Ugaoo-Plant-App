@@ -1,45 +1,48 @@
 import 'dart:developer';
-import 'package:flutter/foundation.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ugaoo/services/auth/constants/login_states.dart';
 import 'package:ugaoo/services/auth/repositories/auth_types_services.dart';
 
 const String _logName = "Login Provider";
 
-class LoginProvider extends ChangeNotifier {
+class LoginProvider {
   final LoginServiceRepo _authService;
 
   LoginProvider({
     required LoginServiceRepo service,
-  }) : _authService = service;
+  }) : _authService = service {
+    log("Login Provider Init", name: _logName);
+  }
 
-  Future<void> login({
+  Future<bool> login({
     required LoginType status,
     String? email,
     String? password,
   }) async {
-    switch (status) {
-      case LoginType.EMAIL:
-        await _authService.loginWithEmailAndPassword(
-          email: email!,
-          password: password!,
-        );
-        break;
+    try {
+      switch (status) {
+        case LoginType.EMAIL:
+          assert(email != null || email!.isNotEmpty);
+          assert(password != null || password!.isNotEmpty);
+          bool response = await _authService.loginWithEmailAndPassword(
+            email: email!,
+            password: password!,
+          );
+          return response;
 
-      case LoginType.GOOGLE:
-        try {
-          await _authService.loginViaGoogle();
-        } catch (error) {
-          rethrow;
-        }
+        case LoginType.GOOGLE:
+          bool response = await _authService.loginViaGoogle();
+          return response;
 
-        break;
+        case LoginType.SIGNOUT:
+          return await _authService.logout();
 
-      case LoginType.SIGNOUT:
-        await _authService.logout();
-        break;
-
-      default:
-        break;
+        default:
+          return false;
+      }
+    } catch (error) {
+      rethrow;
     }
   }
 
@@ -48,15 +51,8 @@ class LoginProvider extends ChangeNotifier {
   Future<void> signOut() async {
     try {
       await _authService.logout();
-      
     } catch (error) {
       throw error;
     }
-  }
-
-  @override
-  void dispose() {
-    log("Login Provider Disposed", name: _logName);
-    super.dispose();
   }
 }

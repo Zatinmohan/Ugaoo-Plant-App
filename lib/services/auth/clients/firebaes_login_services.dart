@@ -24,7 +24,7 @@ class LoginServiceWithFirebase implements LoginServiceRepo {
   }
 
   @override
-  Future<void> loginViaGoogle() async {
+  Future<bool> loginViaGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth =
@@ -43,19 +43,19 @@ class LoginServiceWithFirebase implements LoginServiceRepo {
         userEmail: googleUser?.email ?? "",
         profileImage: googleUser?.photoUrl ?? "",
       );
-      await _preference?.setUserAfterLogin(user: userModel);
       log("Google Login Success", name: _logName);
+      return await _preference?.setUserAfterLogin(user: userModel) ?? false;
     } on FirebaseAuthException catch (e) {
       log("", name: _logName, error: e);
       throw FirebaseAuthExceptions(e.toString());
     } catch (error) {
       log("", name: _logName, error: error);
-      throw const FirebaseAuthExceptions();
+      rethrow;
     }
   }
 
   @override
-  Future<UserCredential> loginWithEmailAndPassword({
+  Future<bool> loginWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -65,11 +65,22 @@ class LoginServiceWithFirebase implements LoginServiceRepo {
         email: email,
         password: password,
       );
-      return _credentails;
+
+      final UserModel userModel = UserModel(
+        firstName: _credentails.user?.displayName ?? "",
+        lastName: "",
+        loginType: _credentails.credential?.signInMethod,
+        loginToken: _credentails.credential?.accessToken ?? "",
+        isLoginSuccessful: true,
+        userEmail: _credentails.user?.email ?? "",
+        profileImage: _credentails.user?.photoURL ?? "",
+      );
+
+      return await _preference?.setUserAfterLogin(user: userModel) ?? false;
     } on FirebaseAuthException catch (error) {
       throw LoginWithEmailPasswordException.fromCode(code: error.code);
     } catch (error) {
-      throw LoginWithEmailPasswordException();
+      rethrow;
     }
   }
 
@@ -82,13 +93,12 @@ class LoginServiceWithFirebase implements LoginServiceRepo {
   }
 
   @override
-  Future<void> logout() async {
+  Future<bool> logout() async {
     try {
       await _firebaseAuth.signOut();
-      await _preference?.clearUserDataAfterLogout();
+      return await _preference?.clearUserDataAfterLogout() ?? false;
     } catch (error) {
-      //TODO
-      //Same goes to here
+      throw error;
     }
   }
 }

@@ -1,11 +1,11 @@
 abstract class LoginServiceRepo {
-  Future<void> loginWithEmailAndPassword({
+  Future<bool> loginWithEmailAndPassword({
     required String email,
     required String password,
   });
-  Future<void> loginViaGoogle();
+  Future<bool> loginViaGoogle();
   Future<bool> isUserLoggedIn();
   // Future<void> loginViaFacebook();
   // Future<void> loginViaApple();
-  Future<void> logout();
+  Future<bool> logout();
 }

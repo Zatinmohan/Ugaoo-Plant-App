@@ -54,7 +54,7 @@ abstract class PreferencesRepo {
     double? defaultValue,
   });
 
-  Future<void> setUserAfterLogin({required UserModel user});
+  Future<bool> setUserAfterLogin({required UserModel user});
 
-  Future<void> clearUserDataAfterLogout();
+  Future<bool> clearUserDataAfterLogout();
 }

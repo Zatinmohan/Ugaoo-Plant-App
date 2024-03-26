@@ -192,7 +192,7 @@ class SharedPreferenceService extends PreferencesRepo {
           error: "Please add some default value",
         );
       }
-      
+
       return _temp!;
     } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
@@ -226,7 +226,7 @@ class SharedPreferenceService extends PreferencesRepo {
   }
 
   @override
-  Future<void> setUserAfterLogin({required UserModel user}) async {
+  Future<bool> setUserAfterLogin({required UserModel user}) async {
     try {
       await _preference.setString(
         PreferenceKeys.LOGINTOKEN.name,
@@ -258,6 +258,7 @@ class SharedPreferenceService extends PreferencesRepo {
         PreferenceKeys.PROFILEIMAGE.name,
         user.profileImage,
       );
+      return true;
     } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
@@ -266,7 +267,7 @@ class SharedPreferenceService extends PreferencesRepo {
   }
 
   @override
-  Future<void> clearUserDataAfterLogout() async {
+  Future<bool> clearUserDataAfterLogout() async {
     try {
       await _preference.setBool(PreferenceKeys.ISLOGIN.name, false);
       await _preference.setString(PreferenceKeys.FIRSTNAME.name, "");
@@ -274,6 +275,7 @@ class SharedPreferenceService extends PreferencesRepo {
       await _preference.setString(PreferenceKeys.LOGINTOKEN.name, "");
       await _preference.setString(PreferenceKeys.LOGINTYPE.name, "");
       await _preference.setString(PreferenceKeys.PROFILEIMAGE.name, "");
+      return true;
     } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
