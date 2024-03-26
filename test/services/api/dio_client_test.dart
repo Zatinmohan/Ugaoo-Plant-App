@@ -17,7 +17,7 @@ void main() {
     apiProvider = ApiProvider(networkService: mockNetworkRepo);
   });
 
-    test("Success Get Request - Response 200", () async {
+  test("Success Get Request - Response 200", () async {
     final dataResponse = {"status": "Success"};
 
     when(
@@ -33,7 +33,13 @@ void main() {
     final response = await apiProvider.getRequest(endPoint: "");
 
     expect(response, equals(dataResponse));
-    verify(await apiProvider.getRequest(endPoint: "")).called(1);
+    verify(
+      await mockNetworkRepo.getRequest(
+        endPoint: anyNamed("endPoint"),
+        params: anyNamed("params"),
+        useBaseUrl: anyNamed("useBaseUrl"),
+      ),
+    ).called(1);
   });
 
   test("Succes Post Request - Response 200", () async {
@@ -52,7 +58,13 @@ void main() {
     final response = await apiProvider.postRequest(endPoint: "");
 
     expect(response, equals(dataResponse));
-    verify(await apiProvider.postRequest(endPoint: "")).called(1);
+    verify(
+      await mockNetworkRepo.postRequest(
+        endPoint: anyNamed("endPoint"),
+        params: anyNamed("params"),
+        useBaseUrl: anyNamed("useBaseUrl"),
+      ),
+    ).called(1);
   });
 
   test("Error Get Request - Response 400", () {
@@ -69,7 +81,13 @@ void main() {
       result,
       throwsA(HttpExceptions.fromCode(errorCode: 400)),
     );
-    verify(apiProvider.getRequest(endPoint: "")).called(1);
+    verify(
+      mockNetworkRepo.getRequest(
+        endPoint: anyNamed("endPoint"),
+        params: anyNamed("params"),
+        useBaseUrl: anyNamed("useBaseUrl"),
+      ),
+    ).called(1);
   });
 
   test("Error Post Request - Response 400", () {
@@ -88,6 +106,12 @@ void main() {
       response,
       throwsA(HttpExceptions.fromCode(errorCode: 400)),
     );
-    verify(apiProvider.postRequest(endPoint: "")).called(1);
+    verify(
+      mockNetworkRepo.postRequest(
+        endPoint: anyNamed("endPoint"),
+        params: anyNamed("params"),
+        useBaseUrl: anyNamed("useBaseUrl"),
+      ),
+    ).called(1);
   });
 }

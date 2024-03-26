@@ -1,23 +1,28 @@
 import 'package:ugaoo/user/user_model.dart';
 
 abstract class PreferencesRepo {
-  Future<void> clearPreferences();
-  Future<void> setStringData({
+  Future<bool> clearPreferences();
+  Future<bool> setStringData({
     required String key,
     required String value,
   });
 
-  Future<void> setListData({
+  Future<bool> setListData({
     required String key,
     required List<String> value,
   });
 
-  Future<void> setBoolData({
+  Future<bool> setInt({
+    required String key,
+    required int value,
+  });
+
+  Future<bool> setBoolData({
     required String key,
     required bool value,
   });
 
-  Future<void> setDoubleData({
+  Future<bool> setDoubleData({
     required String key,
     required double value,
   });

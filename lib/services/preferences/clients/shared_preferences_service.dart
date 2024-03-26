@@ -17,9 +17,10 @@ class SharedPreferenceService extends PreferencesRepo {
   }
 
   @override
-  Future<void> clearPreferences() async {
+  Future<bool> clearPreferences() async {
     try {
       await _preference.clear();
+      return true;
     } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.message);
     } catch (error) {
@@ -28,12 +29,23 @@ class SharedPreferenceService extends PreferencesRepo {
   }
 
   @override
-  Future<void> setStringData({
+  Future<bool> setInt({required String key, required int value}) async {
+    try {
+      return await _preference.setInt(key, value);
+    } on SharedPreferenceException catch (error) {
+      throw SharedPreferenceException.fromCode(error: error.toString());
+    } catch (e) {
+      throw const SharedPreferenceException();
+    }
+  }
+
+  @override
+  Future<bool> setStringData({
     required String key,
     required String value,
   }) async {
     try {
-      await _preference.setString(key, value);
+      return await _preference.setString(key, value);
     } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
@@ -42,12 +54,12 @@ class SharedPreferenceService extends PreferencesRepo {
   }
 
   @override
-  Future<void> setListData({
+  Future<bool> setListData({
     required String key,
     required List<String> value,
   }) async {
     try {
-      await _preference.setStringList(key, value);
+      return await _preference.setStringList(key, value);
     } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
@@ -56,12 +68,12 @@ class SharedPreferenceService extends PreferencesRepo {
   }
 
   @override
-  Future<void> setBoolData({
+  Future<bool> setBoolData({
     required String key,
     required bool value,
   }) async {
     try {
-      await _preference.setBool(key, value);
+      return await _preference.setBool(key, value);
     } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
@@ -70,12 +82,12 @@ class SharedPreferenceService extends PreferencesRepo {
   }
 
   @override
-  Future<void> setDoubleData({
+  Future<bool> setDoubleData({
     required String key,
     required double value,
   }) async {
     try {
-      await _preference.setDouble(key, value);
+      return await _preference.setDouble(key, value);
     } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
     } catch (e) {
@@ -96,7 +108,7 @@ class SharedPreferenceService extends PreferencesRepo {
     try {
       String? _temp;
 
-      _temp = await _preference.getString(key);
+      _temp = _preference.getString(key);
       if (_temp == null && defaultValue != null) {
         await _preference.setString(key, defaultValue);
         return defaultValue;
@@ -120,7 +132,7 @@ class SharedPreferenceService extends PreferencesRepo {
   }) async {
     try {
       List<String>? _temp;
-      _temp = await _preference.getStringList(key);
+      _temp = _preference.getStringList(key);
 
       if (_temp == null && defaultValue != null) {
         await _preference.setStringList(key, defaultValue);
@@ -170,7 +182,7 @@ class SharedPreferenceService extends PreferencesRepo {
   }) async {
     try {
       int? _temp;
-      _temp = await _preference.getInt(key);
+      _temp = _preference.getInt(key);
 
       if (_temp == null && defaultValue != null) {
         await _preference.setInt(key, defaultValue);
@@ -180,6 +192,7 @@ class SharedPreferenceService extends PreferencesRepo {
           error: "Please add some default value",
         );
       }
+      
       return _temp!;
     } on SharedPreferenceException catch (error) {
       throw SharedPreferenceException.fromCode(error: error.toString());
@@ -195,7 +208,7 @@ class SharedPreferenceService extends PreferencesRepo {
   }) async {
     try {
       double? _temp;
-      _temp = await _preference.getDouble(key);
+      _temp = _preference.getDouble(key);
 
       if (_temp == null && defaultValue != null) {
         await _preference.setDouble(key, defaultValue);

@@ -60,7 +60,7 @@ class _AddAddressPageState extends ConsumerState<AddAddressPage> {
 
   bool checkStateInList({required String state}) {
     String value = LIST_OF_INDIAN_STATES.firstWhere(
-      (element) => element.toLowerCase().contains(state.toLowerCase()),
+      (element) => element.toLowerCase() == state.toLowerCase(),
       orElse: () => "null",
     );
     if (value == "null") return false;
