@@ -23,8 +23,8 @@ class LoginProvider {
     try {
       switch (status) {
         case LoginType.EMAIL:
-          assert(email != null || email!.isNotEmpty);
-          assert(password != null || password!.isNotEmpty);
+          assert(email?.isNotEmpty ?? false);
+          assert(password?.isNotEmpty ?? false);
           bool response = await _authService.loginWithEmailAndPassword(
             email: email!,
             password: password!,
